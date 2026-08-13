@@ -785,6 +785,29 @@ def _conductance(cfg: dict, T: float, hourf: float, env: dict,
             "T_inf": t_inf, "T_wo": t_wo, "U": u}
 
 
+def heat_balance_rhs(cfg: dict, N: int, mcp: float, T: float,
+                     hourf: float, env: dict, props_at) -> tuple[float, dict]:
+    """传热方程右端项：dT/dt = (N*Q0 - Q_sea) / (m*cp)。"""
+    c = _conductance(cfg, T, hourf, env, props_at)
+    return (N * Q0 - c["Q"]) / mcp, c
+
+
+def rk4_integrate_step(cfg: dict, N: int, mcp: float, T: float,
+                       hourf: float, dt: float, env: dict,
+                       props_at) -> tuple[float, dict, float]:
+    """单个 RK4 步，返回 (新温度, 步末换热结果, 等效散热量)。"""
+    k1, c1 = heat_balance_rhs(cfg, N, mcp, T, hourf, env, props_at)
+    k2, c2 = heat_balance_rhs(cfg, N, mcp, T + 0.5 * dt * k1,
+                              hourf + 0.5, env, props_at)
+    k3, c3 = heat_balance_rhs(cfg, N, mcp, T + 0.5 * dt * k2,
+                              hourf + 0.5, env, props_at)
+    k4, c4 = heat_balance_rhs(cfg, N, mcp, T + dt * k3,
+                              hourf + 1.0, env, props_at)
+    T_new = T + dt * (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0
+    q_eff = (c1["Q"] + 2.0 * c2["Q"] + 2.0 * c3["Q"] + c4["Q"]) / 6.0
+    return T_new, c4, q_eff
+
+
 def simulate_year(cfg: dict, N: int, env: dict, props_at,
                   dt: float = 3600.0, warmup_h: int = 168,
                   progress_label: str = "", T0: float | None = None) -> dict:
@@ -813,11 +836,7 @@ def simulate_year(cfg: dict, N: int, env: dict, props_at,
     regime_cnt = {"自然对流主导": 0, "强制对流主导": 0, "混合对流": 0}
     ok = True
 
-    def rhs(temperature: float, hourf: float) -> tuple[float, dict]:
-        c = _conductance(cfg, temperature, hourf, env, props_at)
-        return (N * Q0 - c["Q"]) / mcp, c
-
-    k1, c0 = rhs(T, 0)
+    k1, c0 = heat_balance_rhs(cfg, N, mcp, T, 0, env, props_at)
     T_arr[0] = T
     Q_arr[0] = c0["Q"]
     Q_eff_arr[0] = c0["Q"]
@@ -832,15 +851,12 @@ def simulate_year(cfg: dict, N: int, env: dict, props_at,
         if not np.isfinite(T) or T > 250.0 or T < -50.0:
             ok = False
             break
-        k1, c1 = rhs(T, i)
-        k2, c2 = rhs(T + 0.5 * dt * k1, i + 0.5)
-        k3, c3 = rhs(T + 0.5 * dt * k2, i + 0.5)
-        k4, c4 = rhs(T + dt * k3, i + 1.0)
-        T += dt * (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0
+        T_new, c4, q_eff = rk4_integrate_step(
+            cfg, N, mcp, T, i, dt, env, props_at)
+        T = T_new
         T_arr[i + 1] = T
         Q_arr[i + 1] = c4["Q"]
-        Q_eff_arr[i + 1] = (c1["Q"] + 2.0 * c2["Q"]
-                            + 2.0 * c3["Q"] + c4["Q"]) / 6.0
+        Q_eff_arr[i + 1] = q_eff
         q_cap_arr[i + 1] = c4["Q_cap"]
         h_mix_arr[i + 1] = c4["h_mixed"]
         h_nat_arr[i + 1] = c4["h_nat"]
@@ -883,6 +899,16 @@ def simulate_year(cfg: dict, N: int, env: dict, props_at,
             "worst_idx": worst_idx, "N": N, "ok": True}
 
 
+def max_N_feasible(N: int, cfg: dict, env: dict, props_at,
+                   q_opt: float, cache: dict[int, dict]) -> bool:
+    """判断 N 台服务器是否可行：全年最高壳温不超过 T_MAX。"""
+    if N * Q0 > q_opt * 1.001:
+        return False
+    if N not in cache:
+        cache[N] = simulate_year(cfg, N, env, props_at)
+    return cache[N]["T_max"] <= T_MAX + 1e-9
+
+
 def bisect_max_N(cfg: dict, env: dict, props_at,
                  max_iter: int = 10) -> tuple[dict, int]:
     """二分搜索最大 N：N 递增时全年最高壳温单调上升。
@@ -900,30 +926,24 @@ def bisect_max_N(cfg: dict, env: dict, props_at,
     q_opt = steady_capacity(cfg, t_worst, u_max, props_at)["Q"]
     cache: dict[int, dict] = {}
 
-    def feasible(N: int) -> bool:
-        if N * Q0 > q_opt * 1.001:
-            return False
-        if N not in cache:
-            cache[N] = simulate_year(cfg, N, env, props_at)
-        return cache[N]["T_max"] <= T_MAX + 1e-9
-
-    if not feasible(0):
+    if not max_N_feasible(0, cfg, env, props_at, q_opt, cache):
         return cache[0], 0
-    if feasible(hi):
+    if max_N_feasible(hi, cfg, env, props_at, q_opt, cache):
         # 估计值可能过低（如高导热材料），向上扩展直到不可行
-        while hi < n_space and feasible(min(n_space, hi * 2)):
+        while hi < n_space and max_N_feasible(
+                min(n_space, hi * 2), cfg, env, props_at, q_opt, cache):
             hi = min(n_space, hi * 2)
-        if feasible(n_space):
+        if max_N_feasible(n_space, cfg, env, props_at, q_opt, cache):
             return cache[n_space], n_space
     for _ in range(max_iter):
         mid = (lo + hi) // 2
         if mid == lo:
             break
-        if feasible(mid):
+        if max_N_feasible(mid, cfg, env, props_at, q_opt, cache):
             lo = mid
         else:
             hi = mid
-    if not feasible(lo):
+    if not max_N_feasible(lo, cfg, env, props_at, q_opt, cache):
         lo = 0
     return cache[lo], lo
 
