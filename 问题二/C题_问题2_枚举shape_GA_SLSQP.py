@@ -37,13 +37,14 @@ C 题 问题 2：枚举 shape + GA 遗传算法 + SLSQP 局部寻优
       正式交付前请按组委会给定数值替换。
 
 运行：python C题_问题2_枚举shape_GA_SLSQP.py
-数值结果与最优结构横截面温度云图输出到工作区 outputs/ 目录。
+数值结果与最优结构横截面温度云图输出到问题二文件夹 outputs/ 目录。
 """
 
 from __future__ import annotations
 
 import os
 import warnings
+import csv
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -411,7 +412,8 @@ def plot_optimal_cross_section(best: dict,
     if not res["feasible"]:
         return None
 
-    out_dir = _find_project_root() / "outputs"      # 自动定位工程根目录，避免绝对路径
+    # 结果输出到脚本所在目录（问题二文件夹）下的 outputs/，与问题一目录习惯一致
+    out_dir = Path(__file__).resolve().parent / "outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
     os.environ.setdefault("MPLCONFIGDIR", str(out_dir / ".mplcache"))
 
@@ -1114,6 +1116,58 @@ def solve_shape(shape: str, verbose: bool = True) -> dict:
     }
 
 
+def write_q2_results_csv(cyl: dict, box: dict, best: dict) -> Path:
+    """把圆柱 / 长方体与全局最优的数值结果写入 问题二/outputs/问题2_结果.csv。"""
+    fields = ["外形", "nf", "Hf_m", "df_m", "N_台", "N_theory", "N_space",
+              "A_base_m2", "A_eff_m2", "eta_f", "h_air_W_m2K", "h_sea_W_m2K",
+              "h_total_W_m2K", "T_wi_C", "T_wo_C", "Q_max_W"]
+
+    def _num(v):
+        return None if v is None else round(float(v), 6)
+
+    def _row(label: str, r: dict) -> dict:
+        return {
+            "外形": label,
+            "nf": None if r.get("nf") is None else int(r["nf"]),
+            "Hf_m": _num(r.get("Hf")),
+            "df_m": _num(r.get("df")),
+            "N_台": None if r.get("N") is None else int(r["N"]),
+            "N_theory": _num(r.get("n_theory")),
+            "N_space": _num(r.get("n_space")),
+            "A_base_m2": _num(r.get("a_base")),
+            "A_eff_m2": _num(r.get("a_eff")),
+            "eta_f": _num(r.get("eta_f")),
+            "h_air_W_m2K": _num(r.get("h_air")),
+            "h_sea_W_m2K": _num(r.get("h")),
+            "h_total_W_m2K": _num(r.get("h_total")),
+            "T_wi_C": _num(r.get("t_wi")),
+            "T_wo_C": _num(r.get("t_wo")),
+            "Q_max_W": _num(r.get("q_max")),
+        }
+
+    def _full(r: dict) -> dict:
+        """solve_shape 只返回部分字段，完整指标用 evaluate_design 补全。"""
+        if not r.get("feasible") or r.get("h_total") is not None:
+            return r
+        return evaluate_design(r["shape"], r["nf"], r["Hf"], r["df"],
+                               collect_warnings=False)
+
+    rows = [_row("圆柱", _full(cyl)), _row("长方体", _full(box))]
+    best_label = "全局最优（%s）" % ("圆柱" if best["shape"] == "cylinder"
+                                    else "长方体")
+    rows.append(_row(best_label, _full(best)))
+
+    out_dir = Path(__file__).resolve().parent / "outputs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / "问题2_结果.csv"
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+    print("问题2数值结果已保存：%s" % path)
+    return path
+
+
 def main() -> None:
     """主流程：自检 -> 圆柱 -> 长方体 -> 全局最优。"""
     print("=" * 70)
@@ -1174,6 +1228,7 @@ def main() -> None:
         print("    说明：两者 N 并列，本代码以 N_theory 较高者为全局最优；"
               "如需并列展示可改比较规则。")
     print()
+    write_q2_results_csv(cyl, box, best)
     plot_optimal_cross_section(best, {"cylinder": cyl, "cuboid": box})
     print("自检结果：%s" % ("PASS" if self_check_ok else "FAIL"))
 
