@@ -2,6 +2,7 @@
 """Convert a simple Chinese markdown document (headings, tables, paragraphs) to docx."""
 
 from pathlib import Path
+import sys
 
 from docx import Document
 
@@ -27,7 +28,8 @@ def add_md_table(doc, rows):
 
 def main():
     src = Path(__file__).with_name("水下服务器热设计参数与算法交付清单_数据补全.md")
-    dst = Path(__file__).with_name("水下服务器热设计参数与算法交付清单_数据补全.docx")
+    default = Path(__file__).with_name("水下服务器热设计参数与算法交付清单_数据补全.docx")
+    dst = Path(sys.argv[1]) if len(sys.argv) > 1 else default
     doc = Document()
     lines = src.read_text(encoding="utf-8").splitlines()
     i = 0

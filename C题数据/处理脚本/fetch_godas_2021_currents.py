@@ -28,6 +28,11 @@ def nearest(values: np.ndarray, target: float) -> int:
     return int(np.argmin(np.abs(values - target)))
 
 
+def window_mean(grid: np.ndarray) -> float:
+    vals = grid[grid > -1e30]
+    return float(np.mean(vals)) if vals.size else np.nan
+
+
 def main() -> None:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     with Dataset(UCUR) as du, Dataset(VCUR) as dv:
@@ -44,22 +49,25 @@ def main() -> None:
         for name, (lo, la) in SITES.items():
             i = nearest(lon, lo)
             j = nearest(lat, la)
-            u = np.asarray(du.variables["ucur"][:, :, j, i])
-            v = np.asarray(dv.variables["vcur"][:, :, j, i])
-            u[u < -1e30] = np.nan
-            v[v < -1e30] = np.nan
+            i0, i1 = max(i - 3, 0), min(i + 3, len(lon) - 1)
+            j0, j1 = max(j - 3, 0), min(j + 3, len(lat) - 1)
+            u = np.asarray(du.variables["ucur"][:, :, j0 : j1 + 1, i0 : i1 + 1])
+            v = np.asarray(dv.variables["vcur"][:, :, j0 : j1 + 1, i0 : i1 + 1])
             raw_rows = []
             for ti, m in enumerate(months):
                 for zi, depth in enumerate(lev):
-                    um = float(u[ti, zi])
-                    vm = float(v[ti, zi])
+                    um = window_mean(u[ti, zi])
+                    vm = window_mean(v[ti, zi])
                     speed = (
                         round(math.hypot(um, vm), 6)
                         if not math.isnan(um) and not math.isnan(vm)
                         else ""
                     )
                     raw_rows.append([
-                        m.strftime("%Y-%m"), name, float(depth), um, vm, speed,
+                        m.strftime("%Y-%m"), name, float(depth),
+                        None if math.isnan(um) else round(um, 6),
+                        None if math.isnan(vm) else round(vm, 6),
+                        speed,
                     ])
             rows.extend(raw_rows)
             raw = RAW_DIR / f"GODAS_2021_{name}_monthly_raw.csv"
