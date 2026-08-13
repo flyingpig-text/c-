@@ -6,10 +6,23 @@ C 题 问题 2：枚举 shape + GA 遗传算法 + SLSQP 局部寻优
       使可容纳服务器台数 N 最大化。
 
 统一口径（与交付清单一致）：
-    Q_total = h * A_eff * (T_wall - T_inf)
-    N_theory = Q_total / q0
+    散热能力按问题 1 的热阻网络计算（不再只用海侧 h 高估）：
+        Q_max = h_total * A_eff * (T_max - T_inf)
+              = (T_max - T_inf) / R_total        （两式等价，统一为 Q_max）
+        R_total = 1/(h_air*A_in) + R_wall + 1/(h_sea*A_eff)
+    其中 A_eff = A_base + eta_f*N_f*A_f 为含翅片有效外面积，
+    h_air/h_sea 由 Churchill-Chu 关联式 + 壁温自洽迭代得到；
+    N_theory = Q_max / q0
     N_space = V_inner / V_server
     N = floor(min(N_theory, N_space))，且 N_theory < 1 时输出 0
+
+修正说明（2026-08-13 评审后）：
+    1) 原版本只用 h_sea*A_eff*(T_max-T_inf)，忽略舱内空气与壁导热，
+       使 N_theory 高估约两个数量级且恒大于 N_space，优化退化为体积最大化；
+       现改为与问题 1 相同口径的热阻网络，N 重新由散热上限主导。
+    2) 长方体改用等面积当量直径 2a/sqrt(pi) 作为 Churchill-Chu 特征长度，
+       不再把方柱边长直接当作圆柱直径。
+    3) 增加 Ra 适用域检查与参数来源核对；N_space 明确为体积法上界。
 
 本文件不使用 scipy.optimize / DEAP 等黑箱优化器：
     GA       —— 手写二进制锦标赛选择 + 均匀交叉 + 变异 + 精英保留；
@@ -19,7 +32,8 @@ C 题 问题 2：枚举 shape + GA 遗传算法 + SLSQP 局部寻优
     * 题目与交付清单给出：D=1 m，L=12 m，外形上限 1x1x12 m，q0=500 W，
       Tmax=80 ℃，Tinf=20 ℃，1U 服务器 482.6x44.45x525 mm。
     * 清单中“翅片数量/翅高/翅厚上下界”“GA 超参数”只写了名称，未给数值；
-      本文件在“三、可修改参数区”给出了工程默认值，并在注释中标注【假设值】。
+      本文件在核心算法模块《C题_问题2_核心算法.py》的“三、翅片设计变量上下界”
+      给出了工程默认值，并在注释中标注【假设值】；GA/SLSQP 参数见主脚本参数区。
       正式交付前请按组委会给定数值替换。
 
 运行：python C题_问题2_枚举shape_GA_SLSQP.py
@@ -37,76 +51,27 @@ import numpy as np
 
 
 # ==================================================================
-# 一、题目给定参数（全部来自题面 / 交付清单，勿改）
+# 核心算法（独立模块：C题_问题2_核心算法.py）
+# 函数输入/输出说明见《算法设计_问题2_核心算法.md》
 # ==================================================================
-ENVELOPE_SIDE = 1.0      # 外形约束：横截面不超过 1 m（1m x 1m x 12m）
-HULL_LENGTH = 12.0       # 舱体总长 L，m
-Q0 = 500.0               # 单台服务器产热，W
-T_MAX = 80.0             # 壳体允许最高温度，℃
-T_INF = 20.0             # 问题 1 基准海水温度，℃
-
-# 1U 服务器尺寸（宽 x 高 x 长），m
-SERVER_W = 0.4826
-SERVER_H = 0.04445
-SERVER_L = 0.525
-
-
-# ==================================================================
-# 二、材料与海水热物性（数据来源见数据.md；与问题一模型保持同一套近似式）
-# ==================================================================
-K_FIN = 167.0            # 翅片材料导热系数（6061 铝，20 ℃ 约 167 W/(m·K)）
-WALL = 0.01              # 壳体壁厚，m（沿用问题一默认值 10 mm）
-
-
-def sea_props(T: float) -> dict:
-    """海水（S=35‰）热物性近似，T 为摄氏温度。
-
-    与问题一脚本《C题_问题1_核心算法.py》保持同一套近似式：
-        rho: 密度 kg/m^3
-        cp : 比热容 J/(kg·K)
-        k  : 导热系数 W/(m·K)
-        mu : 动力粘度 Pa·s
-        beta: 体膨胀系数 1/K
-    """
-    rho = 1027.0 - 0.24 * (T - 20.0)
-    cp = 3985.0 + 0.35 * T
-    k = 0.575 + 0.0016 * T
-    mu = 0.00108 * np.exp(-0.019 * (T - 20.0))
-    beta = 2.5e-4
-    return {"rho": rho, "cp": cp, "k": k, "mu": mu, "beta": beta}
-
-
-def h_horizontal_cylinder(D: float, dT: float, T_film: float) -> float:
-    """水平圆柱/方柱自然对流换热系数 h，Churchill-Chu 关联式，W/(m^2·K)。
-
-    输入：
-        D      : 特征长度（圆柱直径，或方柱等效直径 = 边长），m
-        dT     : 壁面与海水温差，℃
-        T_film : 膜温（取壁温与海水温度平均值），℃
-    公式：
-        Ra = g*beta*dT*D^3/(nu*alpha)
-        Nu = [0.60 + 0.387*Ra^(1/6)/(1+(0.559/Pr)^(9/16))^(8/27)]^2
-        h  = Nu*k/D
-    """
-    p = sea_props(T_film)
-    g = 9.81
-    nu = p["mu"] / p["rho"]                     # 运动粘度
-    alpha = p["k"] / (p["rho"] * p["cp"])       # 热扩散率
-    Pr = nu / alpha
-    Ra = g * p["beta"] * dT * D**3 / (nu * alpha)
-    denom = (1.0 + (0.559 / Pr) ** (9.0 / 16.0)) ** (8.0 / 27.0)
-    Nu = (0.60 + 0.387 * Ra ** (1.0 / 6.0) / denom) ** 2
-    return Nu * p["k"] / D
+from C题_问题2_核心算法 import (
+    ENVELOPE_SIDE, HULL_LENGTH, Q0, T_MAX, T_INF,
+    SERVER_W, SERVER_H, SERVER_L,
+    K_FIN, WALL, K_WALL_DEFAULT,
+    NF_MIN, NF_MAX, HF_MIN, HF_MAX, DF_MIN, DF_MAX,
+    air_props, sea_props, h_horizontal_cylinder,
+    _char_len, _load_k_wall, _k_wall,
+    _inner_geometry, _wall_resistance, _ra_number,
+    _solve_thermal_network, _fin_efficiency,
+    _solve_fin_and_network, _build_geometry, _raw_metrics,
+    evaluate_design, _infeasible_result, _find_project_root,
+    solve_q2,
+)
 
 
 # ==================================================================
-# 三、可修改参数区
+# 三、优化器参数区（GA / SLSQP；翅片设计变量上下界见核心算法模块）
 # ==================================================================
-# ---- 翅片设计变量上下界（清单未给数值，以下为工程默认值【假设值】）----
-NF_MIN, NF_MAX = 1, 160          # 每根/每面翅片数（长方体 = 每面数量）
-HF_MIN, HF_MAX = 0.005, 0.24     # 翅高上下界，m（0.24 保证基体仍有足够内空间）
-DF_MIN, DF_MAX = 0.001, 0.01     # 翅厚上下界，m
-
 # ---- GA 遗传算子参数（清单未给数值，以下为工程默认值【假设值】）----
 GA_POP = 80          # 种群规模
 GA_GEN = 60          # 迭代代数
@@ -118,220 +83,6 @@ GA_SEED = 20260813   # 随机种子（保证可复现）
 # ---- SLSQP 局部寻优参数 ----
 SLSQP_MAX_ITER = 100
 SLSQP_TOL = 1e-6
-
-
-# ==================================================================
-# 四、翅片几何与传热模型（圆柱 / 长方体统一入口）
-# ==================================================================
-def _build_geometry(shape: str, Hf: float) -> dict:
-    """由翅高 Hf 反推基体尺寸（翅尖刚好贴住 1m 外形约束）。
-
-    几何约定：
-        圆柱    D_base = 1 - 2*Hf，纵向矩形直翅沿圆周均布，翅长 = L；
-        长方体  a_base = 1 - 2*Hf，四个侧面各布 nf 根纵向矩形直翅。
-    这样翅片“向外延展不超 1m 限制”由构造自动满足。
-    """
-    if shape == "cylinder":
-        D_base = ENVELOPE_SIDE - 2.0 * Hf
-        return {
-            "shape": shape,
-            "char_len": D_base,                       # 自然对流特征长度
-            "base_side": D_base,
-            "base_side_area": np.pi * D_base * HULL_LENGTH,   # 侧面积
-            "base_end_area": 2.0 * np.pi * D_base**2 / 4.0,   # 两端封头面积
-            "fin_banks": 1,                           # 圆柱只有 1 圈翅
-            "perimeter": np.pi * D_base,              # 根部圆周
-            "overlap_limit": np.pi * D_base,          # 翅根可布周长
-            "v_cross": np.pi * D_base**2 / 4.0,       # 外轮廓横截面积
-        }
-    if shape == "cuboid":
-        a = ENVELOPE_SIDE - 2.0 * Hf
-        return {
-            "shape": shape,
-            "char_len": a,                            # 方柱等效直径取边长
-            "base_side": a,
-            "base_side_area": 4.0 * a * HULL_LENGTH,  # 四个侧面
-            "base_end_area": 2.0 * a**2,              # 两个端面
-            "fin_banks": 4,                           # 四个侧面各布翅
-            "perimeter": 4.0 * a,                     # 横截面周长
-            "overlap_limit": a,                       # 每面翅根可布宽度
-            "v_cross": a**2,
-        }
-    return None
-
-
-def _raw_metrics(shape: str, nf: int, Hf: float, df: float) -> dict | None:
-    """只做几何/传热计算，不施加可行性门禁。
-
-    该函数供 SLSQP 的数值梯度使用：若像 evaluate_design 那样在
-    “Hf/df<3”等边界处直接返回 1e9 硬惩罚，中心差分会跨过不连续点，
-    产生约 1e13 的假梯度；这里始终返回连续值，可行性交给约束函数
-    g2/g3 与 L1 罚函数处理。
-    """
-    geo = _build_geometry(shape, Hf)
-    if geo is None:
-        return None
-    inner_side = geo["base_side"] - 2.0 * WALL
-    inner_len = HULL_LENGTH - 2.0 * WALL
-    if inner_side <= 0.0 or inner_len <= 0.0:
-        return None
-
-    if shape == "cylinder":
-        v_inner = np.pi * inner_side**2 / 4.0 * inner_len
-    else:
-        v_inner = inner_side**2 * inner_len
-    v_server = SERVER_W * SERVER_H * SERVER_L
-    n_space = v_inner / v_server
-
-    dT = T_MAX - T_INF
-    T_film = (T_MAX + T_INF) / 2.0
-    h = h_horizontal_cylinder(geo["char_len"], dT, T_film)
-    m = np.sqrt(2.0 * h / (K_FIN * df))
-    mH = m * Hf
-    eta_f = 1.0 if mH < 1e-12 else np.tanh(mH) / mH
-    a_fin_one = (2.0 * Hf + df) * HULL_LENGTH
-    total_fins = nf * geo["fin_banks"]
-    a_base = (geo["base_side_area"] + geo["base_end_area"]
-              - total_fins * df * HULL_LENGTH)
-    a_eff = a_base + total_fins * eta_f * a_fin_one
-    n_theory = h * a_eff * dT / Q0
-
-    return {
-        "geo": geo,
-        "base_side": geo["base_side"],
-        "h": h,
-        "eta_f": eta_f,
-        "a_fin_one": a_fin_one,
-        "a_base": a_base,
-        "a_eff": a_eff,
-        "n_theory": n_theory,
-        "n_space": n_space,
-        "v_inner": v_inner,
-    }
-
-
-def evaluate_design(shape: str, nf: int, Hf: float, df: float,
-                    collect_warnings: bool = True) -> dict:
-    """计算一组翅片参数下的有效散热面积 A_eff 与装机台数 N。
-
-    输入：
-        shape : "cylinder" 或 "cuboid"
-        nf    : 翅片数（长方体表示每个侧面的翅片数）
-        Hf    : 翅高，m
-        df    : 翅厚，m
-    输出：
-        dict，含 feasible(是否可行)、h、A_eff、eta_f、N_theory、N_space、
-        N(整数)、warnings 等。
-
-    鲁棒性约定：任何不满足几何/空间/温度约束的输入都不抛异常，
-    而是返回 feasible=False，并给出中文警告。
-    """
-    warns = []
-
-    # ---- 输入合理性检查 ----
-    if shape not in ("cylinder", "cuboid"):
-        warns.append("未知外形 shape=%r，仅支持 cylinder/cuboid" % (shape,))
-        return _infeasible_result(warns)
-    nf = int(round(float(nf)))
-    if nf < 1:
-        warns.append("翅片数 nf=%d < 1，无法形成有效翅片" % nf)
-        return _infeasible_result(warns)
-    if not (HF_MIN - 1e-12 <= Hf <= HF_MAX + 1e-12):
-        warns.append("翅高 Hf=%.5f 超出区间 [%.4f, %.4f] m" % (Hf, HF_MIN, HF_MAX))
-        return _infeasible_result(warns)
-    if not (DF_MIN - 1e-12 <= df <= DF_MAX + 1e-12):
-        warns.append("翅厚 df=%.5f 超出区间 [%.4f, %.4f] m" % (df, DF_MIN, DF_MAX))
-        return _infeasible_result(warns)
-    if Hf / df < 3.0:
-        warns.append("Hf/df=%.2f < 3，一维直翅假设不再可靠，按不可行处理" % (Hf / df))
-        return _infeasible_result(warns)
-
-    geo = _build_geometry(shape, Hf)
-    if geo is None:
-        warns.append("几何建模失败")
-        return _infeasible_result(warns)
-
-    # ---- 翅根间距检查：翅根厚度之和不能超过根部周长 ----
-    overlap_limit = geo["overlap_limit"]
-    if nf * df > overlap_limit + 1e-9:
-        warns.append("nf*df=%.4f > 可布置周长 %.4f m，翅根重叠" % (nf * df, overlap_limit))
-        return _infeasible_result(warns)
-
-    # ---- 内部空间检查 ----
-    base_side = geo["base_side"]
-    inner_side = base_side - 2.0 * WALL          # 圆柱=内径，长方体=内边长
-    inner_len = HULL_LENGTH - 2.0 * WALL
-    if inner_side <= 0.0 or inner_len <= 0.0:
-        warns.append("壁厚使内部尺寸 <= 0，无可用容积")
-        return _infeasible_result(warns)
-    if shape == "cylinder":
-        v_inner = np.pi * inner_side**2 / 4.0 * inner_len
-    else:
-        v_inner = inner_side**2 * inner_len
-    v_server = SERVER_W * SERVER_H * SERVER_L
-    n_space = v_inner / v_server
-
-    # ---- 自然对流换热系数 h ----
-    dT = T_MAX - T_INF                            # 60 ℃
-    T_film = (T_MAX + T_INF) / 2.0                # 50 ℃ 膜温
-    h = h_horizontal_cylinder(geo["char_len"], dT, T_film)
-
-    # ---- 翅片效率与等效散热面积 ----
-    # 矩形直翅（绝热端近似）：m = sqrt(2h/(k_fin*df))，eta = tanh(m*Hf)/(m*Hf)
-    m = np.sqrt(2.0 * h / (K_FIN * df))
-    mH = m * Hf
-    eta_f = 1.0 if mH < 1e-12 else np.tanh(mH) / mH
-    a_fin_one = (2.0 * Hf + df) * HULL_LENGTH     # 单根翅两表面 + 端面
-    total_fins = nf * geo["fin_banks"]
-
-    # 基体面积 = 原外表面积 - 翅根占位面积（端面不布翅，不扣减）
-    a_base = geo["base_side_area"] + geo["base_end_area"] - total_fins * df * HULL_LENGTH
-    a_eff = a_base + total_fins * eta_f * a_fin_one
-
-    # ---- 散热理论上限与空间上限 ----
-    q_max = h * a_eff * dT
-    n_theory = q_max / Q0
-    if n_theory < 1.0:
-        warns.append("N_theory=%.2f < 1，散热能力不足以放置任何服务器" % n_theory)
-        return _infeasible_result(warns)
-
-    # ---- 最终容量：两个上限取小后向下取整 ----
-    n_final = int(np.floor(min(n_theory, n_space)))
-    if n_final < 1:
-        warns.append("取整后 N=%d < 1，无可行装机方案" % n_final)
-        return _infeasible_result(warns)
-
-    return {
-        "feasible": True,
-        "shape": shape,
-        "nf": nf,
-        "Hf": float(Hf),
-        "df": float(df),
-        "base_side": float(base_side),
-        "h": float(h),
-        "eta_f": float(eta_f),
-        "a_fin_one": float(a_fin_one),
-        "a_base": float(a_base),
-        "a_eff": float(a_eff),
-        "q_max": float(q_max),
-        "n_theory": float(n_theory),
-        "v_inner": float(v_inner),
-        "n_space": float(n_space),
-        "N": n_final,
-        "warnings": warns if collect_warnings else [],
-    }
-
-
-def _infeasible_result(warns) -> dict:
-    """不可行结果模板：保证调用方拿到统一结构，不会因缺键崩溃。"""
-    return {
-        "feasible": False,
-        "shape": None, "nf": None, "Hf": None, "df": None,
-        "base_side": None, "h": None, "eta_f": None, "a_fin_one": None,
-        "a_base": None, "a_eff": None, "q_max": None, "n_theory": None,
-        "v_inner": None, "n_space": None, "N": 0,
-        "warnings": warns,
-    }
 
 
 # ==================================================================
@@ -374,7 +125,8 @@ def _steady_conduction_field(shape: str, nf: int, Hf: float, df: float,
 
     内舱节点固定为 T_MAX（允许最高温度边界），固体外露面对海水用 Robin
     对流边界：-k*dT/dn = h*(T-T_inf)。只对固体节点建立稀疏邻接，
-    避免在整张网格上做慢速 SOR，运行时间约 1 秒量级。
+    避免在整张网格上做慢速 SOR，运行时间约 1 秒量级。材料分区与主模型
+    一致：基体壁为壳体材料 K_WALL，翅片为 K_FIN，节点间导热用调和平均。
     """
     x = np.linspace(-0.5, 0.5, n_grid)
     dx = x[1] - x[0]
@@ -425,6 +177,14 @@ def _steady_conduction_field(shape: str, nf: int, Hf: float, df: float,
     outside = ~(solid | interior)
     active = solid.copy()
 
+    # ---- 材料分区：基体壁为壳体材料 K_WALL，翅片为 K_FIN ----
+    k_grid = np.where(solid, K_FIN, 0.0)
+    if shape == "cuboid":
+        ring = (np.abs(XX) <= half) & (np.abs(YY) <= half)
+    else:
+        ring = RR <= R_base
+    k_grid[ring & ~interior] = _k_wall()
+
     # ---- 稀疏邻接：每个固体节点最多 4 个固体邻居 ----
     idx_flat = np.arange(solid.size).reshape(solid.shape)
     local_idx = np.full(solid.size, -1, dtype=np.int64)
@@ -462,22 +222,30 @@ def _steady_conduction_field(shape: str, nf: int, Hf: float, df: float,
 
     n_dir = (iE + iW + iN + iS)[active].astype(float)
     n_exp = (oE + oW + oN + oS)[active].astype(float)
-    n_sol = (nbs >= 0).sum(axis=1).astype(float)
-    diag = K_FIN * (n_sol + n_dir) + h * dx * n_exp
-    b = K_FIN * T_MAX * n_dir + h * dx * T_INF * n_exp
+    k_act = k_grid[active]
+    k_nb = []
+    for d in range(4):
+        nb = nbs[:, d]
+        k_j = np.where(nb >= 0, k_act[nb], 0.0)
+        k_nb.append(np.where(k_j > 0.0,
+                             2.0 * k_act * k_j / (k_act + k_j), 0.0))
+    k_nb = np.stack(k_nb, axis=1)
+
+    diag = k_nb.sum(axis=1) + k_act * n_dir + h * dx * n_exp
+    b = k_act * T_MAX * n_dir + h * dx * T_INF * n_exp
 
     u = np.full(act_flat.size, 60.0)
     r = b - diag * u
     for d in range(4):
         nb = nbs[:, d]
-        r = r + K_FIN * np.where(nb >= 0, u[nb], 0.0)
+        r = r + k_nb[:, d] * np.where(nb >= 0, u[nb], 0.0)
     p = r.copy()
     rr = float(r @ r)
     for _ in range(20000):
         ap = diag * p
         for d in range(4):
             nb = nbs[:, d]
-            ap = ap - K_FIN * np.where(nb >= 0, p[nb], 0.0)
+            ap = ap - k_nb[:, d] * np.where(nb >= 0, p[nb], 0.0)
         pap = float(p @ ap)
         if pap <= 0.0:
             break
@@ -839,7 +607,7 @@ def plot_optimal_cross_section(best: dict,
         "最优结构：%s（N=%d 台）— 右侧翅片局部放大（2D 稳态导热）\n"
         "范围 x∈[%.3f, %.3f] m、y∈[%.3f, %.3f] m；\n"
         "nf=%d，Hf=%.1f mm，df=%.1f mm，h=%.0f W/(m^2·K)\n"
-        "温度变化：内壁 80 ℃ → 外壁≈%.1f ℃ → 翅尖≈%.1f ℃ → 海水 20 ℃"
+        "温度变化：内舱 80 ℃ → 外壁≈%.1f ℃ → 翅尖≈%.1f ℃ → 海水 20 ℃"
         % (shape_cn, best["N"], vx0, vx1, vy0, vy1,
            nf, Hf * 1000.0, df * 1000.0, h, t_wall, t_fin_tip),
         fontsize=10.5,y=1.05
@@ -1312,15 +1080,21 @@ def solve_shape(shape: str, verbose: bool = True) -> dict:
               % (nf_ga, Hf_ga, df_ga, res_ga["N"]))
         print("SLSQP 局部寻优后 : nf=%d, Hf=%.4f m, df=%.4f m -> N=%d"
               % (nf_ga, Hf_loc, df_loc, res_loc["N"]))
-        print("    h      = %.2f W/(m^2·K)" % res_loc["h"])
+        print("    h_air  = %.3f W/(m^2·K)，h_sea = %.1f W/(m^2·K)"
+              % (res_loc["h_air"], res_loc["h"]))
+        print("    h_total= %.4f W/(m^2·K)，T_wi=%.2f ℃，T_wo=%.2f ℃"
+              % (res_loc["h_total"], res_loc["t_wi"], res_loc["t_wo"]))
         print("    eta_f  = %.4f" % res_loc["eta_f"])
         print("    A_eff  = %.2f m^2（A_base=%.2f m^2）"
               % (res_loc["a_eff"], res_loc["a_base"]))
         print("    N_theory = %.2f 台，N_space = %.2f 台"
               % (res_loc["n_theory"], res_loc["n_space"]))
-        if res_loc["n_space"] < res_loc["n_theory"]:
-            print("    提示：当前瓶颈为空间上限 N_space，"
-                  "翅片参数主要影响散热裕度而非 N")
+        if res_loc["n_theory"] < res_loc["n_space"]:
+            print("    提示：当前瓶颈为散热上限 N_theory，"
+                  "外翅片收益受舱内空气侧热阻制约")
+        else:
+            print("    提示：当前瓶颈为空间上限 N_space（体积法上界），"
+                  "翅片参数主要提供散热裕度")
         if local["warnings"]:
             print("    SLSQP 提示:")
             for w in local["warnings"]:
@@ -1353,6 +1127,14 @@ def main() -> None:
     print("GA: pop=%d, gen=%d, pc=%.2f, pm=%.2f；SLSQP: 手写 BFGS+QP"
           % (GA_POP, GA_GEN, GA_PC, GA_PM))
     print()
+    print("口径说明：散热按问题1热阻网络（舱内空气 -> 壁导热 -> 海侧翅片）计算；")
+    print("          长方体 Churchill-Chu 特征长度取等面积当量直径；")
+    print("          N_space 为体积法上界，不代表真实机架布局数。")
+    print("参数来源核对：D/L/Tmax/Tinf/q0/服务器尺寸 = 题面给定；")
+    print("          WALL=10 mm（问题1基准，假设值）；")
+    print("          K_FIN=6061-T6 铝 167 W/(m·K)（MatWeb，MakeItFrom 为 170）；")
+    print("          K_WALL=304 不锈钢 20 ℃（清洗后 CSV，缺失时默认 14.4）。")
+    print()
 
     # ---- 0. 代码校验：同一组翅片参数，手算 A_eff 与 N ----
     self_check_ok = run_self_check()
@@ -1382,8 +1164,12 @@ def main() -> None:
     print("    A_eff=%.2f m^2，N_theory=%.2f 台，N_space=%.2f 台"
           % (best["a_eff"], best["n_theory"], best["n_space"]))
     print("    最终装机台数 N = %d 台" % best["N"])
-    if best["n_space"] < best["n_theory"]:
-        print("    提示：当前瓶颈为空间上限 N_space，翅片参数主要提供散热裕度")
+    if best["n_theory"] < best["n_space"]:
+        print("    提示：当前瓶颈为散热上限 N_theory，"
+              "外翅片收益受舱内空气侧热阻制约")
+    else:
+        print("    提示：当前瓶颈为空间上限 N_space（体积法上界），"
+              "翅片参数主要提供散热裕度")
     if cyl["feasible"] and box["feasible"] and cyl["N"] == box["N"]:
         print("    说明：两者 N 并列，本代码以 N_theory 较高者为全局最优；"
               "如需并列展示可改比较规则。")
@@ -1396,75 +1182,97 @@ def main() -> None:
 # 八、手算校验：同一组翅片参数核对 A_eff 与 N
 # ==================================================================
 def run_self_check() -> bool:
-    """按交付清单“代码校验指标”手工核对。
+    """评审修正后的自检：几何、翅片效率、热阻网络、问题1基准回归。
 
     校验算例（全部为手算可复算的数值）：
         圆柱：nf=60，Hf=0.10 m，df=0.005 m
         基体直径 D_base = 1 - 2*0.10 = 0.80 m
+        问题1回归：裸圆柱 D=1（无翅片）应复现 N=15、Q≈7761 W。
     """
     print("=" * 70)
-    print("代码校验：手算 A_eff 与 N")
+    print("代码校验：几何 + 热阻网络 + 问题1基准回归")
     print("=" * 70)
 
     nf, Hf, df = 60, 0.10, 0.005
+    res = evaluate_design("cylinder", nf, Hf, df)
+    if not res["feasible"]:
+        print("自检结果：FAIL（设计不可行）")
+        return False
     D_base = ENVELOPE_SIDE - 2.0 * Hf
     print("输入：圆柱 nf=%d，Hf=%.3f m，df=%.3f m，D_base=%.2f m"
           % (nf, Hf, df, D_base))
+    print("几何：A_base=%.4f m^2，A_fin,单根=%.4f m^2，eta_f=%.4f，A_eff=%.4f m^2"
+          % (res["a_base"], res["a_fin_one"], res["eta_f"], res["a_eff"]))
+    print("网络：h_air=%.3f，h_sea=%.1f，h_total=%.4f W/(m^2·K)"
+          % (res["h_air"], res["h"], res["h_total"]))
+    print("壁温：T_wi=%.2f ℃，T_wo=%.2f ℃；Q_max=%.1f W"
+          % (res["t_wi"], res["t_wo"], res["q_max"]))
+    print("容量：N_theory=%.2f 台，N_space=%.2f 台，N=%d 台"
+          % (res["n_theory"], res["n_space"], res["N"]))
 
-    # ---- 手算面积 ----
-    a_cyl = np.pi * D_base * HULL_LENGTH
-    a_root = nf * df * HULL_LENGTH
-    a_cap = 2.0 * np.pi * D_base**2 / 4.0
-    a_base_manual = a_cyl - a_root + a_cap
-    a_fin_manual = (2.0 * Hf + df) * HULL_LENGTH
-
-    # ---- 手算翅片效率 ----
+    # ---- 一致性断言 ----
+    ok = True
+    ok = ok and res["a_eff"] > 0.0 and 0.0 < res["eta_f"] <= 1.0
+    # 统一口径：Q_max = h_total*A_eff*ΔT（精确）；再与网络 ΔT/R_total 交叉验证
     dT = T_MAX - T_INF
-    T_film = (T_MAX + T_INF) / 2.0
-    h_manual = h_horizontal_cylinder(D_base, dT, T_film)
-    m_manual = np.sqrt(2.0 * h_manual / (K_FIN * df))
-    eta_manual = np.tanh(m_manual * Hf) / (m_manual * Hf)
-    a_eff_manual = a_base_manual + nf * eta_manual * a_fin_manual
+    ok = ok and abs(res["q_max"] - res["h_total"] * res["a_eff"]
+                    * dT) < 1e-9
+    ok = ok and abs(res["q_max"] - dT / res["r_total"]) < 1e-3
+    ok = ok and res["N"] == int(np.floor(min(res["n_theory"], res["n_space"])))
+    ok = ok and 1e-5 <= res["ra_outer"] <= 1e12
 
-    # ---- 手算 N ----
-    n_theory_manual = h_manual * a_eff_manual * dT / Q0
-    v_inner_manual = np.pi * (D_base - 2.0 * WALL)**2 / 4.0 \
-        * (HULL_LENGTH - 2.0 * WALL)
-    v_server_manual = SERVER_W * SERVER_H * SERVER_L
-    n_space_manual = v_inner_manual / v_server_manual
-    n_manual = int(np.floor(min(n_theory_manual, n_space_manual)))
-
-    print("手算 A_eff：A_base = π*D*L - nf*df*L + 2*πD^2/4")
-    print("          = %.4f - %.4f + %.4f = %.4f m^2"
-          % (a_cyl, a_root, a_cap, a_base_manual))
-    print("          A_fin,单根 = (2*Hf+df)*L = %.4f m^2" % a_fin_manual)
-    print("          eta_f = tanh(mHf)/(mHf) = %.4f" % eta_manual)
-    print("          A_eff = A_base + nf*eta_f*A_fin = %.4f m^2" % a_eff_manual)
-    print("手算 N：h=%.2f W/(m^2·K)，N_theory=%.2f 台，N_space=%.2f 台，"
-          "N=%d 台" % (h_manual, n_theory_manual, n_space_manual, n_manual))
-
-    # ---- 与 evaluate_design 输出比对 ----
-    res = evaluate_design("cylinder", nf, Hf, df)
-    ok_area = res["feasible"] and abs(res["a_eff"] - a_eff_manual) < 1e-9
-    ok_n = res["feasible"] and res["N"] == n_manual
-    ok = ok_area and ok_n
-    print("代码输出：A_eff=%.4f m^2，N=%d 台" % (res["a_eff"], res["N"]))
+    # ---- 问题1基准回归：裸圆柱 D=1（无翅片）应回到 N=15 ----
+    geo = _build_geometry("cylinder", 0.0)
+    a_out = geo["base_side_area"] + geo["base_end_area"]
+    net = _solve_thermal_network("cylinder", geo, a_out, _k_wall())
+    q1_max = net["h_total"] * a_out * dT
+    n_theory_q1 = q1_max / Q0
+    n_space_q1 = net["v_inner"] / (SERVER_W * SERVER_H * SERVER_L)
+    n_q1 = int(np.floor(min(n_theory_q1, n_space_q1)))
+    print("问题1基准回归（裸圆柱 D=1，无翅片）：Q_max=%.1f W，h_sea=%.1f，"
+          "N_theory=%.2f，N=%d 台（基准 N=15）"
+          % (q1_max, net["h_sea"], n_theory_q1, n_q1))
+    ok = ok and abs(q1_max - 7761.5) / 7761.5 < 0.05
+    ok = ok and abs(q1_max - net["q_total"]) / q1_max < 1e-6
+    ok = ok and n_q1 == 15
     print("自检结果：%s" % ("PASS" if ok else "FAIL"))
     if not ok:
-        warnings.warn("手算自检未通过，请检查公式。")
+        warnings.warn("自检未通过，请检查公式或数据。")
     return ok
 
 
 # ==================================================================
 # 九、无可行解鲁棒性演示（不抛异常，只给警告）
 # ==================================================================
-def demo_warning_path() -> None:
-    """演示参数严重不合理时的行为：返回警告而非报错。"""
-    print("鲁棒性演示：翅根严重重叠的一组参数")
-    res = evaluate_design("cylinder", 100000, 0.10, 0.01)
-    print("    feasible = %s，N = %s" % (res["feasible"], res["N"]))
-    for w in res["warnings"]:
-        print("    警告：", w)
+def demo_warning_path() -> bool:
+    """鲁棒性演示：非法输入应返回 feasible=False 与中文警告，不抛异常。
+
+    覆盖 4 类情况：
+        1) 声明区间内翅根重叠（nf*df > 可布置周长）
+        2) 一维翅片假设不满足（Hf/df < 3）
+        3) 翅片数超出声明区间（nf > NF_MAX）
+        4) 未知外形
+    """
+    print("鲁棒性演示：非法输入均返回 feasible=False 与中文警告，不抛异常")
+    cases = [
+        ("翅根重叠（nf*df > 可布置周长）", "cuboid", 160, 0.24, 0.01),
+        ("一维翅片假设不满足（Hf/df < 3）", "cylinder", 60, 0.005, 0.01),
+        ("翅片数超出声明区间（nf > NF_MAX）", "cylinder", 200, 0.10, 0.005),
+        ("未知外形（仅支持 cylinder/cuboid）", "sphere", 60, 0.10, 0.005),
+    ]
+    ok = True
+    for name, shape, nf, Hf, df in cases:
+        res = evaluate_design(shape, nf, Hf, df)
+        valid = (not res["feasible"]) and len(res["warnings"]) > 0
+        ok = ok and valid
+        print("  [%s] %s" % ("PASS" if valid else "FAIL", name))
+        print("    输入：shape=%s，nf=%d，Hf=%.3f m，df=%.4f m"
+              % (shape, nf, Hf, df))
+        print("    输出：feasible=%s，N=%d" % (res["feasible"], res["N"]))
+        for w in res["warnings"]:
+            print("    警告：", w)
+    print("鲁棒性演示：%s" % ("全部 PASS" if ok else "存在 FAIL"))
+    return ok
 
 
 if __name__ == "__main__":
