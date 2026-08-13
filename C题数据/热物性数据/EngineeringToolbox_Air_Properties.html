@@ -1,0 +1,2831 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<head>
+	
+<meta charset="UTF-8" >
+	
+<link rel="stylesheet" type="text/css" href="static/css/www.css" >
+	<title>Air Properties - Density, Viscosity, Heat Capacity, Thermal Conductivity, and more</title>	
+<script type="application/ld+json">
+	
+        {
+            "@context":"https://schema.org",
+            "@type":"Article",
+            "headline":"Air Properties - Density, Viscosity, Heat Capacity, Thermal Conductivity, and more",
+            "abstract":"Thermal properties of air, including density, viscosity, thermal conductivity, specific heat and more at different temperatures and pressures. Comprehensive reference with formulas, tables, and charts to support engineering calculations.",
+            "url":"https://www.engineeringtoolbox.com/air-properties-d_156.html",
+            "image":["static/docs/documents/2008/Air%20phase%20diagram%20C.jpg","static/docs/documents/156/air_temperature_density.png","static/docs/documents/156/air_temperature_density_2.png"],
+            "datePublished":"2003-02-15T04:25:03Z",
+            "dateModified":"2025-03-24T06:35:09Z",
+            "author":[{
+                "@type":"Person",
+                "name":"Editor Engineeringtoolbox",
+                "url": "https://engineeringtoolbox.com" 
+            }]
+            
+        }
+        
+</script>
+	
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" >
+	
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" >
+	
+<link rel="preconnect" href="https://fundingchoicesmessages.google.com" >
+	
+<link rel="dns-prefetch" href="https://cse.google.com" >
+	
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" >
+	
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" >
+	
+<link rel="dns-prefetch" href="https://clients1.google.com" >
+	
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	
+</script>
+	
+<meta name="robots" content="index,follow" >
+	
+<meta name="apple-touch-fullscreen" content="YES" >
+	
+<meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1.0" >
+	
+<meta name="keywords" content="air properties, air density, air viscosity, thermal conductivity, specific heat, air pressure, temperature effects, gas properties, engineering reference, HVAC calculations" >
+	
+<meta name="description" content="Thermal properties of air, including density, viscosity, thermal conductivity, specific heat and more at different temperatures and pressures. Comprehensive reference with formulas, tables, and charts to support engineering calculations." >
+	<!-- Thermal properties of air, including density, viscosity, thermal conductivity, specific heat and more at different temperatures and pressures. Comprehensive reference with formulas, tables, and charts to support engineering calculations. -->
+	
+<meta property="og:title" content="Air Properties - Density, Viscosity, Heat Capacity, Thermal Conductivity, and more" >
+	
+<meta property="og:type" content="article" >
+	
+<meta property="og:description" content="Thermal properties of air, including density, viscosity, thermal conductivity, specific heat and more at different temperatures and pressures. Comprehensive reference with formulas, tables, and charts to support engineering calculations." >
+	
+<meta property="og:url" content="https://www.engineeringtoolbox.com/air-properties-d_156.html" >
+	
+<meta property="og:image" content="static/img/logo.jpg" >
+	
+<link rel="apple-touch-icon-precomposed" type="text/css" href="static/lib/img/apple-touch-icon.png" >
+	
+<link rel="shortcut icon" type="image/x-icon" href="static/img/favicon.ico" >
+				
+<script src="static/scripts/sgmlRender.js" defer="defer">
+	
+</script>
+	
+<script src="static/scripts/www.js" defer="defer">
+	
+</script>
+	
+<script src="static/scripts/userlist.js" defer="defer">
+	
+</script>
+			
+<link rel="amphtml" href="https://www.engineeringtoolbox.com/amp/air-properties-d_156.html" >
+	
+<link rel="canonical" href="https://www.engineeringtoolbox.com/air-properties-d_156.html" >
+					
+<script src="data:text/javascript;base64,c2V0VGltZW91dChmdW5jdGlvbigpewkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkKJGooIiNhZGRGYWhyZW5oZWl0IikuY2xpY2soZnVuY3Rpb24oKXsKIGlmICgkaih0aGlzKS5oYXNDbGFzcygidmlldyIpKXsKICAkaih0aGlzKS5yZW1vdmVDbGFzcygidmlldyIpOwogICRqKCIuZmFocmVuaGVpdFZhbHVlIikucmVtb3ZlKCk7CiB9IGVsc2UgewogICRqKHRoaXMpLmFkZENsYXNzKCJ2aWV3Iik7CiAgJGooIi5jZWxzaXVzIikuZWFjaChmdW5jdGlvbihpLG8pewogICB2YXIgdmFsdWUgPSBwYXJzZUZsb2F0KCRqKG8pLmh0bWwoKSkgKiA5IC8gNSArIDMyOwogICAkaihvKS5hcHBlbmQoIjxzcGFuIGNsYXNzPVwiZmFocmVuaGVpdFZhbHVlXCIgc3R5bGU9XCJjb2xvcjpibHVlO1wiPjxici8+ICIgKyBDb252LnJvdW5kaW5nKHZhbHVlKSArICI8L3NwYW4+Iik7CiAgfSk7CiB9Cn0pOwoKCQokaigiI2FkZFNsdWdzQ3VGdCIpLmNsaWNrKGZ1bmN0aW9uKCl7CiBpZiAoJGoodGhpcykuaGFzQ2xhc3MoInZpZXciKSl7CiAgJGoodGhpcykucmVtb3ZlQ2xhc3MoInZpZXciKTsKICAkaigiLnNsdWdzQ3VGdFZhbHVlIikucmVtb3ZlKCk7CiB9IGVsc2UgewogICRqKHRoaXMpLmFkZENsYXNzKCJ2aWV3Iik7CiAgJGooIi5rZ20zIikuZWFjaChmdW5jdGlvbihpLG8pewogICB2YXIgdmFsdWUgPSBwYXJzZUZsb2F0KCRqKG8pLmh0bWwoKSkgLyA1MTUuMzc5OwogICAkaihvKS5hcHBlbmQoIjxzcGFuIGNsYXNzPVwic2x1Z3NDdUZ0VmFsdWVcIiBzdHlsZT1cImNvbG9yOmJsdWU7XCI+PGJyLz4gIiArIENvbnYucm91bmRpbmcodmFsdWUpICsgIjwvc3Bhbj4iKTsKICB9KTsKIH0KfSk7CgoKJGooIiNhZGRCdHVMYkYiKS5jbGljayhmdW5jdGlvbigpewogaWYgKCRqKHRoaXMpLmhhc0NsYXNzKCJ2aWV3IikpewogICRqKHRoaXMpLnJlbW92ZUNsYXNzKCJ2aWV3Iik7CiAgJGooIi5idHVMYkZWYWx1ZSIpLnJlbW92ZSgpOwogfSBlbHNlIHsKICAkaih0aGlzKS5hZGRDbGFzcygidmlldyIpOwogICRqKCIua0prZ0siKS5lYWNoKGZ1bmN0aW9uKGksbyl7CiAgIHZhciB2YWx1ZSA9IHBhcnNlRmxvYXQoJGoobykuaHRtbCgpKSAqIDAuMjM4OTsKICAgJGoobykuYXBwZW5kKCI8c3BhbiBjbGFzcz1cImJ0dUxiRlZhbHVlXCIgc3R5bGU9XCJjb2xvcjpibHVlO1wiPjxici8+ICIgKyBDb252LnJvdW5kaW5nKHZhbHVlKSArICI8L3NwYW4+Iik7CiAgfSk7CiB9Cn0pOwoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKfSwgMTAwMCk7" defer="defer">
+	
+</script>
+	
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WH8MKZX');</script>
+<!-- End Google Tag Manager -->
+                	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3176996020956223"
+     crossorigin="anonymous"></script>	
+<script async src="https://fundingchoicesmessages.google.com/i/pub-3176996020956223?ers=1" nonce="kUwMyhBaatnOdZ-JwpEGCA"></script><script nonce="kUwMyhBaatnOdZ-JwpEGCA">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+            	
+<script data-cfasync="false" type="text/javascript">
+window.snigelPubConf = {
+    "adengine": {
+        "activeAdUnits": ["adhesive", "doc1", "doc2", "left1", "right", "top", "video", "incontent1", "incontent2"] 
+    }
+}
+</script>
+<script async data-cfasync="false" src="https://cdn.snigelweb.com/adengine/engineeringtoolbox.com/loader.js" type="text/javascript"></script>
+</head>
+	
+<body>
+	
+<div id="top">
+	
+<div id="logo">
+	
+<a href="https://www.engineeringtoolbox.com">
+	
+<img src="static/img/logo.jpg" width="350" height="60" alt="Engineering ToolBox" >
+
+</a>
+</div>
+	
+<p id="intro" class="smallHide">
+	
+<a href="/">
+	Engineering ToolBox
+</a>
+	 - Resources, Tools and Basic Information for Engineering and Design of Technical Applications!</p>
+	
+<div id="adVideo" class="noPrint">
+	
+<div>
+	
+<!-- adngin-video-0 -->
+<div id="adngin-video-0"></div>
+                    
+</div>
+
+</div>
+</div>
+	
+<div id="center">
+	
+<div id="gooSearch">
+	
+<script async data-ad-channel="2933301748" src="https://cse.google.com/cse.js?cx=021dde52dd8917132"></script>
+<div class="gcse-search"></div>
+            
+</div>
+	
+<main id="content">
+	
+<article>
+	
+<div>
+	
+<header>
+	
+<h1>
+	
+<a href="air-properties-d_156.html">
+	Air Properties - Density, Viscosity, Heat Capacity, Thermal Conductivity, and more
+</a>
+
+</h1>
+	
+<h2>
+	Thermal properties of air, including density, viscosity, thermal conductivity, specific heat and more at different temperatures and pressures. Comprehensive reference with formulas, tables, and charts to support engineering calculations.
+</h2>
+</header>
+	
+<div id="adSlotDoc1" class="noPrint">
+	
+<div>
+	
+<!-- adngin-doc1-0 -->
+<div id="adngin-doc1-0"></div>
+                        
+</div>
+
+</div>
+	
+<div>
+	<p>Thermophysical properties of air:</p>
+<ul style="line-height: 1.5;">
+<li>Boiling temperature (at 1 bara):&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 78.8 K = -194.4 &deg;C = -317.8 &deg;F</li>
+<li><a href="bulk-modulus-elasticity-d_585.html" title="Bulk modulus of elasticity"> Bulk modulus elasticity</a> : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1.01325&times;10<sup>5</sup> Pa or N/m<sup>2</sup></li>
+<li>Condensation temperature (at 1 bara):&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 81.8 K = -191.4 &deg;C = -312.5 &deg;F</li>
+<li><a href="gas-critical-temperature-pressure-d_161.html"> Critical temperature</a> :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 132.63 K = -140.52 &deg;C = -220.94 &deg;F</li>
+<li><a href="gas-critical-temperature-pressure-d_161.html"> Critical pressure</a> : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 37.363 atm = 37.858 bar = 3.7858 MPa (MN/m<sup>2</sup>) = 549.08 psi (lb<sub>f</sub>/in<sup>2</sup>)</li>
+<li>Critical density:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 10.448 mol/dm<sup>3</sup> = 302.6 kg/m<sup>3</sup> = 0.5871 slug/ft<sup>3</sup> = 18.89 lb<sub>m</sub>/ft<sup>3</sup></li>
+<li><a href="density-specific-weight-gravity-d_290.html"> Density</a> (at 0&deg;C and 1 bara): &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.276 kg/m<sup>3</sup> = 0.00248 slug/ft<sup>3</sup> = 0.0797 lb/ft<sup>3</sup></li>
+<li>Density (at 60&deg;F and 1 atm): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 1.208 kg/m<sup>3</sup> = 0.00234 slug/ft<sup>3</sup> = 0.0754 lb/ft<sup>3</sup></li>
+<li>Enthalpy (heat) of air at 0&deg;C&nbsp; and 1 bara:&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 11.57&nbsp; kJ/mol = 399.4&nbsp; kJ/kg = 171.7 Btu(IT)/lb</li>
+<li>Entropy of air at 0&deg;C&nbsp; and 1 bara:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 0.1100 kJ/mol K = 3.796 kJ/kg K = 0.9067 Btu(IT)/lb &deg;F</li>
+<li>Liquid density at boiling point and 1 bar:&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 875.50 kg/m<sup>3</sup> = 54.656 lb/ft<sup>3</sup></li>
+<li>Molar mass: <a href="molecular-mass-air-d_679.html"> 28.9647 g/mol</a></li>
+<li>Specific <a href="heat-capacity-d_338.html"> heat</a> <a href="heat-capacity-d_338.html"> capacity</a> (C<sub>p</sub>) air at 0&deg;C and 1 bara:&nbsp;&nbsp;1.006 kJ/kgK = 0.24028 Btu(IT)/(lb<sub>m</sub>&deg;F) or kcal/(kg K)</li>
+<li>Specific <a href="heat-capacity-d_338.html"> heat</a> <a href="heat-capacity-d_338.html"> capacity</a> (C<sub>v</sub>) air at 0&deg;C and 1 bara:&nbsp; 0.7171 kJ/kgK = 0.17128 Btu(IT)/(lb<sub>m</sub>&deg;F) or kcal/(kg K)</li>
+<li>Thermal conductivity at 0&deg;C and 1 bara:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24.35 mW/(m K) = 0.02094 kcal(IT)/(h m K) = 0.01407 Btu(IT)/(h ft &deg;F)</li>
+<li>Thermal expansion coefficient at 0&deg;C and 1 bara:&nbsp; 0.00369 1/K&nbsp; = 0.00205 1/&deg;F</li>
+<li><a href="gas-critical-temperature-pressure-d_161.html"> Triple point</a> pressure:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 0.05196 atm = 0.05265 bar = 5265 Pa = 0.7636 psi (lb<sub>f</sub>/in<sup>2</sup>)</li>
+<li><a href="gas-critical-temperature-pressure-d_161.html"> Triple point</a> temperature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 59.75 K = -213.40 &deg;C = -352.12 &deg;F</li>
+<li><a href="dynamic-absolute-kinematic-viscosity-d_412.html"> Viscosity, dynamic</a>, at 0&deg;C and 1 bara:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; 17.22 &mu;Pa s = 0.01722 cP = 0.3596&times;10<sup>-6</sup> (lb<sub>f</sub>s)/ft<sup>2</sup> = 11.57&times;10<sup>-6</sup> lb<sub>m</sub>/(ft s)</li>
+<li><a href="dynamic-absolute-kinematic-viscosity-d_412.html"> Viscosity, kinematic</a>, at 0&deg;C and 1 bara:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 0.00001349 m<sup>2</sup>/s = 13.49 cSt = 0.0001452 ft<sup>2</sup>/s</li>
+</ul>
+<p>Follow the links below to get values for the listed <strong> properties of air </strong> at varying <strong> pressure </strong> and <strong> temperature </strong> :</p>
+<ul>
+<li><a href="air-temperature-pressure-density-d_771.html"> Density at varying pressure</a></li>
+<li><a href="air-density-specific-weight-d_600.html"> Density, specific weight and thermal expansion coefficient at varying temperature</a></li>
+<li><a href="air-diffusion-coefficient-gas-mixture-temperature-d_2010.html"> Diffusion coefficients of gases in excess of air</a></li>
+<li><a href="air-absolute-kinematic-viscosity-d_601.html"> Dynamic and kinematic viscosity</a></li>
+<li><a href="air-prandtl-number-viscosity-heat-capacity-thermal-conductivity-d_2009.html"> Prandtl's number</a></li>
+<li><a href="air-gas-liquid-equilibrium-condition-properties-temperature-pressure-boiling-curve-d_2008.html"> Properties at gas-liquid equilibrium condition</a></li>
+<li><a href="air-specific-heat-various-pressures-d_1535.html"> Specific heat (heat capacity) at varying pressure</a></li>
+<li><a href="air-specific-heat-capacity-d_705.html"> Specific heat (heat capacity) at varying temperature</a></li>
+<li><a href="air-properties-viscosity-conductivity-heat-capacity-d_1509.html"> Thermal conductivity</a></li>
+<li><a href="air-thermal-diffusivity-d_2011.html"> Thermal diffusivity</a></li>
+</ul>
+<p>See also <a href="pressure-d_587.html" title="Atmospheric pressure"> more about atmospheric pressure</a>, and <a href="stp-standard-ntp-normal-air-d_772.html" title="air STP NTP standard temperature pressure "> STP - Standard Temperature and Pressure &amp; NTP - Normal Temperature and Pressure</a>, <br > as well as <strong> Thermophysical properties </strong> of: <a href="acetone-2-propanone-dimethyl-ketone-properties-d_2036.html"> Acetone</a>, <a href="acetylene-d_1412.html"> Acetylene</a>, <a href="ammonia-d_1413.html"> Ammonia</a>, <a href="argon-d_1414.html"> Argon</a>, <a href="benzene-benzol-properties-d_2053.html"> Benzene</a>, <a href="butane-d_1415.html"> Butane</a>, <a href="CO2-carbon-dioxide-properties-d_2017.html"> Carbon dioxide</a>, <a href="carbon-monoxide-d_1416.html"> Carbon monoxide</a>, <a href="ethane-d_1417.html"> Ethane</a>, <a href="ethanol-ethyl-alcohol-properties-C2H6O-d_2027.html"> Ethanol</a>, <a href="ethylene-ethene-C2H4-properties-d_2104.html"> Ethylene</a>, <a href="helium-d_1418.html"> Helium</a>, <a href="hydrogen-d_1419.html"> Hydrogen</a>, <a href="hydrogen-sulfide-H2S-properties-d_2034.html"> Hydrogen sulfide</a>, <a href="methane-d_1420.html"> Methane</a>, <a href="methanol-methyl-alcohol-properties-CH3OH-d_2031.html"> Methanol</a>, <a href="nitrogen-d_1421.html"> Nitrogen</a>, <a href="oxygen-d_1422.html"> Oxygen</a>, <a href="pentane-properties-d_2048.html"> Pentane</a>, <a href="propane-d_1423.html"> Propane</a>, <a href="toluene-methylbenzene-properties-d_2095.html"> Toluene</a>, <a href="water-thermal-properties-d_162.html"> Water</a> and <a href="heavy-water-thermodynamic-properties-d_2003.html"> Heavy water, D<sub>2</sub>O</a>.</p>
+
+<div id="adInContent1" class="noPrint">
+	
+<div>
+	
+<!-- adngin-incontent1-0 -->
+<div id="adngin-incontent1-0"></div>
+                    
+</div>
+
+</div>
+
+<p>Air is a mixture of <em> gases </em> at standard conditions. However, at low temperature and high pressures the gas mixture becomes a liquid. The phase diagram for air shows the phase behavior with changes in temperature and pressure. The curve between the triple point and the critical point shows the air boiling point with changes in pressure.</p>
+<ul>
+<li><a href="air-composition-d_212.html"> Air composition and molecular weight</a></li>
+</ul>
+<p><img alt="Air phase diagram" height="305" src="static/docs/documents/2008/Air%20phase%20diagram%20C.jpg" title="Air phase diagram" width="500" style="display: block; margin-left: auto; margin-right: auto;" ></p>
+<p>At the <strong> <a href="gas-critical-temperature-pressure-d_161.html"> critical point</a> </strong> there is no change of state when pressure is increased or if heat is added.</p>
+<p>The <a href="triple-point-d_1926.html"> <strong> triple point </strong></a> of a substance is the temperature and pressure at which the three phases (gas, liquid, and solid) of that substance coexist in thermodynamic equilibrium.</p>
+<p><img alt="Air  - density vs. temperature chart" height="390" src="static/docs/documents/156/air_temperature_density.png" title="Air  - density vs. temperature chart" width="600" style="display: block; margin-left: auto; margin-right: auto;" ></p>
+<p style="text-align: center;"><a href="static/docs/documents/156/air_temperature_density.png" target="_blank" title="Air - Density vs. Temperature Chart"> Download and print Air - Density vs. Temperature Chart</a></p>
+<p><img alt="Air  - density vs. temperature chart" height="395" src="static/docs/documents/156/air_temperature_density_2.png" title="Air  - density vs. temperature chart" width="600" style="display: block; margin-left: auto; margin-right: auto;" ></p>
+<p style="text-align: center;"><a href="static/docs/documents/156/air_temperature_density_2.png" target="_blank" title="Air - Density vs. Temperature Chart"> Download and print Air - Density vs. Temperature Chart</a></p>
+<p></p>
+
+<div id="adInContent2" class="noPrint">
+	
+<div>
+	
+<!-- adngin-incontent2-0 -->
+<div id="adngin-incontent2-0"></div>
+                    
+</div>
+
+</div>
+
+<p><strong>Example - Mass of Air at Temperature </strong> <em> <strong> 100 <sup>o</sup>C </strong> <br > </em></p>
+<p>From the table above - the <a href="density-specific-weight-gravity-d_290.html" title="Density"> density</a> of air is <em> 0.946 kg/m<sup>3</sup> </em> at <em> 100 <sup>o</sup>C </em> . The mass of <em>10 m<sup>3</sup></em> air can be calculated as</p>
+<p style="padding-left: 30px;"><em> m = V &rho; </em></p>
+<p style="padding-left: 30px;"><em> = (10 m<sup>3</sup>) (0.946 kg/m<sup>3</sup>) </em></p>
+<p style="padding-left: 30px;"><em> = <span style="text-decoration: underline;"> 9.46</span> kg </em></p>
+<p style="padding-left: 30px;"><em> where </em></p>
+<p style="padding-left: 30px;"><em> m = mass (kg) </em></p>
+<p style="padding-left: 30px;"><em> V = volume (m<sup>3</sup>) </em></p>
+<p style="padding-left: 30px;"><em> &rho; = density (kg/m<sup>3</sup>) </em></p>
+<p><strong> Example - Mass of Air at Temperature <em> 20 <sup>o</sup>C </em> </strong></p>
+<p>From the table above - the <a href="density-specific-weight-gravity-d_290.html" title="Density"> density</a> of air is <em> 1.205 kg/m<sup>3</sup> </em> at <em> 20 <sup>o</sup>C</em>. The mass of <em> 10 m</em><sup>3</sup> air can be calculated as</p>
+<p style="padding-left: 30px;"><em> m = (10 m<sup>3</sup>) (1.205 kg/m<sup>3</sup>) </em></p>
+<p style="padding-left: 30px;"><em> = <span style="text-decoration: underline;"> 12.05</span> kg </em></p>
+<p><strong> Example - Lifting Force of a Hot Air Balloon </strong></p>
+<p>An air balloon with volume <em> 10 m<sup>3</sup> </em> is heated to <em> 100 <sup>o</sup>C</em>. The temperature of the surrounding air is <em> 20 <sup>o</sup>C. </em> The change in <a href="mass-weight-d_589.html" title="Gravity force - weight"> gravity force (weight)</a> of the air volume is the potential lifting force of the balloon. The lifting force can be calculated as</p>
+<p style="padding-left: 30px;"><em> F<sub>l </sub> = dm a<sub>g </sub> </em></p>
+<p style="padding-left: 30px;"><em> = V d&rho; a<sub>g </sub> </em></p>
+<p style="padding-left: 30px;"><em> = (10 m<sup>3</sup>) ((1.205 kg/m<sup>3</sup>) - (0.946 kg/m<sup>3</sup>)) (9.81 m/s<sup>2</sup>) </em></p>
+<p style="padding-left: 30px;"><em> = <span style="text-decoration: underline;"> 25.4</span> N </em></p>
+<p style="padding-left: 30px;"><em> where </em></p>
+<p style="padding-left: 30px;"><em> F<sub>l </sub> = lifting force - change in gravity force (weight)&nbsp; (N) </em></p>
+<p style="padding-left: 30px;"><em> a<sub>g </sub> = <a href="accelaration-gravity-d_340.html" title="Acceleration of gravity"> acceleration of gravity</a> (9.81 m/s<sup>2</sup>) </em></p>
+<p style="padding-left: 30px;"><em> dm = V d&rho; = change of mass in the balloon (kg) </em></p>
+<p style="padding-left: 30px;"><em> d&rho; = change in density due to temperature difference (kg/m<sup>3</sup>) </em></p>
+</div>
+		
+<div id="adSlotDoc2" class="noPrint">
+	
+<div>
+	
+<!-- adngin-doc2-0 -->
+<div id="adngin-doc2-0"></div>
+                    
+</div>
+
+</div>
+	
+<nav>
+	
+<h2>
+	Your Short List
+</h2>
+	
+<div id="userlist">
+	
+</div>
+</nav>
+	
+<nav>
+	
+<h2>
+	Related Topics
+</h2>
+	
+<ul>
+	
+<li>
+	
+<h3>
+	
+<a href="air-psychrometrics-properties-t_8.html" title="air psychrometrics property properties conditioning flow velocity dehumidifier temperature pressure heating relative humidity meter chamber mollier chart diagram humidifier calculator">
+	Air Psychrometrics
+</a>
+</h3>
+	Moist and humid air calculations. Psychrometric charts and Mollier diagrams. Air-condition systems temperatures, absolute and relative humidities and moisture content in air.</li>
+
+<li>
+	
+<h3>
+	
+<a href="si-units-engineering-t_19.html" title="SI imperial unit converter uscs properties pressure measurement gages">
+	Basics
+</a>
+</h3>
+	Basic engineering data. SI-system, unit converters, physical constants, drawing scales and more.</li>
+
+<li>
+	
+<h3>
+	
+<a href="density-gravity-t_64.html" title="density gravity API">
+	Densities
+</a>
+</h3>
+	Densities of solids, liquids and gases. Definitions and convertion calculators.</li>
+
+<li>
+	
+<h3>
+	
+<a href="environment-climate-meterology-t_13.html" title="environment wind climate meteorology air sun water power carbon dioxide health effects pollution indoor control systems equipment temperature turbines power speed generator force filter ionic ionized freshener">
+	Environment
+</a>
+</h3>
+	Climate, meteorology, solar, wind, emissions and environmental related engineering resources.</li>
+
+<li>
+	
+<h3>
+	
+<a href="fluid-mechanics-t_21.html" title="fluid mechanics pressure air gas flow meters water mass kinematic dynamic absolute viscosity density water ultrasonic liquid sensors controller measurement regulators vessels tanks dynamics">
+	Fluid Mechanics
+</a>
+</h3>
+	The study of fluids - liquids and gases. Involving velocity, pressure, density and temperature as functions of space and time.</li>
+
+<li>
+	
+<h3>
+	
+<a href="gas-air-systems-t_22.html" title="compressed gas systems air natural lpg butane propane filters dryers lines piping vessels tanks heat heating grills pressure drop velocity valve regulators gages compressors">
+	Gases and Compressed Air
+</a>
+</h3>
+	Properties of air, LNG, LPG and other common gases. Pipeline capacities and sizing of relief valves.</li>
+
+<li>
+	
+<h3>
+	
+<a href="material-properties-t_24.html" title="properties density viscosity temperature mass conductivity thermal water properties specific capacity liquid fluid  transfer meter table chart steel">
+	Material Properties
+</a>
+</h3>
+	Properties of gases, fluids and solids. Densities, specific heats, viscosities and more.</li>
+
+<li>
+	
+<h3>
+	
+<a href="thermodynamics-t_36.html" title="thermodynamics energy temperature law  law heat transfers plate tube exchangers pumps exchange pump convection coefficient equipment fluid radiation conduction machine pipe calculator charts diagrams insulation emissivity">
+	Thermodynamics
+</a>
+</h3>
+	Work, heat and energy systems.</li>
+
+<li>
+	
+<h3>
+	
+<a href="viscosity-kinematic-dynamic-t_67.html" title=" viscosity kinematic dynamic ">
+	Viscosities
+</a>
+</h3>
+	Viscosities of products and chemical species at varying conditions.</li>
+
+</ul>
+</nav>
+	
+<nav>
+	
+<h2>
+	Related Documents
+</h2>
+	
+<div>
+	
+<h3>
+	
+<a href="dynamic-absolute-kinematic-viscosity-d_412.html" title="centipoises, centistokes, viscosity, dynamic viscosity, absolute viscosity, kinematic viscosity, viscosity units, viscosity conversion, fluid mechanics, engineering properties, viscosity formulas, viscosity tables">
+	 Dynamic, Absolute, and Kinematic Viscosity – Definitions & Conversions
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="dynamic-absolute-kinematic-viscosity-d_412.html" title=" Dynamic, Absolute, and Kinematic Viscosity – Definitions & Conversions">
+	
+<img src="static/docs/documents/412/viscosity_newton_small.png" title=" Dynamic, Absolute, and Kinematic Viscosity – Definitions & Conversions" alt=" Dynamic, Absolute, and Kinematic Viscosity – Definitions & Conversions" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	The differences between dynamic, absolute, and kinematic viscosity - a fluids resistance to flow - with definitions, unit conversions, and practical applications for engineers and scientists.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="acetone-2-propanone-dimethyl-ketone-properties-d_2036.html" title="acetone 2-propanone dimethyl ketone properties">
+	Acetone - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of acetone, also called 2-propanone, dimethyl ketone and pyroacetic acid. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-composition-d_212.html" title="air composition gases">
+	Air - Composition and Molecular Weight
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Dry air is a mechanical mixture of nitrogen, oxygen, argon and several other gases in minor amounts.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-altitude-density-volume-d_195.html" title="air density altitude STP NTP">
+	Air - Density and Specific Volume vs. Altitude
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="air-altitude-density-volume-d_195.html" title="Air - Density and Specific Volume vs. Altitude">
+	
+<img src="static/docs/documents/195/air-altitude-density_small.png" title="Air - Density and Specific Volume vs. Altitude" alt="Air - Density and Specific Volume vs. Altitude" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Density and specific volume of air varies with elevation above sea level.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-diffusion-coefficient-gas-mixture-temperature-d_2010.html" title="air diffusion coefficient gas mixture temperature">
+	Air - Diffusion Coefficients of Gases in Excess of Air
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Diffusion coefficients (D<sub>12</sub>)  for gases in large excess of air at temperatures ranging 0 - 400 °C.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="molecular-mass-air-d_679.html" title="molecular mass air">
+	Air - Molecular Weight and Composition
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="molecular-mass-air-d_679.html" title="Air - Molecular Weight and Composition">
+	
+<img src="static/docs/documents/679/Components_dry_air_small.png" title="Air - Molecular Weight and Composition" alt="Air - Molecular Weight and Composition" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Dry air is a mixture of gases where the average molecular weight (or molar mass) can be calculated by adding the weight of each component.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-prandtl-number-viscosity-heat-capacity-thermal-conductivity-d_2009.html" title="air prandtl number viscosity heat capacity thermal conductivity">
+	Air - Prandtl Number
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Prandtl number for air vs. temperature and pressure.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-gas-liquid-equilibrium-condition-properties-temperature-pressure-boiling-curve-d_2008.html" title=" ">
+	Air - Properties at Gas-Liquid Equilibrium Conditions
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Properties of air change along the boiling and condensation curves (temperature and pressure between triple point and critical point conditions). An air phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-specific-heat-various-pressures-d_1535.html" title="air specific heat various pressures">
+	Air - Specific Heat vs. Pressure at Constant Temperature
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Figures and tables with isobaric (Cp) and isochoric (Cv) specific heat of air at constant temperature and pressure ranging 0.01 to 10000 bara.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-speed-sound-d_603.html" title="velocity speed sound air humidity temperature atmosphere pressure">
+	Air - Speed of Sound vs. Temperature
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="air-speed-sound-d_603.html" title="Air - Speed of Sound vs. Temperature">
+	
+<img src="static/docs/documents/603/speed_of_sound_in_dry_air_small.png" title="Air - Speed of Sound vs. Temperature" alt="Air - Speed of Sound vs. Temperature" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Speed of sound in air at standard atmospheric pressure with temperatures ranging -40 to 1000 °C (-40 to 1500 °F) - Imperial and SI Units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-thermal-diffusivity-d_2011.html" title=" ">
+	Air - Thermal Diffusivity vs. Temperature and Pressure
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Figures and tables withdry air thermal diffusivity vs. temperarure and pressure. SI and Imperial units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-temperature-volume-d_853.html" title="air temperature volume">
+	Air - Volume vs. Temperature
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Air volume vs. temperature correction factor compared to Normal Air Conditions.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="cooling-air-heat-removed-d_1669.html" title="cooling air heat removed storage room ">
+	Air Cooling of Storage Roooms
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Heat removed from storage rooms with cooled air.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-density-specific-weight-d_600.html" title="air density specific weight temperature">
+	Air Density, Specific Weight, and Thermal Expansion Coefficients at Varying Temperatures and Pressures
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Online calculator, figures and tables showing density, specific weight and thermal expansion coefficients of air at temperatures ranging -100 to 1600 °C (-140 to 2900 °F) at atmospheric and higher pressure - Imperial and SI Units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-properties-d_1067.html" title="air properties low pressures imperial units">
+	Air Properties - Imperial Units
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Thermodynamic properties of air at low pressures - imperial units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-properties-d_1257.html" title="air properties low pressures imperial units">
+	Air Properties - SI Units
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Ideal gas properties of air at low pressure - SI units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-properties-viscosity-conductivity-heat-capacity-d_1509.html" title="air properties viscosity thermal conductivity specific heat  prandtl">
+	Air Properties - Thermal Conductivity vs. Temperature and Pressure Charts and Calculator
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Online calculator with figures and tables showing air thermal conductivity vs. temperature and pressure. SI and imperial units. 
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-temperature-pressure-density-d_771.html" title="air density temperature pressure">
+	Air Properties: Temperature, Pressure & Density Data
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Air density at pressure ranging 1 to 10 000 bara (14.5 - 145000 psi) and constant selected temperatures.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-altitude-temperature-d_461.html" title="air altitude temperature density">
+	Air Temperature, Pressure and Density vs. Altitude
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Elevation above sea level and air temperature, pressure and density. 
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-absolute-kinematic-viscosity-d_601.html" title="air viscosity dynamic absolute kinematic temperature">
+	Air Viscosity: Dynamic and Kinematic Viscosity at Various Temperatures and Pressures
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="air-absolute-kinematic-viscosity-d_601.html" title="Air Viscosity: Dynamic and Kinematic Viscosity at Various Temperatures and Pressures">
+	
+<img src="static/docs/documents/601/Air_Dynamic_viscosity_pressure_C_small.png" title="Air Viscosity: Dynamic and Kinematic Viscosity at Various Temperatures and Pressures" alt="Air Viscosity: Dynamic and Kinematic Viscosity at Various Temperatures and Pressures" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Online calculator, figures and tables with dynamic (absolute) and kinematic viscosity for air at temperatures ranging -100 to 1600°C (-150 to 2900°F) and at pressures ranging 1 to 10 000 bara (14.5 - 145000 psia) - SI and Imperial Units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="ammonia-d_1413.html" title="ammonia anhyd nh3">
+	Ammonia - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, Physical and Thermal Properties of Ammonia. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="benzene-benzol-properties-d_2053.html" title="benzene benzol properties">
+	Benzene - Thermophysical properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of benzene, also called benzol. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="CO2-carbon-dioxide-properties-d_2017.html" title=" ">
+	Carbon Dioxide (CO₂) Properties & Characteristics: Density, Thermal Data & More
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of carbon dioxide. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="carbon-dioxide-prandtl-number-viscosity-heat-capacity-thermal-conductivity-d_2024.html" title="carbon dioxide prandtl number viscosity heat capacity thermal conductivity">
+	Carbon dioxide - Prandtl Number vs. Temperature and Pressure
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Figures and table with changes in Prandtl number for carbon dioxide with changes in temperature and pressure.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="densities-specific-volumes-dry-air-water-vapor-d_1575.html" title="densities density specific volumes dry air water vapor temperatures">
+	Dry Air and Water Vapor - Density and Specific Volume vs. Temperature - Imperial Units
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Density and specific volume of dry air and water vapor at temperatures ranging <em>225 to 900 degF (107 to 482 degC)</em>.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="dry-air-properties-d_973.html" title="diffusivity, dry air properties, air density, air viscosity, specific heat of air, thermal conductivity of air, air composition, thermodynamic properties of air, engineering tables, HVAC air properties, air pressure and temperature effects">
+	Dry Air Thermodynamic and Physical Properties – Density, Specific Heat, Viscosity
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	THe essential thermodynamic properties of dry air like  specific heat, ratio of specific heats, dynamic viscosity, thermal conductivity, Prandtl number, density and kinematic viscosity at temperatures ranging <i>175 - 1900 K</i>.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="ethane-d_1417.html" title="ethane c2h6">
+	Ethane - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, Physical and Thermal Properties of Ethane - C2H6.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="ethylene-ethene-C2H4-properties-d_2104.html" title="ethylene ethene C2H4 properties">
+	Ethylene - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of ethylene, also called ethene, acetene and olefiant gas. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="global-temperature-trend-d_2170.html" title="global temperature trend">
+	Global Temperature Trend
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Global temperature trend year 1880 - 2015.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="heavy-water-thermodynamic-properties-d_2003.html" title=" ">
+	Heavy Water - Thermophysical Properties 
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="heavy-water-thermodynamic-properties-d_2003.html" title="Heavy Water - Thermophysical Properties ">
+	
+<img src="static/docs/documents/2003/heavy_water%20_density_C_small.png" title="Heavy Water - Thermophysical Properties " alt="Heavy Water - Thermophysical Properties " >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Thermodynamic properties of heavy water (D2O) like density, melting temperature, boiling temperature, latent heat of fusion, latent heat of evaporation, critical temperature and more.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="helium-d_1418.html" title="helium He">
+	Helium - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, Physical and Thermal Properties of Helium - He.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="hot-air-balloon-lifting-force-d_562.html" title="hot air balloon, lifting force, buoyancy, aerostatics, balloon flight, lift calculation, air density, temperature difference, engineering tool, physics, aviation, aerodynamics">
+	Hot Air Balloon Lifting Force Calculator
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="hot-air-balloon-lifting-force-d_562.html" title="Hot Air Balloon Lifting Force Calculator">
+	
+<img src="static/docs/documents/562/hot_air_balloon_lifting_force_small.png" title="Hot Air Balloon Lifting Force Calculator" alt="Hot Air Balloon Lifting Force Calculator" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Calculate the lifting force of a hot air balloon based on temperature difference, air density, and balloon volume. Includes formulas, explanations, and practical applications for aeronautics and physics.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="heating-humid-air-d_693.html" title="heating air enthaply temperature">
+	Humid Air - Heating
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Enthalpy change and temperature rise when heating humid air without adding moisture.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="individual-universal-gas-constant-d_588.html" title="individual universal gas constant R air helium">
+	Individual & Universal Gas Constants: Definitions, Values, and Applications
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	The Universal and Individual Gas Constants in fluid mechanics and thermodynamics. Individual gas constants for the most common gases.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="ammonia-liquid-thermal-properties-d_1765.html" title="Ammonia - Liquid Thermal Properties Density, specific heat, thermal conductivity">
+	Liquid Ammonia - Thermal Properties at Saturation Pressure
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="ammonia-liquid-thermal-properties-d_1765.html" title="Liquid Ammonia - Thermal Properties at Saturation Pressure">
+	
+<img src="static/docs/documents/1765/Ammonia_liquid_density_pressure_%20C_small.png" title="Liquid Ammonia - Thermal Properties at Saturation Pressure" alt="Liquid Ammonia - Thermal Properties at Saturation Pressure" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Density, specific heat, thermal conductivity, viscosity and Prandtls no. of liquid ammonia at saturation pressure.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="cubical-expansion-coefficients-d_1262.html" title="volumetric cubical temperature expansion coefficients fluids liquids">
+	Liquids - Volumetric Expansion Coefficients
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Volumetric - or cubical - expansion coefficients for common liquids.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="methane-d_1420.html" title="methane ch4">
+	Methane (CH₄): Thermophysical Properties and Phase Diagram
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="methane-d_1420.html" title="Methane (CH₄): Thermophysical Properties and Phase Diagram">
+	
+<img src="static/docs/documents/1420/Methane%20phase%20diagram%20C_small.png" title="Methane (CH₄): Thermophysical Properties and Phase Diagram" alt="Methane (CH₄): Thermophysical Properties and Phase Diagram" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, Physical and Thermal Properties of Methane - <i>CH<sub>4</sub></i>. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="methanol-methyl-alcohol-properties-CH3OH-d_2031.html" title="methanol methyl alcohol properties CH3OH">
+	Methanol - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of methanol, CH<sub>3</sub>OH (also called carbinol, wood alcohol, hydroxy methyl and methyl alcohol). Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="mixing-humid-air-d_694.html" title="humid air mixing enthalphy heat temperature moist humidity ratio">
+	Mixing of Humid Air
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	The change in state wwhen mixing moist air - enthalpy, heat, temperature and specific humidity.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="density-moist-air-d_1533.html" title="density moist air dew point temperature pressure mm Hg">
+	Moist Air - Density vs. Pressure
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="density-moist-air-d_1533.html" title="Moist Air - Density vs. Pressure">
+	
+<img src="static/docs/documents/1533/density_moist_air_small.png" title="Moist Air - Density vs. Pressure" alt="Moist Air - Density vs. Pressure" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Density of moist air vs. pressure ranging 75 - 1000 mmHg.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="enthalpy-moist-air-d_683.html" title="enthalpy moist humid air">
+	Moist Air - Enthalpy 
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Sensible and latent heat of moist air.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-psychrometric-table-d_1574.html" title="air psychrometric table dry wet bulb temperature pressure weight saturated water vapor ">
+	Moist Air - Psychrometric Table for Pressure 29.92 inHg
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Dry and wet bulb temperatures, saturation pressure, water vapor weight, specific volume, heat and more.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="pentane-properties-d_2048.html" title="pentane properties">
+	Pentane - Thermophysical Properties
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Chemical, physical and thermal properties of pentane, also called n-pentane. Phase diagram included.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="heat-removed-with-air-d_1577.html" title="heat removed dry air wet bulb temperature lb kg btu watts">
+	Removing Heat with Air
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="heat-removed-with-air-d_1577.html" title="Removing Heat with Air">
+	
+<img src="static/docs/documents/1577/air_heat_removed_wet_dry_bulb_temperature_small.png" title="Removing Heat with Air" alt="Removing Heat with Air" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Calculating heat removed with air by measuring the wet bulb temperature.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="rshf-room-sensible-heat-factor-d_701.html" title="room sensible heat factor rshf  load">
+	Room Sensible Heat Factor - RSHF
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Room Sensible Heat Factor - RSHF - is defined as the sensible heat load divided by the total heat load in a room
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="air-specific-heat-capacity-d_705.html" title="specific heat air">
+	Specific Heat Capacity of Air: Isobaric and Isochoric Heat Capacities at Various Temperatures and Pressures
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Online calculator with figures and tables showing specific heat (Cp and Cv) of dry air vs. temperature and pressure. SI and imperial units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="sensible-heat-storage-d_1217.html" title="sensible heat energy energy storage materials">
+	Storing Thermal Heat
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Energy stored as sensible heat in different types of materials.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="stp-standard-ntp-normal-air-d_772.html" title="air STP NTP standard temperature pressure ">
+	STP - Standard Temperature and Pressure and NTP - Normal Temperature and Pressure
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	The definition of STP - Standard Temperature and Pressure and NTP - Normal Temperature and Pressure.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="thermal-conductivity-calculator-d_857.html" title="thermal conductivity calculator convert">
+	Thermal Conductivity - Online Converter
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Convert between thermal conductivity units.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="thermodynamic-terms-d_149.html" title="thermodynamic terms function relation energy entropy">
+	Thermodynamic Terms - Functions and Relations
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Common thermodynamic terms and functions - potential energy, kinetic energy, thermal or internal energy, chemical energy, nuclear energy and more.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="third-law-thermodynamics-d_416.html" title="thermodynamics third 3 law entropy">
+	Third Law of Thermodynamics
+</a>
+
+</h3>
+	
+<div class="docTable">
+		
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	The entropy of a substance is zero if the absolute temperature is zero.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="volumetric-temperature-expansion-d_315.html" title="fluid volumetric temperature expansion">
+	Volumetric (Cubic) Thermal Expansion
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="volumetric-temperature-expansion-d_315.html" title="Volumetric (Cubic) Thermal Expansion">
+	
+<img src="static/docs/documents/315/volumetric-temperature-expansion_small.png" title="Volumetric (Cubic) Thermal Expansion" alt="Volumetric (Cubic) Thermal Expansion" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Volumetric temperature expansion calculator.
+</div>
+
+</div>
+</div>
+</div>
+
+<div>
+	
+<h3>
+	
+<a href="wind-power-d_1214.html" title="wind power generation">
+	Wind Power
+</a>
+
+</h3>
+	
+<div class="docTable">
+	
+<div class="docColumnImage">
+	
+<div class="docRowImage">
+	
+<a href="wind-power-d_1214.html" title="Wind Power">
+	
+<img src="static/docs/documents/1214/windmill_small.png" title="Wind Power" alt="Wind Power" >
+
+</a>
+</div>
+</div>
+	
+<div class="docColumnDescription">
+	
+<div class="docRowDescription">
+	Power generation from wind.
+</div>
+
+</div>
+</div>
+</div>
+</nav>
+	
+<div>
+	
+<div>
+	
+<h2>
+	Related Searches
+</h2>
+	
+<p>
+	
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+air properties">
+	air properties
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+air density">
+	air density
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+air viscosity">
+	air viscosity
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+thermal conductivity">
+	thermal conductivity
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+specific heat">
+	specific heat
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+air pressure">
+	air pressure
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+temperature effects">
+	temperature effects
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+gas properties">
+	gas properties
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+engineering reference">
+	engineering reference
+</a>
+ &bullet; 
+<a href="https://www.google.com/search?q=site%3Aengineeringtoolbox.com+HVAC calculations">
+	HVAC calculations
+</a>
+ &bullet; 
+</p>
+</div>
+
+</div>
+</div>
+</article>
+
+</main>
+	
+<div id="adSlotStickyRight" class="noPrint">
+	
+<div>
+	
+<!-- adngin-right-0 -->
+<div id="adngin-right-0"></div>
+                    
+</div>
+
+</div>
+	
+<footer>
+	
+<div id="below">
+	
+<div>
+	
+<h2>
+	Search
+</h2>
+	
+<script async src="https://cse.google.com/cse.js?cx=6a091aba9f3e1fba3"></script>
+<div class="gcse-searchbox-only"></div>
+            	
+<p>
+	Search is the most efficient way to navigate the Engineering ToolBox.
+</p>
+	
+<ul>
+	
+<li>
+	
+<a href="search-engineering-toolbox-d_2075.html">
+	Popular internal searches in the Engineering ToolBox
+</a>
+</li>
+
+</ul>
+</div>
+	
+<div>
+	
+<h2>
+	Our Mission
+</h2>
+	
+<div>
+	<p>The Engineering ToolBox provides a wide range of free tools, calculators, 
+        and information resources aimed at engineers and designers. It offers detailed technical data and 
+        calculations for various fields such as fluid mechanics, material properties, HVAC systems, 
+        electrical engineering, and more.</p><p>The site includes resources for common engineering tasks, such as 
+        calculating physical properties (e.g., density, viscosity, thermal conductivity), converting units, and 
+        designing systems like heating and water distribution. </p><p>With sections on everything from acoustics to hydraulics, 
+        it serves as a comprehensive tool for both students and professionals in technical and engineering disciplines.</p>
+</div>
+</div>
+	
+<div id="sketchup">
+	
+<h2>
+	Engineering ToolBox - SketchUp Extension - Online 3D modeling!
+</h2>
+	
+<p class="center">
+	
+<a href="https://sketchup.engineeringtoolbox.com" title="3D Engineering ToolBox Extension to SketchUp - add parametric components to your SketchUp model">
+	
+<img src="static/img/sketchup_700.gif" alt="3D Engineering ToolBox Extension to SketchUp - add parametric components to your SketchUp model" height="95" width="700" loading="lazy" >
+
+</a>
+	
+<a href="static/img/sketchup_700.png">
+	.
+</a>
+</p>
+	
+<p>
+	Add standard and customized parametric components - like flange beams, lumbers, piping, stairs and more - to your 	
+<a href="https://www.sketchup.com">
+	Sketchup model
+</a>
+	 with the 	
+<a href="https://sketchup.engineeringtoolbox.com">
+	Engineering ToolBox - SketchUp Extension
+</a>
+	 - enabled for use with older versions of the amazing 	
+<a href="https://www.google.com/search?q=sketchup+make+old+download">
+	SketchUp Make
+</a>
+	 and the newer "up to date" 	
+<a href="https://www.google.com/search?q=sketchup+pro">
+	SketchUp Pro
+</a>
+	. Add the 	
+<a href="https://extensions.sketchup.com/extension/99d3eb24-a56f-4c3e-b7cb-3550cd9d2aca/the-engineering-tool-box">
+	Engineering ToolBox extension
+</a>
+	 to your SketchUp Make/Pro from the 	
+<a href="https://extensions.sketchup.com/extension/99d3eb24-a56f-4c3e-b7cb-3550cd9d2aca/the-engineering-tool-box">
+	Extension Warehouse
+</a>
+	!</p>
+</div>
+	
+<div id="translate">
+	
+<h2>
+	Translate this Page
+</h2>
+	
+<p>
+	Translate this page to 	
+<a href="https://translate.google.com/translate?u=www.engineeringtoolbox.com/air-properties-d_156.html%26langpair=en%7Ces%26hl=en%26ie=UTF-8%26oe=UTF-8%26prev=%2Flanguage_tools">
+	Your Own Language
+</a>
+	.</p>
+</div>
+	
+<div id="aboutus">
+	About the Engineering ToolBox!
+</div>
+	
+<div id="privacy">
+	
+<h2>
+	Privacy Policy
+</h2>
+	
+<p>
+	We don't collect information from our users. More about 	
+<a href="privacy-policy-d_2228.html">
+	our privacy policy here.
+</a>
+</p>
+	
+<p>We use a third-party to provide monetization technology for our site. 
+You can review their privacy and cookie policy 
+<a href="https://www.snigel.com/privacy-policy/">here</a>.</p>
+<p>
+    You can change your privacy settings by clicking the following button: 
+    <button onclick="adconsent('showGUI')">Manage Consent</button>.
+</p>
+</div>
+	
+<div id="advertise">
+	
+<h2>
+	Advertise in the ToolBox
+</h2>
+	
+<p>
+	If you want to promote your products or services in the Engineering ToolBox - please use 	
+<a href="https://adwords.google.com/">
+	Google Adwords.
+</a>
+	 You can target the Engineering ToolBox by using 	
+<a href="https://support.google.com/adwords/answer/2470108?hl=en">
+	AdWords Managed Placements.
+</a>
+</p>
+</div>
+	
+<div id="citation">
+	
+<h2>
+	Citation
+</h2>
+	
+<p>
+	This page can be cited as
+</p>
+	
+<ul>
+	
+<li>
+	The Engineering ToolBox (2003). <i>Air Properties - Density, Viscosity, Heat Capacity, Thermal Conductivity, and more</i>. [online] Available at: https://www.engineeringtoolbox.com/air-properties-d_156.html [Accessed Day Month Year].
+</li>
+
+</ul>
+	
+<p>
+	Modify the access date according your visit.
+</p>
+</div>
+</div>
+
+</footer>
+</div>
+	
+<div id="left">
+	
+<nav>
+	
+<div id="menu">
+	
+<ul>
+	
+<li id="t_27" class="menuItem">
+	
+<a href="acoustics-noise-decibels-t_27.html">
+	Acoustics
+</a>
+
+</li>
+
+<li id="t_8" class="menuItem">
+	
+<a href="air-psychrometrics-properties-t_8.html">
+	Air Psychrometrics
+</a>
+
+</li>
+
+<li id="t_19" class="menuItem">
+	
+<a href="si-units-engineering-t_19.html">
+	Basics
+</a>
+
+</li>
+
+<li id="t_9" class="menuItem">
+	
+<a href="combustion-boiler-fuels-t_9.html">
+	Combustion
+</a>
+
+</li>
+
+<li id="t_61" class="menuItem">
+	
+<a href="drawing-tools-t_61.html">
+	Drawing Tools
+</a>
+
+</li>
+
+<li id="t_60" class="menuItem">
+	
+<a href="dynamics-t_60.html">
+	Dynamics
+</a>
+
+</li>
+
+<li id="t_53" class="menuItem">
+	
+<a href="engineering-economics-t_53.html">
+	Economics
+</a>
+
+</li>
+
+<li id="t_33" class="menuItem">
+	
+<a href="electrical-systems-t_33.html">
+	Electrical
+</a>
+
+</li>
+
+<li id="t_13" class="menuItem">
+	
+<a href="environment-climate-meterology-t_13.html">
+	Environment
+</a>
+
+</li>
+
+<li id="t_21" class="menuItem">
+	
+<a href="fluid-mechanics-t_21.html">
+	Fluid Mechanics
+</a>
+
+</li>
+
+<li id="t_22" class="menuItem">
+	
+<a href="gas-air-systems-t_22.html">
+	Gases and Compressed Air
+</a>
+
+</li>
+
+<li id="t_23" class="menuItem">
+	
+<a href="hvac-systems-t_23.html">
+	HVAC Systems
+</a>
+
+</li>
+
+<li id="t_59" class="menuItem">
+	
+<a href="hydraulic-pneumatic-systems-t_59.html">
+	Hydraulics and Pneumatics
+</a>
+
+</li>
+
+<li id="t_4" class="menuItem">
+	
+<a href="insulation-heat-loss-t_4.html">
+	Insulation
+</a>
+
+</li>
+
+<li id="t_24" class="menuItem">
+	
+<a href="material-properties-t_24.html">
+	Material Properties
+</a>
+
+</li>
+
+<li id="t_54" class="menuItem">
+	
+<a href="mathematics-t_54.html">
+	Mathematics
+</a>
+
+</li>
+
+<li id="t_52" class="menuItem">
+	
+<a href="mechanics-t_52.html">
+	Mechanics
+</a>
+
+</li>
+
+<li id="t_25" class="menuItem">
+	
+<a href="engineering-topics-t_25.html">
+	Miscellaneous
+</a>
+
+</li>
+
+<li id="t_31" class="menuItem">
+	
+<a href="physiology-t_31.html">
+	Physiology
+</a>
+
+</li>
+
+<li id="t_6" class="menuItem">
+	
+<a href="piping-tubing-systems-t_6.html">
+	Piping Systems
+</a>
+
+</li>
+
+<li id="t_32" class="menuItem">
+	
+<a href="process-control-systems-t_32.html">
+	Process Control Systems
+</a>
+
+</li>
+
+<li id="t_34" class="menuItem">
+	
+<a href="pumps-t_34.html">
+	Pumps
+</a>
+
+</li>
+
+<li id="t_75" class="menuItem">
+	
+<a href="sanitary-drainage-systems-t_75.html">
+	Sanitary Drainage Systems
+</a>
+
+</li>
+
+<li id="t_48" class="menuItem">
+	
+<a href="standards-organizations-t_48.html">
+	Standard Organizations
+</a>
+
+</li>
+
+<li id="t_63" class="menuItem">
+	
+<a href="statics-t_63.html">
+	Statics
+</a>
+
+</li>
+
+<li id="t_28" class="menuItem">
+	
+<a href="steam-condensate-properties-t_28.html">
+	Steam and Condensate
+</a>
+
+</li>
+
+<li id="t_36" class="menuItem">
+	
+<a href="thermodynamics-t_36.html">
+	Thermodynamics
+</a>
+
+</li>
+
+<li id="t_29" class="menuItem">
+	
+<a href="hot-water-systems-t_29.html">
+	Water Systems
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+	
+<div id="convert">
+	
+<h3>
+	
+<a href="unit-converter-d_185.html">
+	Unit Converter
+</a>
+
+</h3>
+	
+<br >
+	
+<blockquote>
+	
+<label for="temperature_value2">
+	
+<a href="temperature-d_291.html">
+	Temperature
+</a>
+
+</label>
+	
+<input type="number" id="temperature_value2" value="0.0" >
+	
+<input type="radio" name="temperature_unit2" value="degC" id="temperature_unit2_degC" checked="checked" >
+	
+<label for="temperature_unit2_degC">
+	<i><sup>o</sup>C</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="temperature_unit2" id="temperature_unit2_degK" value="degK" >
+	
+<label for="temperature_unit2_degK">
+	<i>K</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="temperature_unit2" id="temperature_unit2_degF" value="degF" >
+	
+<label for="temperature_unit2_degF">
+	<i><sup>o</sup>F</i>
+</label>
+	
+<br >
+	
+<input type="button" id="temperature_calculate2" value="Convert!" >
+	
+<div id="resultMenuTemperature">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="length_value2">
+	
+<a href="length-units-converter-d_1033.html">
+	Length
+</a>
+
+</label>
+	
+<input type="number" id="length_value2" value="1.0" >
+	
+<input type="radio" name="length_unit2" id="length_unit2_meters" value="meters" checked="checked" >
+	
+<label for="length_unit2_meters">
+	<i>m</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_kilometers" value="kilometers" >
+	
+<label for="length_unit2_kilometers">
+	<i>km</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_inches" value="inches" >
+	
+<label for="length_unit2_inches">
+	<i>in</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_feet" value="feet" >
+	
+<label for="length_unit2_feet">
+	<i>ft</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_yards" value="yards" >
+	
+<label for="length_unit2_yards">
+	<i>yards</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_miles" value="miles" >
+	
+<label for="length_unit2_miles">
+	<i>miles</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="length_unit2" id="length_unit2_nautical_miles" value="nautical_miles" >
+	
+<label for="length_unit2_nautical_miles">
+	<i>naut miles</i>
+</label>
+	
+<br >
+	
+<input type="button" id="length_calculate2" value="Convert!" >
+	
+<div id="resultMenuLength">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="area_value2">
+	
+<a href="area-units-converter-d_2007.html">
+	Area
+</a>
+
+</label>
+	
+<input type="number" id="area_value2" value="1.0" >
+	
+<input type="radio" name="area_unit2" id="area_unit2_square_meters" value="sq.meters" checked="checked" >
+	
+<label for="area_unit2_square_meters">
+	<i>m<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="area_unit2" id="area_unit2_square_kilometers" value="sq.kilometers" >
+	
+<label for="area_unit2_square_kilometers">
+	<i>km<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="area_unit2" id="area_unit2_square_inches" value="sq.inches" >
+	
+<label for="area_unit2_square_inches">
+	<i>in<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="area_unit2" id="area_unit2_square_feet" value="sq.feet" >
+	
+<label for="area_unit2_square_feet">
+	<i>ft<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="area_unit2" id="area_unit2_square_miles" value="sq.miles" >
+	
+<label for="area_unit2_square_miles">
+	<i>miles<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="area_unit2" id="area_unit2_acres" value="acres" >
+	
+<label for="area_unit2_acres">
+	<i>acres</i>
+</label>
+	
+<br >
+	
+<input type="button" id="area_calculate2" value="Convert!" >
+	
+<div id="resultMenuArea">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="volume_value2">
+	
+<a href="volume-units-converter-d_1034.html">
+	Volume
+</a>
+
+</label>
+	
+<input type="number" id="volume_value2" value="1.0" >
+	
+<input type="radio" name="volume_unit2" id="volume_unit2_cubic_meters" value="cubic_meters" checked="checked" >
+	
+<label for="volume_unit2_cubic_meters">
+	<i>m<sup>3</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="volume_unit2" id="volume_unit2_liters" value="liters" >
+	
+<label for="volume_unit2_liters">
+	<i>liters</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="volume_unit2" id="volume_unit2_cubic_inches" value="cubic_inches" >
+	
+<label for="volume_unit2_cubic_inches">
+	<i>in<sup>3</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="volume_unit2" id="volume_unit2_cubic_feet" value="cubic_feet" >
+	
+<label for="volume_unit2_cubic_feet">
+	<i>ft<sup>3</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="volume_unit2" id="volume_unit2_us_liquid_gallons" value="us_liquid_gallons" >
+	
+<label for="volume_unit2_us_liquid_gallons">
+	<i>us gal</i>
+</label>
+	
+<br >
+	
+<input type="button" id="volume_calculate2" value="Convert!" >
+	
+<div id="resultMenuVolume">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="weight_value2">
+	
+<a href="mass-weight-d_589.html">
+	Weight
+</a>
+
+</label>
+	
+<input type="number" id="weight_value2" value="1.0" >
+	
+<input type="radio" name="weight_unit2" id="weight_unit2_kgf" value="kgf" checked="checked" >
+	
+<label for="weight_unit2_kgf">
+	<i>kg<sub>f</sub></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="weight_unit2" id="weight_unit2_N" value="N" >
+	
+<label for="weight_unit2_N">
+	<i>N</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="weight_unit2" id="weight_unit2_lbf" value="lbf" >
+	
+<label for="weight_unit2_lbf">
+	<i>lbf</i>
+</label>
+	
+<br >
+	
+<input type="button" id="weight_calculate2" value="Convert!" >
+	
+<div id="resultMenuWeight">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="velocity_value2">
+	
+<a href="velocity-units-converter-d_1035.html">
+	Velocity
+</a>
+
+</label>
+	
+<input type="number" id="velocity_value2" value="1.0" >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_m_per_s" value="m_per_s" checked="checked" >
+	
+<label for="velocity_unit2_m_per_s">
+	<i>m/s</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_km_per_h" value="km_per_h" >
+	
+<label for="velocity_unit2_km_per_h">
+	<i>km/h</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_ft_per_min" value="ft_per_min" >
+	
+<label for="velocity_unit2_ft_per_min">
+	<i>ft/min</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_ft_per_s" value="ft_per_s" >
+	
+<label for="velocity_unit2_ft_per_s">
+	<i>ft/s</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_mph" value="mph" >
+	
+<label for="velocity_unit2_mph">
+	<i>mph</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="velocity_unit2" id="velocity_unit2_knots" value="knots" >
+	
+<label for="velocity_unit2_knots">
+	<i>knots</i>
+</label>
+	
+<br >
+	
+<input type="button" id="velocity_calculate2" value="Convert!" >
+	
+<div id="resultMenuVelocity">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="pressure_value2">
+	
+<a href="pressure-units-converter-d_569.html">
+	Pressure
+</a>
+
+</label>
+	
+<input type="number" id="pressure_value2" value="1.0" >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_Pa" value="Pa" checked="checked" >
+	
+<label for="pressure_unit2_Pa">
+	<i>Pa</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_bar" value="bar" >
+	
+<label for="pressure_unit2_bar">
+	<i>bar</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_atmosphere" value="atmosphere" >
+	
+<label for="pressure_unit2_atmosphere">
+	<i>atmosphere</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_mmH2O" value="mmH2O" >
+	
+<label for="pressure_unit2_mmH2O">
+	<i>mm H<sub>2</sub>O</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_kg_per_cm2" value="kg_per_cm2" >
+	
+<label for="pressure_unit2_kg_per_cm2">
+	<i>kg/cm<sup>2</sup></i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_psi" value="psi" >
+	
+<label for="pressure_unit2_psi">
+	<i>psi</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="pressure_unit2" id="pressure_unit2_inH2O" value="inH2O" >
+	
+<label for="pressure_unit2_inH2O">
+	<i>inches H<sub>2</sub>O</i>
+</label>
+	
+<br >
+	
+<input type="button" id="pressure_calculate2" value="Convert!" >
+	
+<div id="resultMenuPressure">
+	
+</div>
+</blockquote>
+	
+<br >
+	
+<blockquote>
+	
+<label for="flow_value2">
+	
+<a href="flow-units-converter-d_405.html">
+	Flow
+</a>
+
+</label>
+	
+<input type="number" id="flow_value2" value="1.0" >
+	
+<input type="radio" name="flow_unit2" id="flow_unit2_cubic_meters_per_second" value="cubic_meters_per_second" checked="checked" >
+	
+<label for="flow_unit2_cubic_meters_per_second">
+	<i>m<sup>3</sup>/s</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="flow_unit2" id="flow_unit2_cubic_meters_per_hour" value="cubic_meters_per_hour" >
+	
+<label for="flow_unit2_cubic_meters_per_hour">
+	<i>m<sup>3</sup>/h</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="flow_unit2" id="flow_unit2_us_gallons_per_minute" value="us_gallons_per_minute" >
+	
+<label for="flow_unit2_us_gallons_per_minute">
+	<i>US gpm</i>
+</label>
+	
+<br >
+	
+<input type="radio" name="flow_unit2" id="flow_unit2_cubic_feet_per_minute" value="cubic_feet_per_minute" >
+	
+<label for="flow_unit2_cubic_feet_per_minute">
+	<i>cfm</i>
+</label>
+	
+<br >
+	
+<input type="button" id="flow_calculate2" value="Convert!" >
+	
+<div id="resultMenuFlow">
+	
+</div>
+</blockquote>
+</div>
+	
+<p id="tstamp">
+	8.4.18
+</p>
+	
+<div id="adSlotStickyLeft" class="noPrint">
+	
+<div>
+	
+<!-- adngin-left1-0 -->
+<div id="adngin-left1-0"></div>
+                    
+</div>
+
+</div>
+	
+<a href="/amp/air-properties-d_156.html" title="amp page">
+	
+<img src="static/img/amp.png" width="80" height="33" >
+
+</a>
+	
+<br >
+	
+<br >
+	
+<div id="apps">
+	
+<a title="3D Engineering ToolBox - 3D modelling technical applications!" href="https://sketchup.engineeringtoolbox.com">
+	
+<img src="static/img/sketchup2.png" alt="3D Engineering ToolBox - draw and model technical applications!" loading="lazy" >
+
+</a>
+	
+<a title="2D Engineering ToolBox - create and share online diagram drawing templates!" href="https://www.engineeringtoolbox.com/2d-drawing-diagram-template-t_62.html">
+	
+<img src="static/img/googleDrawing.png" alt="2D Engineering ToolBox - create and share online diagram drawing templates!" loading="lazy" >
+</a>
+	
+<a title="Engineering ToolBox Apps - mobile online and offline engineering applications!" href="https://apps.engineeringtoolbox.com">
+	
+<img src="static/img/apps.png" alt="Engineering ToolBox Apps - mobile online and offline engineering applications!" loading="lazy" >
+
+</a>
+</div>
+</div>
+	
+<div id="right">
+	
+<div id="share">
+	
+<p>
+	
+<a title="Print page!" href="#" id="printer_friendly">
+	
+<img src="static/img/printer.png" width="60" height="20" alt="printer friendly" loading="lazy" >
+
+</a>
+
+</p>
+	
+<p>
+	
+<a title="Shortcut to Home Screen" href="shortcut-webpage-homescreen-desktop-d_2230.html">
+	Make Shortcut to Home Screen?
+</a>
+
+</p>
+</div>
+</div>
+	
+<script>
+var reload = false; 
+var host = window.location.hostname; 
+if (host.indexOf("www.engineeringtoolbox.com") == -1) reload = true; 
+if (host.indexOf("localhost") != -1) reload = false; 
+if (host == "") reload = false;
+reload = false;
+if (reload) {
+var canUrl = "https://www.engineeringtoolbox.com/air-properties-d_156.html"; 
+setTimeout(function(){location.href = canUrl;} , 3000);
+}
+</script>
+            	
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WH8MKZX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+                	
+<div id="adAnchor" class="noPrint">
+	
+<!-- adngin-adhesive-0 -->
+<div id="adngin-adhesive-0"></div>
+
+</div>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a29698a2c819a114',t:'MTc4NjQ0NDU1NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

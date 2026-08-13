@@ -1,0 +1,996 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="author" content="Microsoft Research - Special Projects" />
+		<meta name="description" content="Project Natick is a research project to determine the feasibility of subsea datacenters." />
+	
+		<!-- Stylesheets
+		============================================= -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="./css/bootstrap.css" type="text/css" />
+		<link rel="stylesheet" href="./style.css" type="text/css" />
+	
+		<!-- One Page Module Specific Stylesheet -->
+		<link rel="stylesheet" href="./onepage.css" type="text/css" />
+		<!-- / -->
+	
+		<link rel="stylesheet" href="./css/dark.css" type="text/css" />
+		<link rel="stylesheet" href="./css/font-icons.css" type="text/css" />
+		<link rel="stylesheet" href="./css/et-line.css" type="text/css" />
+		<link rel="stylesheet" href="./css/animate.css" type="text/css" />
+		<link rel="stylesheet" href="./css/magnific-popup.css" type="text/css" />
+	
+		<link rel="stylesheet" href="./css/fonts.css" type="text/css" />
+	
+		<link rel="stylesheet" href="./css/responsive.css" type="text/css" />
+		<meta name="viewport" content="initial-scale=1.0"/>
+	
+		<!-- External JavaScripts
+		============================================= -->
+		<script type="text/javascript" src="./js/jquery.js"></script>
+		<script type="text/javascript" src="./js/plugins.js"></script>
+		
+		<link href="https://amp.azure.net/libs/amp/2.1.7/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet" />
+		<script src="https://amp.azure.net/libs/amp/2.1.7/azuremediaplayer.min.js"></script>
+
+		<link href="images/icons/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="images/icons/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="apple-touch-icon" sizes="76x76" href="https://acom.azurecomcdn.net/80C57D/cdn/cvt-4f641e13aca8131c68b7a5c143273433dd9a0046e0f72c9139ef7b2b9b4fb786/images/icon/apple-touch/76x76.png"/> 
+		<link rel="apple-touch-icon" sizes="120x120" href="https://acom.azurecomcdn.net/80C57D/cdn/cvt-e046f564b0cc2f19a708284829be4d55a8fd5ed54ec39eb5edc7f79bd080b7d2/images/icon/apple-touch/120x120.png"/> 
+		<link rel="apple-touch-icon" sizes="152x152" href="https://acom.azurecomcdn.net/80C57D/cdn/cvt-1cd850ce3ac9e8302275fbd40ff5643809b611a20b27a37eb53104ae24e48b8e/images/icon/apple-touch/152x152.png"/> 
+		<link rel="apple-touch-icon" sizes="180x180" href="https://acom.azurecomcdn.net/80C57D/cdn/cvt-abd9ce8c1f853a3baa22d3d956e0520bdb33f4ae2075cad36a25de3a394f6f81/images/icon/apple-touch/180x180.png"/>
+	
+	<!-- Document Title
+	============================================= -->
+	<title>Project Natick Phase 2</title>
+
+</head>
+
+<body class="stretched dark side-push-panel">
+	<!-- Cookie Consent -->
+	<script src="https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"></script>
+	<div class="body-overlay"></div>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+		<!-- Header
+		============================================= -->
+		<header id="header" class="full-header transparent-header static-sticky" data-sticky-offset="full" data-sticky-offset-negative="100">
+			<div id="header-wrap" class="statick-sticky">
+				<div id="cookie-banner"></div>
+
+				<div class="container clearfix">
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+				
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-msft-dark.png"><img src="images/logo-msft.png" alt="Microsoft Logo"/></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-msft-dark@2x.png"><img src="images/logo-msft@2x.png" alt="Microsoft Logo"/></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+							<li><a href="#" data-href="#wrapper"><div>Home</div></a></li>
+							<li><a href="#" data-href="#section-updates"><div>Updates</div></a></li>
+							<li><a href="#" data-href="#section-articles"><div>Articles</div></a></li>
+							<li><a href="#" data-href="#section-factsandfigures"><div>Facts and Figures</div></a></li>
+							<li><a href="#" data-href="#section-faq"><div>FAQ</div></a></li>
+							<li><a href="#" data-href="#section-timeline"><div>Timeline</div></a></li>
+							<li><a href="#" data-href="#section-contact"><div>Contact</div></a></li>
+						</ul>
+					</nav><!-- #primary-menu end -->
+
+				</div>
+
+			</div>
+		</header><!-- #header end -->
+
+		<!-- Slider
+		============================================= -->
+		<section id="slider" class="slider-parallax full-screen force-full-screen">
+			<div id="header-foot">
+
+			</div>
+
+			<div class="full-screen force-full-screen dark section nopadding nomargin noborder ohidden" style="background-image: url('images/videos/2.png'); background-size: cover; background-position: center center;">
+
+				<div class="container center">
+					<div class="vertical-middle ignore-header">
+						<div class="emphasis-title">
+							<h1>
+                                <span class="nocolor t700 font-body opm-large-word">Project Natick</span>
+							</h1>
+						</div>
+                        <a href="#" class="button button-border button-light button-rounded hidden-xs" data-scrollto="#section-updates" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">50% of us live near the coast. Why doesn't our data?</a>
+                        <a href="#" class="button button-border button-mini button-light button-rounded visible-xs" data-scrollto="#section-updates" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">50% of us live near the coast. <br>Why doesn't our data?</a>
+					</div>
+				</div>
+
+				<div class ="video-wrap">
+					<div id="video-viewport">
+						<video 
+							id="azuremediaplayer" 
+							class="azuremediaplayer amp-default-skin" 
+							width="100%" 
+							height="100%" 						
+							autoplay
+							muted
+							tabindex="0">
+								<p class="amp-no-js">
+									To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+								</p>
+						</video>
+					</div>
+            	</div>
+
+				<a href="#" data-scrollto="#section-intro" data-easing="easeInOutExpo" data-speed="1250" data-offset="65" class="one-page-arrow dark"><i class="infinite animated fadeInDown">...</i></a>
+
+			</div>
+
+		</section><!-- #slider end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap nopadding">
+				<div class="center page-section clearfix" id="section-intro">
+					<h2>A research project to determine the feasibility of subsea datacenters powered by offshore renewable energy</h2>
+					<p class="lead divcenter bottommargin" style="max-width: 900px;">Project Natick seeks to understand the benefits and difficulties in deploying subsea datacenters worldwide. Phase two extends the research we accomplished in phase one by deploying a full-scale datacenter module in the North Sea, powered by renewable energy. 
+					<br/> This is the <i>continuing</i> story of Project Natick.</p>
+					<div class="lead divcenter bottommargin" style="max-width:900px;">
+						Learn more about Project Natick research below or read the Natick story <a href="https://news.microsoft.com/features/under-the-sea-microsoft-tests-a-datacenter-thats-quick-to-deploy-could-provide-internet-connectivity-for-years/">here</a> and <a href="https://aka.ms/AA99bju">here</a>.
+					</div>
+				</div>
+
+				<div id="section-updates" class="page-section center clearfix">
+					<div class="row topmargin-lg divcenter" style="max-width: 1000px;">
+						<div class="heading-block center bottommargin-lg">
+							<h2>Updates</h2>
+						</div>
+						<div class="divcenter center" style="max-width: 900px;margin: 0 auto">
+							<div class="acc_content clearfix" style="margin: 0 auto;width:100%">
+								<h3>On July 9th, 2020, Natick Northern Isles completed its mission at the bottom of the North Sea and was retrieved for analysis.</h3>
+								<h4>We are still reviewing the data, but here is what we already know:</h4>
+
+								<div class="factsandfiguresbox"><img src="images/facts/reliability.png" alt="Clip-art of a stopwatch with a checkmark"/><h4>Reliability</h4>The servers in Natick Northern Isles showed a failure rate of 1/8th that of our land-based control group.</div>
+								<div class="factsandfiguresbox"><img src="images/facts/location.png" alt="Clip-art of a globe with location pins"/><h4>Community Service</h4>Natick was used to perform COVID-19 research for <a href="https://foldingathome.org">Folding at Home</a> and <a href="https://www.worldcommunitygrid.org">World Community Grid.</a></div>
+								<div class="factsandfiguresbox"><img src="images/facts/recycling.png" alt="The international recycling logo"/><h4>Recycling</h4>The steel pressure vessel, heat exchangers, servers, and all other components will be recycled.</div>
+								<div class="factsandfiguresbox" style="padding-top:0px;"></div>
+								<div class="factsandfiguresbox" style="padding-top:0px;"><img src="images/facts/ocean.png" alt="Clip art drawing the sun over the ocean"/><h4>Sea bed</h4>The sea bed is being restored to the same state it was in before we deployed.</div>
+								<div class="factsandfiguresbox" style="padding-top:0px;"></div>
+							</div>
+						</div>
+					</div>
+			</div>
+				<div id="section-articles" class="page-section center clearfix">
+					<div class="row topmargin-lg divcenter" style="max-width: 1000px;">
+						<div class="heading-block center bottommargin-lg">
+							<h2>Published Articles</h2>
+						</div>
+							<h3><a href="https://aka.ms/AA99bju" target="_blank">Microsoft finds underwater datacenters are reliable, practical and use energy sustainably</a></h3>
+							<h3><a href="https://arstechnica.com/information-technology/2020/09/microsoft-declares-its-underwater-data-center-test-was-a-success/" target="_blank">Ars Technica: Microsoft declares its underwater data center test was a success</a></h3>
+							<h3><a href="https://www.bbc.com/news/technology-54146718" target="_blank">BBC: Microsoft's underwater data centre resurfaces after two years</a></h3>
+							<h3><a href="https://www.economist.com/science-and-technology/2020/09/19/davy-joness-data-centre" target="_blank">The Economist: Davy Jones's Data-center</a></h3>
+							<h3><a href="https://www.msn.com/en-us/money/news/underwater-data-centers-part-of-microsofts-future-growth/ar-BB192cdd" target="_blank">MSN: Underwater Data Centers Part Of Microsoft's Future Growth</a></h3>
+							<h3><a href="https://www.msn.com/en-us/news/technology/microsoft-pulled-its-underwater-data-center-out-of-the-sea-in-scotland/ar-BB1921cN" target="_blank">CNN: Microsoft pulled its underwater data center out of the sea in Scotland</a></h3>
+							<h3><a href="https://www.datacenterdynamics.com/en/news/microsoft-retrieves-project-natick-underwater-data-center-after-two-years/" target="_blank">DCD: Microsoft retrieves Project Natick data center after two years underwater</a></h3>
+							<h3><a href="https://datacenterfrontier.com/microsoft-servers-in-our-underwater-data-center-are-super-reliable/" target="_blank">Data Center Frontier: Microsoft: Servers in Our Underwater Data Center Are Super-Reliable</a></h3>
+							<h3><a href="https://www.geekwire.com/2020/microsoft-pulls-underwater-data-center-back-surface-assess-benefits-deep-sea-cloud/" target="_blank">Geek Wire: Microsoft pulls underwater data center back to the surface to assess benefits of deep-sea cloud</a></h3>
+							<h3><a href="https://www.neowin.net/news/microsofts-project-natick-finds-that-underwater-datacenters-are-reliable-and-effective/" target="_blank">Neowin: Microsoft's Project Natick finds that underwater datacenters are reliable and effective</a></h3>
+							<h3><a href="https://uk.pcmag.com/cloud-infrastructure/128600/microsoft-retrieves-its-sea-floor-data-center-after-2-years" target="_blank">PCMag UK: Microsoft Retrieves Its Sea Floor Data Center After 2 Years</a></h3>
+							<h3><a href="https://techcrunch.com/2020/09/14/microsofts-project-natick-underwater-datacenter-experiment-confirms-viability-of-seafloor-data-storage/" target="_blank">Tech Crunch: Microsoft’s Project Natick underwater data center experiment confirms viability of seafloor data storage</a></h3>
+							<h3><a href="https://www.techradar.com/news/microsofts-deep-sea-experiment-just-revealed-some-very-shocking-server-data" target="_blank">Tech Radar: Microsoft's deep-sea experiment just revealed some very shocking server data</a></h3>
+							<h3><a href="https://www.theverge.com/2020/9/14/21436746/microsoft-project-natick-data-center-server-underwater-cooling-reliability" target="_blank">The Verge: Microsoft’s underwater server experiment resurfaces after two years</a></h3>
+							<h3><a href="https://www.wired.co.uk/article/data-centres-underwater-climate-crisis" target="_blank">Wired: Turns out dumping data centres in the ocean could be a good idea</a></h3>
+					</div>
+				</div>
+
+				<div id="section-factsandfigures" class="page-section">
+					<div class="container clearfix">
+						<div class="heading-block center bottommargin-lg">
+							<h2>Facts and Figures</h2>
+						</div>
+						<div class="divcenter center" style="max-width: 900px;margin: 0 auto">
+							<div class="acc_content clearfix" style="margin: 0 auto;width:100%">
+								<div class="factsandfiguresbox"><img src="images/facts/vessel.png" alt="clip-art drawing of an ocean ship"/><h4>Datacenter Designation</h4>"Northern Isles"<br/>(SSDC-002).</div>
+								<div class="factsandfiguresbox"><img src="images/facts/measure.png" alt="clip-art of a compass"/><h4>Pressure Vessel Dimensions</h4>12.2m length, 2.8m diameter (3.18m including external components); about the size of a 40' ISO shipping container you might see on a ship, train, or truck.</div>
+								<div class="factsandfiguresbox"><img src="images/facts/measure2.png" alt="clip-art of a tape measure"/><h4>Subsea Docking Structure Dimensions</h4>14.3m length, 12.7m width. </div>
+								<div class="factsandfiguresbox"><img src="images/facts/windmill.png" alt="clip-art of a wind turbine"/><h4>Electrical Power Source</h4>100% locally produced renewable electricity from on-shore wind and solar, off-shore tide and wave. </div>
+								<div class="factsandfiguresbox"><img src="images/facts/power.png" alt="clip-art of an electrical plug"/><h4>Electrical Power Consumption</h4>240 KW.</div>
+								<div class="factsandfiguresbox"><img src="images/facts/payload.png" alt="clip-art of a stack of servers"/><h4>Payload</h4>12 racks containing 864 standard Microsoft datacenter servers with FPGA acceleration and 27.6 petabytes of disk.  This Natick datacenter is as powerful as several thousand high end consumer PCs and has enough storage for about 5 million movies. </div>
+								<div class="factsandfiguresbox"><img src="images/facts/location.png" alt="clip-art of a globe with location markers"/><h4>Location</h4>European Marine Energy Centre, Scotland, UK. </div>
+								<div class="factsandfiguresbox"><img src="images/facts/environment.png" alt="clip-art of a thermometer"/><h4>Internal Operating Environment</h4>1 atmosphere pressure, dry nitrogen.</div>
+								<div class="factsandfiguresbox"><img src="images/facts/time.png" alt="clip-art of an hourglass"/><h4>Time to Deploy</h4>Less than 90 days from factory to operation.</div>
+								<div class="factsandfiguresbox"></div>
+								<div class="factsandfiguresbox"><img src="images/facts/stopwatch.png" alt="clip-art of a stopwatch"/><h4>Planned Length of Operation Without Maintenance</h4>Up to 5 years.</div>
+								<div class="factsandfiguresbox"></div>
+								<div style="clear: both"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="section-faq" class="page-section">
+                    <div class="container clearfix">
+                       <div class="heading-block center bottommargin-lg">
+				        <h2>Frequently Asked Questions</h2>
+                           <span></span>
+					   </div>
+                        <div class="divcenter center" style="max-width: 900px;">
+                            <div class="accordion clearfix" data-state="closed">
+                               <div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What is Project Natick?</div>
+                               <div class="acc_content clearfix" style="text-align: left;">
+									<ul>
+                                        <li>Project Natick is a research project to build an underwater datacenter.  Microsoft is investigating the numerous potential benefits that a standard, manufacturable, deployable undersea datacenter could provide to cloud users all over the world. </li>
+                                        <br/>
+                                        <li>The Natick Phase 1 vessel was operated on the seafloor approximately one kilometer off the Pacific coast of the United States from August to November of 2015.  </li>
+										<br/>
+										<li>Phase 2 of Natick aims to demonstrate that we can economically manufacture full scale undersea datacenter modules and deploy them in under 90 days from decision to power on. The Phase 2 vessel was deployed at the European Marine Energy Centre located in the Orkney Islands, UK in June of 2018. </li>
+										<br/>
+										<li>Project Natick reflects Microsoft’s ongoing quest for cloud datacenter solutions that offer less resource intensive options, rapid provisioning, lower costs, and high agility in meeting customer needs. </li>										
+                                    </ul>
+                                </div>
+
+                               <div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>Why Project Natick?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">                                    
+                                        Project Natick is focused on a cloud future that can help better serve customers in areas which are near large bodies of water (where nearly 50% of society resides). The vision of operating containerized datacenters offshore near major population centers anticipates a highly interactive future requiring data resources located close to users. Deepwater deployment offers ready access to cooling and a controlled environment, and has the potential to be powered by co-located renewable power sources.                                      
+                                </div>
+                                
+                                <div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What are the customer benefits of Project Natick?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">
+                                    <ul>
+                                        <li><strong>Rapid provisioning:</strong> Able to deploy a datacenter at scale from start to finish in no more than 90 days. </li>
+                                        <ul>
+                                            <li>Enables rapid response to market demand. </li>
+                                        </ul>
+                                        <br/>
+                                        <li><strong>Latency:</strong> Latency is how long it takes data to travel between its source and destination. Half of the world’s population lives within 200 km of the ocean so placing datacenters offshore increases the proximity of the datacenter to the population, dramatically reducing latency and providing better responsiveness. Signals travel around 200 km/millisecond across the Internet, so if you are 200 km away one round trip to the datacenter takes about 2 milliseconds but if you are 4000 km away each round trip takes 40 milliseconds.   </li>
+										<ul>
+                                            <li>For example, if you are playing a video game like Minecraft, latency would affect how fast the blocks you place show up in the game. Or if you are browsing the web, latency could affect how long it takes to completely paint a new webpage with lots of content. Modern television at 30 frames per second is just 33 milliseconds per frame. Some videogames exceed 100 frames per second or just 10 milliseconds per frame.  </li>
+                                        </ul>
+										<br/>
+										<li><strong>Sustainability:</strong> We aspire to create a sustainable datacenter which leverages locally produced green energy, providing customers with additional options to meet their own sustainability requirements.    </li>
+										<ul>
+                                            <li>Natick datacenters are envisioned to be fully recycled. Made from recycled material which in turn is recycled at the end of life of the datacenter.  </li>
+											<li>A Natick datacenter co-located with offshore renewable energy sources could be truly zero emission: no waste products, whether due to the power generation, computers, or human maintainers are emitted into the environment.   </li>
+											<li>We see this as an opportunity to field long-lived, resilient datacenters that operate “lights out” – nobody on site – with very high reliability for the entire life of the deployment, possibly as long as 10 years.  </li>
+											<li>Natick datacenters consume no water for cooling or any other purpose. </li>
+                                        </ul>
+                                        <br/>
+                                    </ul>
+                                </div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>How would a Natick datacenter impact the environment?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">      
+										We aspire to create a sustainable datacenter which leverages locally produced green energy, providing customers with additional options to meet their own sustainability requirements. 								
+                                        <ul>
+                                            <li>Natick datacenters are envisioned to be fully recycled. Made from recycled material which in turn is recycled at the end of life of the datacenter.  </li>
+											<li>A Natick datacenter co-located with offshore renewable energy sources could be truly zero emission: no waste products, whether due to the power generation, computers, or human maintainers are emitted into the environment.   </li>
+											<li>We see this as an opportunity to field long-lived, resilient datacenters that operate “lights out” – nobody on site – with very high reliability for the entire life of the deployment, possibly as long as 10 years.  </li>
+											<li>Natick datacenters consume no water for cooling or any other purpose. </li>
+                                        </ul>
+                                </div>
+
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>How long was the Phase 2 vessel in the water?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">      
+									Microsoft’s Project Natick team deployed the Northern Isles datacenter 117 feet deep to the seafloor in June 2018. For the next two years, team members tested and monitored the performance of the datacenter’s servers.                                </div>
+
+
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What other Microsoft groups are supporting Project Natick? </div>
+                                <div class="acc_content clearfix" style="text-align: left;">
+                                    Project Natick is a complementary effort bolstering Microsoft’s ever evolving datacenter ecosystem.  The researchers have collaborated with employees from across Microsoft, especially from Microsoft’s Cloud and Enterprise Group, who have contributed their expertise to the project in such diverse areas as server design, datacenter cooling and electrical architecture, network provisioning, sustainability, reliability analysis, and economic modeling. 
+                                </div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What did you learn?  </div>
+								<div class="acc_content clearfix" style="text-align: left;">
+									<ul>
+									<li>In Phase 1, we confirmed that we can successfully deploy and operate datacenter equipment in an undersea environment. Challenges our prototype tackled included cooling large scale electronics and withstanding the effects of biofouling. </li>
+									<li>In Phase 2, we confirmed that we can economically manufacture full scale undersea datacenter modules and deploy them in under 90 days from decision to power on.  </li>									
+									<li>With the retrieval and preliminary analysis of the phase 2 vessel, we’ve now confirmed that not only can we successfully deploy, operate, and scale an undersea datacenter, but also that this more sustainable approach actually improves the performance and reliability of the datacenter when compared to land. Project Natick had 1/8th the failure rate of land datacenters. Not only is a greener future possible, but it is economically practical.</li>
+									</ul>								
+								</div>
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What are the key factors that contributed to Project Natick’s greater reliability?    </div>
+								<div class="acc_content clearfix" style="text-align: left;">
+								We believe that the atmosphere of nitrogen, which is less corrosive than oxygen, and the absence of people to bump and jostle components, are the primary reasons for the difference. If the post-deployment analysis proves this hypothesis correct, we may be able to translate the benefits to land datacenters.   
+								</div>
+
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>How does Microsoft plan to use these learnings in its own datacenters?  </div>
+								<div class="acc_content clearfix" style="text-align: left;">
+									<ul>
+									<li>The proven reliability of underwater datacenters has informed efforts to serve customers who need to deploy and operate tactical and critical datacenters anywhere in the world.   </li>
+									<li>Lessons learned from Project Natick are further informing Microsoft’s datacenter sustainability strategy around energy, waste, and water. </li>
+									</ul>
+								</div>
+
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What is different about Phase 2? </div>
+                                <div class="acc_content clearfix" style="text-align: left;">
+                                    Phase 1 demonstrated the feasibility of the subsea datacenter concept, including our ability to remotely operate a Lights Out datacenter* for long periods of time, operating with a highly efficient PUE (power usage effectiveness is total power divided by server power; lower values are better, 1.0 is perfect) of 1.07, and using no water at all, for a perfect WUE (water usage effectiveness is the liters consumed per megawatt of power per minute; lower values are better, 0 is best) of exactly 0 vs land datacenters which consume up to 4.8 liters of water per kilowatt-hour. 
+									<br/>
+									For Phase 2, our goals are to:
+									<br/>
+									<br/>
+									<ul>
+                                        <li>Develop one full scale prototype subsea datacenter, which could be used as a modular building block to aggregate subsea datacenters of arbitrary size </li>
+                                        <br/>
+                                        <li>Gain an understanding of the economics of undersea datacenter TCO (total cost of ownership is the full lifetime cost of a datacenter including manufacture, deployment, operations, and recovery) should we proceed to commercial deployment </li>
+										<br/>
+										<li>Efficiently deploy this prototype in coastal waters (within 12 nautical miles of land) at a depth of no more than 328 feet (100 meters)  </li>
+										<br/>
+										<li>Demonstrate Lights Out operation during a deployment cycle of up to 5 years  </li>
+										<br/>
+										<li>Power the prototype from a nearby marine renewable energy source; and </li>
+										<br/>
+										<li>Explore cloud datacenter solutions that offer less resource intensive options </li>										
+                                    </ul>
+									We anticipate that Phase 2 will surface design and operational issues that may require further refinement post-deployment and should be captured during Phase 2 to inform subsequent work, in particular, productization. 
+									<br/>
+									<br/>
+									<i>* A lights out data center is a server or computer room that is physically or geographically isolated, thereby limiting environmental fluctuations and human access. Unnecessary energy used for lighting and for maintaining a proper climate around frequently used doors can be saved by going lights out. </i>
+                                </div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>Is a Natick datacenter renewable/recyclable?     </div>
+                                <div class="acc_content clearfix" style="text-align: left;">
+                                    Our vision is for Natick datacenter deployments of up to 5 years, which is the anticipated lifespan of the computers contained within the vessel. After each 5-year deployment cycle, the datacenter vessel would be retrieved, reloaded with new computers, and redeployed. The target lifespan of a Natick datacenter is at least 20 years. After that, the datacenter is designed to be retrieved and recycled.  
+                                </div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>Are there other similar efforts in Microsoft Research to improve the sustainability of datacenters?    </div>
+                                <div class="acc_content clearfix" style="text-align: left;">
+                                    Both Microsoft Research and Microsoft Cloud and Enterprise, the business unit responsible for Microsoft’s datacenters, have ongoing research projects and specific initiatives focused on reliability, renewable energy, energy efficiency, and other efforts to improve the sustainability of our datacenters. 
+                                </div>								
+								
+                                <div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>When will Natick datacenters be more widely available in a product?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">Project Natick is currently at the research stage. It’s still early days in evaluating whether this concept could be adopted by Microsoft and other cloud service providers.
+                                </div>
+								
+                                <div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>What does the name Natick mean?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">Natick is a codename and carries no special meaning. It is a town in Massachusetts.
+								</div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>Does Natick use AI?</div>
+                                <div class="acc_content clearfix" style="text-align: left;">Natick uses AI to monitor the servers and other equipment for signs of failure and to seek to identify any correlations between environment and server longevity. Because Natick operates like a standard land datacenter, the computers inside Natick can be used for machine learning to provide artificial intelligence to other applications just as in any other Microsoft datacenter. 
+                                </div>
+								
+								<div class="acctitle" style="font-size: 18px; text-align: left;"><i class="acc-closed icon-line2-plus"></i><i class="acc-open"></i>How are Natick datacenters powered?</div>
+								<div class="acc_content clearfix" style="text-align: left;">
+								For this Phase 2 deployment, the Natick datacenter is connected to the Orkney power grid in Scotland.  The Orkney Islands produce enough renewable energy to power the islands, our datacenter, and feed the remaining renewable energy back to the main Scottish power grid.  This renewable energy is a mix of off-shore wave and tide, and on-shore wind and solar. More <a href="https://www.ssepd.co.uk/ANM/">here</a>.  
+								<br/>
+								<br/>
+								Future Natick research will explore directly powering a Natick datacenter by a co-located ocean-based green power system, such as offshore wind or tide, with no grid connection.  By co-locating with a green power source, undersea datacenters can help the environment and reduce strain on overstressed electric grids.  Or even bring both electricity and the cloud to underserved communities around the globe. 
+                                </div>
+								
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				
+				<div id="section-about" class="center page-section clearfix">
+
+					<div class="row topmargin-lg divcenter" style="max-width: 1000px;">
+						<div class="heading-block center bottommargin-lg">
+							<h2 class="divcenter bottommargin font-body" style="max-width: 700px; font-size: 40px;">The Team</h2>
+						</div>
+						<div class="divcenter center" style="max-width: 900px;margin: 0 auto">
+							<div class="acc_content clearfix" style="margin: 0 auto;width:100%">
+								<div class="factsandfiguresbox">
+									<img src="images/team/Ben_small.jpg" alt="Ben Cutler profile picture"/><br/>Ben Cutler<br/>Project Manager
+								</div>
+								<div class="factsandfiguresbox">
+									<img src="images/team/Spencer_small.jpg" alt="Spencer Fowers profile picture"/><br/>Spencer Fowers<br/>Research & Engineering
+								</div>
+								<div class="factsandfiguresbox">
+									<img src="images/team/Eric_small.jpg" alt="Eric Peterson profile picture"/><br/>Eric Peterson<br/>Mechanical Engineer
+								</div>
+								<div class="factsandfiguresbox">&nbsp;</div>
+								<div class="factsandfiguresbox">
+									<img src="images/team/Mike_small.jpg" alt="Mike Shepperd profile picture"/><br/>Mike Shepperd<br/>IT Engineering
+								</div>
+								<div class="factsandfiguresbox">&nbsp;</div>
+							</div>
+						</div>							
+					</div>
+				</div>
+
+                <div class="section parallax nomargin dark" style="background-image: url('images/testimonials/deployment.JPG'); padding: 150px 0;" data-stellar-background-ratio="0.3">
+
+						<div class="container clearfix">
+
+							<div class="col_two_fifth nobottommargin">&nbsp;</div>
+
+							<div class="col_three_fifth nobottommargin col_last">
+
+								<div class="fslider testimonial testimonial-full nobgcolor noborder noshadow nopadding" data-arrows="false">
+									<div class="flexslider" style="background-color: rgba(0, 0, 0, 0.3);">
+										<div class="slider-wrap">
+											<div class="slide">
+												<div class="testi-content">
+													<p>Our industry does not respect tradition. It only respects innovation.</p>
+													<div class="testi-meta">
+														Satya Nadella
+													</div>
+												</div>
+											</div>
+											<div class="slide">
+												<div class="testi-content">
+													<p>One doesn't discover new lands without consenting to lose sight, for a very long time, of the shore.</p>
+													<div class="testi-meta">
+														André Gide
+														<span>French author and Nobel Prize winner</span>
+													</div>
+												</div>
+											</div>
+											<div class="slide">
+												<div class="testi-content">
+													<p>The greatest threat to our planet is the belief that someone else will save it.</p>
+													<div class="testi-meta">
+														Robert Swan
+														<span></span>
+													</div>
+												</div>
+											</div>
+                                            <div class="slide">
+												<div class="testi-content">
+													<p>There's a way to do it better - find it.</p><br/><br/>
+													<div class="testi-meta">
+														Thomas Edison
+														<span></span>
+													</div>
+												</div>
+											</div>
+                                            <div class="slide">
+												<div class="testi-content">
+													<p>There are no passengers on spaceship earth. We are all crew.</p><br/><br/>
+													<div class="testi-meta">
+														Marshall McLuhan
+														<span></span>
+													</div>
+												</div>
+											</div>
+                                            <div class="slide">
+												<div class="testi-content">
+													<p>It always seems impossible until it's done.</p><br/><br/>
+													<div class="testi-meta">
+														Nelson Mandela
+														<span></span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div id="section-timeline" class="page-section center">
+	                    <div class="heading-block center bottommargin-lg">
+					        <h2>Natick Phase 2 Timeline</h2>
+							<span>After the success of the first phase of project Natick, we immediately set to work on Phase 2.</span>
+	                    </div>
+	                    <div class="lead divcenter bottommargin" style="max-width: 1000px;">
+	                        <div class="cntl">
+	                            <span class="cntl-bar cntl-center">
+	                                <span class="cntl-bar-fill"></span>
+	                            </span>
+
+	                            <div class="cntl-states">
+
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Phase 2 Planning</h3>
+	                                        <h4>We had a few major goals in mind: make it full scale, deploy it deeper and in harsher conditions, and power it with completely renewable energy.</h4>
+										</div>
+	                                    <div class="cntl-image"><img src="./images/timeline/planning.jpg" alt="The Natick team in a planning meeting for phase 2."></div>
+ 	                                    <div class="cntl-icon cntl-center">9/15</div>
+	                                </div>
+
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Request for Information</h3>
+	                                        <h4>An RFI was issued seeking information about the feasibility of deploying a Natick datacenter in the ocean powered by renewable energy.</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/gifs/RFI.gif" alt="Microsoft sent out an RFI to a number of ocean engineering and renewable energy companies in late 2015"></div>
+	                                    <div class="cntl-icon cntl-center">12/15</div>
+	                                </div>
+
+									<div class="cntl-state">
+										<div class="cntl-content">
+											<h3>Request for Proposals</h3>
+											<h4>A select group of marine organizations was invited to present proposals to realize our vision for Natick Phase 2.</h4>
+										</div>
+
+										<div class="cntl-icon cntl-center">3/16</div>
+									</div>
+
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Naval Group Selected</h3>
+	                                        <h4>From a very strong field of proposals, we selected Naval Group and its subsidiary, Naval Energies to lead design, fabrication, and deployment of the Phase 2 datacenter.</h4>
+	                                    </div>
+	                                    <div class="cntl-image"><img src="./images/timeline/naval_group.jpg" alt="Microsoft Selects Naval Group"></div>
+	                                    <div class="cntl-icon cntl-center">11/16</div>
+	                                </div>
+
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Design Complete</h3>
+	                                        <h4>We designed subsea equivalents of all elements typically found in a land datacenter including networking, electrical and cooling systems, environmental monitoring, and more.</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/timeline/design.jpg" alt="Eric Peterson reviews completed design of the Natick North Seas."/></div>
+	                                    <div class="cntl-icon cntl-center">10/17</div>
+
+	                                </div>
+
+									<div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Fabrication Complete</h3>
+	                                        <h4>Fabrication of datacenter complete. All IT equipment installed and tested.  The vessel is shipped to Stromness, UK.</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/videos/2.png" alt="The IT equipment is inserted into the pressure vessel prior to shipment to the UK."></div>
+	                                    <div class="cntl-icon cntl-center">5/18</div>
+
+									</div>
+									
+									<div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Deployment</h3>
+	                                        <h4>The Natick Phase 2 vessel, "Northern Isles", was deployed at the European Marine Energy Centre on June 1st, 2018.</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/deployment_small4.jpg" alt="The pressure vessel ready to be moved to deployment site."></div>
+	                                    <div class="cntl-icon cntl-center">6/18</div>
+
+									</div>
+									
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Operations</h3>
+	                                        <h4>Natick Northern Isles was used by more than 18 groups inside Microsoft</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/timeline/deployment.JPG" alt="The pressure vessel at the bottom of the ocean during deployment as seen from a survey ROV"></div>
+	                                    <div class="cntl-icon cntl-center">6/18</div>
+
+									</div>
+									
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Pandemic Work</h3>
+	                                        <h4>Natick Northern Isles was re-tasked to provide additional resources for COVID-19 vaccine research via Folding at Home and World Community Grid</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/timeline/corona.jpg" alt="CDC rendering of the novel corona virus"></div>
+	                                    <div class="cntl-icon cntl-center">3/20</div>
+
+									</div>
+
+	                                <div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>Retrieval</h3>
+	                                        <h4>After more than 2 years at the bottom of the ocean, Natick Northern Isles was retrieved for analysis.</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/timeline/retrieval.jpg" alt="CDC rendering of the novel corona virus"></div>
+	                                    <div class="cntl-icon cntl-center">7/20</div>
+
+									</div>
+									
+									<div class="cntl-state">
+	                                    <div class="cntl-content">
+	                                        <h3>What's Next?</h3>
+	                                        <h4>Look for more information here soon!</h4>
+	                                    </div>
+
+	                                    <div class="cntl-image"><img src="./images/whats_next.jpg" alt="Reflection of Northern Isles pressure vessel"></div>
+	                                    <div class="cntl-icon cntl-center"></div>
+
+	                                </div>
+
+								</div>
+	                        </div>
+	                    </div>
+						<div class="heading-block center bottommargin-lg"><h2>Earlier Natick Phase 2 Publications</h2></div>
+						<h3><a href="https://news.microsoft.com/innovation-stories/project-natick-covid-19/" target="_blank">Microsoft’s undersea datacenter helps the hunt for a COVID-19 vaccine</a></h3>
+						<h3><a href="https://cloudblogs.microsoft.com/quantum/2020/02/26/cryptography-quantum-computers/" target="_blank">Natick was used to test Microsoft Research's first post-quantum cryptography software</a></h3>
+						<h3><a href="https://www.bbc.co.uk/news/technology-44368813" target="_blank">BBC: Microsoft sinks data centre off Orkney</a></h3>
+						<h3><a href="https://www.businessinsider.com/photos-microsoft-project-natick-data-centre-scotland-coast-2018-6" target="_blank">Business Insider: Photos show how Microsoft took a big step forward in its crazy plan to power the internet from the sea</a></h3>
+						<h3><a href="https://www.theverge.com/2018/6/6/17433206/microsoft-underwater-data-center-project-natick" target="_blank">The Verge: Microsoft sinks a data center off the Scottish coast</a></h3>
+						<h3><a href="https://gizmodo.com/microsofts-newest-data-center-is-a-giant-metal-can-at-t-1826606291?rev=1528302179303" target="_blank">Gizmodo: Microsoft's Newest Data Center Is a Giant Metal Can at the Bottom of the Sea</a></h3>
+						<h3><a href="https://www.huffingtonpost.co.uk/entry/microsoft-has-dropped-a-data-centre-to-the-bottom-of-the-ocean-heres-why_uk_5b17a224e4b0734a9938fc38" target="_blank">Huffington Post: Microsoft Has Dropped A Data Centre To The Bottom Of The Ocean - Here’s Why</a></h3>
+						<h3><a href="https://www.cnbc.com/2018/06/06/microsoft-deploys-an-underwater-submarine-like-data-center-in-orkney.html?__source=twitter%7Cmain" target="_blank">CNBC: Microsoft deploys an underwater submarine-like data center to boost internet speeds</a></h3>
+						<h3><a href="https://news.microsoft.com/features/under-the-sea-microsoft-tests-a-datacenter-thats-quick-to-deploy-could-provide-internet-connectivity-for-years/" target="_blank">Microsoft News: Under the sea, Microsoft tests a datacenter that’s quick to deploy...</a></h3>
+						<h3><a href="https://azure.microsoft.com/en-us/blog/monitoring-environmental-conditions-near-underwater-datacenters-using-deep-learning/" target="_blank">Azure Blog: Monitoring environmental conditions near underwater datacenters using Deep Learning</a></h3>
+
+					</div>
+				</div>
+            
+
+
+				<div id="section-contact" class="page-section parallax nomargin dark" style="background-image: url('images/deploymap2.png'); padding: 150px 0;" data-stellar-background-ratio="0.3">
+
+					<div class="row noleftmargin norightmargin bottommargin-lg common-height">
+						<div class="col-md-2 col-sm-1 hidden-xs">
+                        </div>
+                        <div class="col-md-4 col-sm-6" style="background-color: #282828;">
+							<div class="col-padding max-height">
+								<h3 class="font-body t400 ls1">Our Locations</h3>
+
+								<div style="font-size: 16px; line-height: 1.7;">
+									<address style="line-height: 1.7;">
+										<strong>Headquarters:</strong><br>
+										One Microsoft Way<br>
+										Redmond, WA 98052<br>
+										<br/>
+										<strong>Phase 1 Deployment:</strong><br>
+										Somewhere off the Pacific coast of the United States<br/>
+										<br/>
+										<strong>Phase 2 Deployment:</strong><br/>
+										<a href="http://www.emec.org.uk" target="_blank">EMEC</a>, Orkney Islands, Scotland, UK<br/>
+									</address>
+
+									<div class="clear topmargin"></div>
+
+									<strong>General Inquiries:</strong> natick@microsoft.com <br/>
+                                    <strong>Media Inquiries:</strong> natick-media@microsoft.com <br/>
+                                    <strong><a href="http://news.microsoft.com/?p=406566" target="_blank">Project Natick Press Kit</a></strong>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="section-phase1" class="page-section center">
+					<div class="heading-block center bottommargin-lg">
+						<h2>Natick Phase 1</h2>
+						<span>It all started in 2013 when Microsoft employee, Sean James, who served on a US Navy submarine submitted a ThinkWeek Paper. Norm Whitaker read the paper and built a team to explore the idea of placing computers or even entire datacenters in water. In late 2014, Microsoft kicked off Project Natick. The rest is history.</span>
+					</div>
+					<div class="lead divcenter bottommargin" style="max-width: 1000px;">
+						<div class="cntl">
+							<span class="cntl-bar cntl-center">
+								<span class="cntl-bar-fill"></span>
+							</span>
+
+							<div class="cntl-states">
+
+								<div class="cntl-state">
+									<div class="cntl-content">
+										<h3>Initial White Paper</h3>
+										<h4>A Microsoft white paper comes to the attention of senior leaders.  It describes an underwater datacenter, powered by renewable ocean energy.</h4>
+									</div>
+									<div class="cntl-icon cntl-center">02/13</div>
+								</div>
+
+
+								<div class="cntl-state">
+									<div class="cntl-content">
+										<h3>Project Natick Begins</h3>
+										<h4>Project begins with kickoff meeting in Redmond.</h4>
+									</div>
+									<div class="cntl-icon cntl-center">08/14</div>
+								</div>
+
+								<div class="cntl-state">
+									<div class="cntl-content">
+										<h3>Project Natick Operational</h3>
+										<h4>The <i>Leona Philpot</i> is christened and deployed off the coast of California.</h4>
+									</div>
+
+									<div class="cntl-image"><img src="./images/gifs/Peter_Lee_2_1.gif" alt="Peter Lee christens the Leona Philpot with a bottle of champaign" /></div>
+									<div class="cntl-icon cntl-center">08/15</div>
+								</div>
+
+								<div class="cntl-state">
+									<div class="cntl-content">
+										<h3>Testing</h3>
+										<h4>The <i>Leona Philpot</i> system is thoroughly tested and monitored.</h4>
+									</div>
+
+									<div class="cntl-image"><img src="./images/gifs/grafana-loop.gif" alt="The graphs scroll by showing what's going on in the system below the ocean"></div>
+									<div class="cntl-icon cntl-center"></div>
+								</div>
+
+								<div class="cntl-state">
+									<div class="cntl-content">
+										<h3>Project Natick returns to Redmond</h3>
+										<h4>After a very successful series of tests, the <i>Leona Philpot</i> is lifted out of the water and is brought back to Redmond for analysis and refitting.</h4>
+									</div>
+									<div class="cntl-image"><img src="./images/gifs/Natick-Truck.gif" alt="The Leona Philpot is on a truck being driven down a highway"></div>
+									<div class="cntl-icon cntl-center">12/15</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="heading-block center bottommargin-lg"><h2>Natick Phase 1 Publications</h2></div>
+					<h3><a href="http://theliquidgrid.com/2017/10/24/underwater-data-centers/" target="_blank">The Liquid Grid: "Underwater Datacenters"</a></h3><br/>
+		 			<h3><a href="http://spectrum.ieee.org/computing/hardware/want-an-energyefficient-data-center-build-it-underwater" target="_blank">IEEE Spectrum: "Want an Energy-Efficient Data Center? Build It Underwater"</a></h3><br/>
+					 <h3><a href="http://www.nytimes.com/2016/02/01/technology/microsoft-plumbs-oceans-depths-to-test-underwater-data-center.html?_r=0" target="_blank">New York Times: "Microsoft Plumbs Ocean Depths to Test Underwater Data Center"</a></h3><br/>
+					 <h3><a href="http://fortune.com/2016/01/31/microsoft-underwater-data-center/" target="_blank">Fortune: "Microsoft Test Drives (Dives?) Submarine Data Center"</a></h3><br/>
+					 <h3><a href="http://venturebeat.com/2016/01/31/microsofts-project-natick-brings-data-centers-underwater/" target="_blank">VentureBeat: "Microsoft's Project Natick brings data centers underwater"</a></h3><br/>
+					 <h3><a href="http://news.microsoft.com/features/microsoft-research-project-puts-cloud-in-ocean-for-the-first-time/" target="_blank">Microsoft News Center: "Microsoft research project puts cloud in ocean for the first time"</a></h3><br/>
+					 <h3><a href="http://www.digitaltrends.com/computing/microsoft-is-making-a-digital-atlantis-by-putting-data-centers-under-the-sea/#ixzz3yyHugesb" target="_blank">Digital Trends: "Microsoft is making a digital Atlantis by putting data centers under the sea"</a></h3><br/>
+					 <h3><a href="http://www.pcworld.com/article/3027934/data-center-cloud/microsofts-project-natick-wants-to-submerge-your-data-in-the-oceans.html" target="_blank">PC World: "Microsoft's audacious Project Natick wants to submerge your data in the oceans"</a></h3><br/>
+					 <h3><a href="http://www.businessinsider.com.au/microsoft-project-natick-undersea-data-centre-2016-2" target="_blank">Business Insider: "Microsoft has a crazy project to build massive data centres under the sea"</a></h3><br/>
+					 <h3><a href="http://www.abc.net.au/news/2016-02-02/microsoft-goes-underwater-to-develop-mega-internet-datacentre/7132116" target="_blank">ABC Online: "Microsoft goes underwater to test mega internet data centre technology"</a></h3><br/>
+					 <h3><a href="http://www.popsci.com/microsoft-is-putting-data-servers-in-cool-new-place-ocean" target="_blank">Popular Science: "This Is Why Microsoft Is Putting Data Servers In The Ocean"</a></h3><br/>
+					 <h3><a href="http://www.techinsider.io/microsoft-project-natick-photos-2016-2" target="_blank">Tech Insider: "This is Microsoft's plan to power the internet from under the sea"</a></h3><br/>
+
+				</div>
+			</div>
+		</section>
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark noborder">
+
+			<div class="container center">
+				<div class="footer-widgets-wrap">
+
+					<div class="row divcenter clearfix">
+
+						<div class="col-md-4">
+
+							<div class="widget clearfix">
+								<h4>Site Links</h4>
+
+								<ul class="list-unstyled footer-site-links nobottommargin">
+									<li><a href="#" data-scrollto="#wrapper" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Top</a></li>
+                                    <li><a href="#" data-scrollto="#section-updates" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Updates</a></li>
+									<li><a href="#" data-scrollto="#section-articles" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Articles</a></li>
+									<li><a href="#" data-scrollto="#section-factsandfigures" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Facts and Figures</a></li>
+									<li><a href="#" data-scrollto="#section-faq" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">FAQ</a></li>
+									<li><a href="#" data-scrollto="#section-timeline" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Timeline</a></li>
+									<li><a href="#" data-scrollto="#section-contact" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Contact</a></li>
+								</ul>
+							</div>
+
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <img src="images/sealife.jpg" alt="A crab crawls along the Leona Philpot, with the Microsoft logo in the background">
+                        </div>
+
+						<div class="col-md-4">
+
+							<div class="widget clearfix">
+								<h4>Contact</h4>
+
+								<p class="lead">1 Microsoft Way<br>Redmond, WA 98052</p>
+
+								<div class="center topmargin-sm">
+									<a href="https://www.facebook.com/Microsoft/" class="social-icon inline-block noborder si-small si-facebook" title="Facebook">
+										<i class="icon-facebook"></i>
+										<i class="icon-facebook"></i>
+									</a>
+									<a href="https://twitter.com/MSFTResearch" class="social-icon inline-block noborder si-small si-twitter" title="Twitter">
+										<i class="icon-twitter"></i>
+										<i class="icon-twitter"></i>
+									</a>
+									<a href="https://github.com/Microsoft" class="social-icon inline-block noborder si-small si-github" title="Github">
+										<i class="icon-github"></i>
+										<i class="icon-github"></i>
+									</a>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div id="copyrights">
+				<!-- <div class="container center clearfix">
+					Copyright Microsoft 2015 | All Rights Reserved
+				</div> -->
+                <div class="container center clearfix visible-lg visible-md">
+                <!--footer code begin-->
+                    <div style="font-family: sans-serif; width:1002px; height:25px; padding-top:5px; font-size:100%;">
+                        <a href="mailto:natick@microsoft.com" style="border-right:1px solid #bbb; padding:0em 1em 0em 0em;">Contact us</a>
+						<a href="http://go.microsoft.com/fwlink/?LinkID=286687" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Privacy and Cookies</a>
+						<a href='#' onClick='manageConsent()' id="manageConsentLinklg" style="display:none;">Manage Cookie Preferences</a>
+						<a href="https://go.microsoft.com/fwlink/?linkid=2259814" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Consumer Health Privacy</a>
+                        <a href="http://go.microsoft.com/fwlink/?LinkID=386394" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Terms of use</a>
+                        <a href="http://go.microsoft.com/fwlink/?LinkId=506942" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Trademarks</a>
+                        <span style="margin-right:100px; padding:0em 1em 0em 1em; color:#bbb">&copy; 2024 Microsoft Corporation. All Rights Reserved. </span>
+                        <img style="margin-right:10px;" alt="Microsoft" src="./images/logo-msft-small.png" border="0">
+                    </div> <!--footer code end-->
+                </div>
+                <div class="container center clearfix visible-xs">
+                    <div style="font-family: sans-serif; padding-top:2px; font-size:100%;" >
+                        <a href="mailto:natick@microsoft.com">Contact us</a><br/>
+						<a href="http://go.microsoft.com/fwlink/?LinkID=286687">Privacy and Cookies</a><br/>
+						<a href='#' onClick='manageConsent()' id="manageConsentLinkxs" style="display:none;">Manage Cookie Preferences</a>
+						<a href="https://go.microsoft.com/fwlink/?linkid=2259814" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Consumer Health Privacy</a>
+                        <a href="http://go.microsoft.com/fwlink/?LinkID=386394">Terms of use</a><br/>
+                        <a href="http://go.microsoft.com/fwlink/?LinkId=506942">Trademarks</a><br/>
+                        <span style="color:#bbb">&copy; 2024 Microsoft Corporation. All rights reserved. </span><br/>
+                        <img alt="Microsoft" src="./images/logo-msft-small.png" border="0">
+                    </div>
+                </div>
+                <div class="container center clearfix visible-sm">
+                    <div style="font-family: sans-serif; padding-top:4px; font-size:100%;" >
+                        <div class="col_half"><a href="mailto:natick@microsoft.com">Contact us</a></div>
+                        <div class="col_half col_last"><a href="http://go.microsoft.com/fwlink/?LinkID=286687">Privacy and Cookies</a></div>
+						<a href='#' onClick='manageConsent()' id="manageConsentLinksm" style="display:none;">Manage Cookie Preferences</a>
+						<a href="https://go.microsoft.com/fwlink/?linkid=2259814" style="border-right:1px solid #bbb; padding:0em 1em 0em 1em;">Consumer Health Privacy</a>
+                        <div class="col_half"><a href="http://go.microsoft.com/fwlink/?LinkID=386394">Terms of use</a></div>
+                        <div class="col_half col_last"><a href="http://go.microsoft.com/fwlink/?LinkId=506942">Trademarks</a></div>
+                        <div class="col_half"><span style="color:#bbb">&copy; 2024 Microsoft Corporation. All rights reserved. </span></div>
+                        <div class="col_half col_last"><img alt="Microsoft" src="./images/logo-msft-small.png" border="0"></div>
+                    </div>
+                </div>
+
+			</div>
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script type="text/javascript" src="./js/functions.js"></script>
+    <script type="text/javascript" src="./js/jquery.cntl.min.js"></script>
+    <script type="text/javascript">
+		var selectedVideo = 0;
+
+		var videos = 
+		[
+			[ 
+				"images/videos/2.png", 
+				"https://natickmediaservices.streaming.mediaservices.windows.net/37f3a4af-cac7-4af5-b1c0-bbefaf1b5f2f/2.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/37f3a4af-cac7-4af5-b1c0-bbefaf1b5f2f/2_1920x1080_AACAudio_5040.mp4"
+			],
+			[ 
+				"https://natickmediaservices.streaming.mediaservices.windows.net/3045bbd8-5046-4b86-a77e-e729d98f4362/Natick-ShortClips-8_000001.png", 
+				"https://natickmediaservices.streaming.mediaservices.windows.net/3045bbd8-5046-4b86-a77e-e729d98f4362/Natick-ShortClips-8.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/3045bbd8-5046-4b86-a77e-e729d98f4362/Natick-ShortClips-8_1920x1080_4700.mp4"
+			],
+			[
+				"https://natickmediaservices.streaming.mediaservices.windows.net/0b8f2139-bdd6-46f8-9621-c409d11717b9/Natick-ShortClips-7_000001.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/0b8f2139-bdd6-46f8-9621-c409d11717b9/Natick-ShortClips-7.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/0b8f2139-bdd6-46f8-9621-c409d11717b9/Natick-ShortClips-7_1920x1080_4700.mp4"
+			],
+			[
+				"https://natickmediaservices.streaming.mediaservices.windows.net/7108d1e1-c1ba-4c6f-9558-bd1ff8812794/Natick-ShortClips-4_000001.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/7108d1e1-c1ba-4c6f-9558-bd1ff8812794/Natick-ShortClips-4.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/7108d1e1-c1ba-4c6f-9558-bd1ff8812794/Natick-ShortClips-4_1920x1080_4700.mp4"
+			],
+			[
+				"images/videos/Retrieval_Short_2.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/08b30f4e-bd7a-450f-85fb-de78539dc5f0/Retrieval_Short_2.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/08b30f4e-bd7a-450f-85fb-de78539dc5f0/Retrieval_Short_2_1920x1080_AACAudio_5624.mp4"
+			],
+			[
+				"images/videos/Retrieval_Short_4.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/2a3c8e95-a250-463d-93c7-05d09fd2d5f9/Retrieval_Short_4.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/2a3c8e95-a250-463d-93c7-05d09fd2d5f9/Retrieval_Short_4_1920x1080_AACAudio_6825.mp4"
+			],
+			[
+				"images/videos/Cleaning_Short_1.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/d8f7ee16-2ca1-4947-a60b-a1e3b7be8f2f/Cleaning_Short_1.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/d8f7ee16-2ca1-4947-a60b-a1e3b7be8f2f/Cleaning_Short_1_1920x1080_AACAudio_6036.mp4"
+			],
+			[
+				"images/videos/Retrieval_Short_1.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/a28d144d-9a4e-4097-95e7-d2bd697b0cb1/Retrieval_Short_1.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/a28d144d-9a4e-4097-95e7-d2bd697b0cb1/Retrieval_Short_1_1920x1080_AACAudio_6104.mp4"
+			],
+			[
+				"images/videos/Cleaning_Short_2.png",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/fa374bf9-a033-43f3-92e1-b0f0a01ed5a5/Cleaning_Short_2.ism/manifest",
+				"https://natickmediaservices.streaming.mediaservices.windows.net/fa374bf9-a033-43f3-92e1-b0f0a01ed5a5/Cleaning_Short_2_1920x1080_AACAudio_5687.mp4"
+			]
+		];
+
+		function SelectRandomVideo()
+		{
+			selectedVideo = Math.floor(Math.random() * videos.length);
+			var player = document.getElementById("azuremediaplayer");
+			player.setAttribute("poster", videos[selectedVideo][0]);
+
+			var streamSource = document.createElement("source");
+			streamSource.setAttribute("src", videos[selectedVideo][2]);
+			streamSource.setAttribute("type", "video/mp4");
+			streamSource.setAttribute("id", "amp_streamsource");
+			player.appendChild(streamSource);
+
+			var manifest = document.createElement("source");
+			manifest.setAttribute("src", videos[selectedVideo][1]);
+			manifest.setAttribute("type", "application/vnd.ms-sstr+xml");
+			manifest.setAttribute("id", "amp_manifest");
+			player.appendChild(manifest);
+		}
+		function sleep(ms) {
+            return new Promise(function (resolve) { return setTimeout(resolve, ms) });
+		}
+		function Replay()
+		{
+			console.log("Playback ended.  Starting again.");
+			sleep(5000);
+			SelectRandomVideo();
+			document.getElementById("amp_streamsource").play();
+		}
+		$(document).ready(function(e){
+			SelectRandomVideo();
+			$('.cntl').cntl({
+                revealbefore: 300,
+                anim_class: 'cntl-animate',
+                onreveal: function(e){
+                    console.log(e);
+                }
+            });
+		});
+		
+		/* Code for the webcams */
+		var myOptions = {
+		"nativeControlsForTouch": false,
+		controls: true,
+		autoplay: true,
+		width: "640",
+		height: "400",
+	}
+	/* myPlayer = amp("azuremediaplayer_webcam1", myOptions);
+	myPlayer.src([
+        {			
+                "src": "https://natickmediaservices.streaming.mediaservices.windows.net/fc050e9a-7212-4f2f-af39-1fc180a1012b/eaf9f7d5-90be-42a2-8368-45f329b40fdf.ism/manifest",
+                "type": "application/vnd.ms-sstr+xml"
+        }
+	]);
+	myPlayer = amp("azuremediaplayer_webcam2", myOptions);
+	myPlayer.src([
+        {
+                "src": "https://natickmediaservices.streaming.mediaservices.windows.net/59ebbf4c-49cd-42ea-aceb-59d5ba156ddd/61c85878-8a89-4c28-b919-ae9c4aa4de0c.ism/manifest",
+                "type": "application/vnd.ms-sstr+xml"
+        }
+	]); */
+    </script>
+</body>
+<script>    
+    function onConsentChanged(categoryPreferences) {
+        console.log("onConsentChanged", categoryPreferences);        
+    }
+
+    window.WcpConsent && WcpConsent.init("en-US", "cookie-banner", function (err, _siteConsent) {
+        if (!err) {
+            siteConsent = _siteConsent;  //siteConsent is used to get the current consent          
+        } else {
+            console.log("Error initializing WcpConsent: "+ err);
+        }
+    }, onConsentChanged, WcpConsent.themes.light);
+
+    function manageConsent() {
+        if(siteConsent.isConsentRequired){
+            siteConsent.manageConsent();
+        }
+    }
+
+	if(siteConsent.isConsentRequired) { 
+		document.getElementById("manageConsentLinklg").style = "border-right:1px solid #bbb; padding:0em 1em 0em 1em;";
+		document.getElementById("manageConsentLinkxs").style = "border-right:1px solid #bbb; padding:0em 1em 0em 1em;";
+		document.getElementById("manageConsentLinksm").style = "border-right:1px solid #bbb; padding:0em 1em 0em 1em;";
+	}
+	else
+	{
+	}
+</script>
+</html>

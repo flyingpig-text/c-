@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "36dc2f535377f81b",
+    "type": "split",
+    "children": [
+      {
+        "id": "029b1f62e4ec410c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f73e1b736b49cb90",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "aa92f15dcbd87b58",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a46852c22be5175",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7b2883ca55aa3a88",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "107628a0babe1b1a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "f8ba12d2506b7c24",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "303b8a02fb5a4e9d",
+    "type": "split",
+    "children": [
+      {
+        "id": "846d10a51043e4d0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c551fd4a1ba397b0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "流程.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "流程 的反向链接列表"
+            }
+          },
+          {
+            "id": "871a94d42b576fe4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "流程.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "流程 的出链列表"
+            }
+          },
+          {
+            "id": "784e99200b9713ed",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "cf64d1a6c02267f1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "7324f0406fda2c62",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "流程.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "流程 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "7b2883ca55aa3a88",
+  "lastOpenFiles": [
+    "基础/注意事项.md",
+    "问题一/__pycache__/C题_问题1_核心算法.cpython-312.pyc",
+    "问题一/__pycache__/C题_问题1_服务器散热_整数模型.cpython-312.pyc",
+    "问题一/__pycache__",
+    "附件/~$模型检验.docx",
+    "问题三/问题三大概输出.zip",
+    "问题三/输出.zip",
+    "C题数据/补充材料数据/README_补充数据说明.md",
+    "C题数据/补充材料数据/安全系数/安全系数_GB-T150.1-2024_clean.csv",
+    "C题数据/补充材料数据/腐蚀速率/国家材料环境腐蚀平台_腐蚀速率_clean.csv",
+    "C题数据/补充材料数据/价格/上海金属网_期货行情_clean.csv",
+    "C题数据/处理脚本/build_supplement_data.py",
+    "outputs/问题2_最优结构横截面温度云图.png",
+    "问题一/outputs/图3_灵敏度分析.png",
+    "outputs/_v3.png",
+    "outputs/_v2.png",
+    "outputs/_v1.png",
+    "outputs/_tE.png",
+    "outputs/_tD.png",
+    "outputs/_tC.png",
+    "outputs/_tB.png",
+    "outputs/_tA.png",
+    "C题数据/数据清洗报告.md",
+    "算法设计_函数说明.md",
+    "1.检验.md",
+    "数据.md",
+    "C题数据/README.md",
+    "注意事项.md",
+    "流程.md",
+    "选模型.md",
+    "欢迎.md"
+  ]
+}

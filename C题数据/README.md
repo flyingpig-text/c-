@@ -1,0 +1,55 @@
+# C 题数据包：海底数据中心散热优化（2021 MathorCup C 题）
+
+下载时间：2026-08-11。所有文件均来自公开数据源，版权归原机构所有，仅供学习与竞赛使用。
+
+## 目录结构
+
+- `海洋环境数据/`
+  - `WOA18/woa18_documentation.pdf`：World Ocean Atlas 2018 使用说明文档（NOAA NCEI）
+  - `WOA18_南海温度剖面.csv`：珠海、陵水两点 0-5500 m 年气候态温度剖面（WOA18, 1981-2010, 0.25°，站点附近 0.75° 海域平均）
+  - `WOA18_1981-2010_月均表层温度_南海站点.csv`：两站点逐月表层温度气候态
+  - `ERSST_v5/`：NOAA ERSST v5 逐月 SST，2020-01 至 2021-12（2° 全球网格）
+  - `ERSST_v5_2020-2021_南海站点SST.csv`：由上述文件提取的两站点与南海区域月均 SST
+  - `OISST_每日SST/`：NOAA OISST v2.1 日海温目录。本次下载时 NOAA 服务器限速严重，日文件未能完整下完；季节变化请直接用 `ERSST_v5_2020-2021_南海站点SST.csv` 或 WOA18 月均表层温度。原始下载地址：https://www.ncei.noaa.gov/products/optimum-interpolation-sst
+  - `潮汐/HKO_ChekLapKokE_2026_hourly_tide.csv`：香港赤鱲角东 2026 年逐小时天文潮预报（米）
+  - `潮汐/*.html`：香港天文台 2026 年赤鱲角东、长洲、芝麻湾高低潮与逐时潮高原始网页
+- `热物性数据/`
+  - `EngineeringToolbox_Air_Properties.html`：空气热物性表
+  - `EngineeringToolbox_Water_Properties.html`：水/海水密度参考
+  - `MIT_Seawater_Properties.html`：海水热物性公式与计算器（附 Sharqawy 2010 论文）
+- `材料数据/`
+  - `EngineeringToolbox_ThermalConductivity_Metals.html`：金属导热系数表
+- `数据中心资料/`
+  - `Microsoft_ProjectNatick.html`：微软海底数据中心官方页面
+  - `IEA_EnergyEfficiency2023.pdf`：IEA 2023 能效报告（含数据中心耗电与 PUE 数据）
+  - `gov_新型数据中心三年行动计划.html / .pdf`：工信部等四部门政策原文
+- `处理脚本/`
+  - `process_data.py`：把 HKO 潮汐网页、ERSST、WOA18 本地文件转成 CSV
+  - `fetch_woa18_remote.py`：从 APDRC OPeNDAP 远程拉取 WOA18 并生成 CSV
+
+## 数据源清单
+
+| 数据 | 原始来源 |
+|---|---|
+| WOA18 温盐气候态 | https://www.ncei.noaa.gov/products/world-ocean-atlas （经 APDRC OPeNDAP 拉取） |
+| OISST v2.1 | https://www.ncei.noaa.gov/products/optimum-interpolation-sst |
+| ERSST v5 | https://www.ncei.noaa.gov/data/ersst/ |
+| 潮汐预报 | https://www.hko.gov.hk/en/tide/predtide.htm （香港天文台） |
+| 空气/水/材料热物性 | https://www.engineeringtoolbox.com/ |
+| 海水热物性 | https://web.mit.edu/seawater/ |
+| Project Natick | https://natick.research.microsoft.com/ |
+| IEA 数据中心报告 | https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks |
+| 政策文件 | https://www.gov.cn/zhengce/zhengceku/2021-07/14/content_5624964.htm |
+
+## 需要注册或动态页面的数据源
+
+- Copernicus Marine Service（CMEMS）：免费注册后下载高分辨率海温/海流：https://marine.copernicus.eu/
+- 国家海洋科学数据中心（中国近海实测温盐、潮汐）：https://mds.nmdis.org.cn/ （需实名注册）
+- MatWeb 材料数据库：https://www.matweb.com/ （需注册，脚本访问返回 403）
+- SMM 上海有色网、生意社：金属价格行情页面为动态数据，不适合直接存档：https://www.smm.cn/、https://www.100ppi.com/
+
+## 备注
+
+- WOA18 全球 0.25° 原始文件约 730 MB/卷，本包经 APDRC OPeNDAP 只拉取南海站点附近小区域，节省空间。
+- ERSST 网格为 2°，站点值取最近网格点；OISST 网格为 0.25°。站点坐标：珠海 (113.75°E, 22.25°N)、陵水 (110.0°E, 18.5°N)。
+- 潮汐数据为天文潮预报，不含风暴潮余水位；单位 m（香港潮汐基准面，即 Chart Datum 附近）。

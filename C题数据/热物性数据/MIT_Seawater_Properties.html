@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+   <meta charset="utf-8">
+   <base href="https://web.mit.edu/seawater/">
+   <meta name="author" content="J.H. Lienhard">
+   <meta name="robots" content="index; nofollow">
+   <meta name="description" content="Thermophysical properties of seawater may be downloaded in pdf format and as MATLAB, EES, or VBA routines.">
+   <meta name="keywords" content="seawater, thermophysical properties, thermodynamic properties, transport properties, MATLAB, EES, VBA, software, code, download, surface tension, heat capacity, density, enthalpy, entropy, exergy, vapor pressure, internal energy, osmotic coefficient, osmotic pressure, tables, chemical potential, boiling point elevation, viscosity, isobaric expansivity, isothermal compressibility, latent heat of vaporization, Prandtl number, Gibbs energy, specific volume, thermal conductivity, thermal diffusivity, density of seawater">
+   <meta http-equiv="default-style" content="websty"> 
+   <link rel="icon" type="image/x-icon" href="favicon.svg"> 
+   <style>
+   	   header 	{ padding: 0em !important; }
+	   html 	{ font-size: 100%; }
+       table    {font-size: 100%;}
+       table, th, td {
+   		 border: 1px solid black;
+		 border-collapse: collapse;
+			}
+       sup      {vertical-align: super;} 
+       sub      {vertical-align: sub;} 
+ /*    font design is partially derived from https://www.w3schools.com/w3css/4/w3.css by Jan Egil and Borge Refsnes */  
+  	   body
+	   		{font-family: Verdana, sans-serif; 
+			 font-size: 0.9375rem; 
+			 line-height: 1.5;
+			 margin: 0
+			 }
+	   h1,h2,h3
+			{font-family: "Neue Haas Grotesk", "Segoe UI", Arial, sans-serif;
+			 font-weight: 400;
+			 margin: 0.625rem 0;
+			}
+	   h1	{font-size: 2.25rem;}
+	   h2	{  font-size: 1.75rem;
+  			padding-top: 1rem; 
+		    }
+	   h3 	{font-size: 1.375rem;}
+	   a    {text-decoration: none;
+			 color:  #750014;
+			 background-color: #ffffff;
+			}
+		a:focus-visible 
+			{
+			 outline: 3px solid #005fcc;
+			}
+	   a:hover  
+	   		{color: #ffffff;
+	   		 background-color: #750014;
+			}
+	   li:not(:last-child) 
+	   			{
+			     margin-bottom: 5px;
+				}
+	   div, header  
+	   			{display:block; 
+	   			 padding:0.01em 20px;
+				}
+	   section	{display:block; 
+	   			 padding:0.01em 40px
+				}
+	   .large   {font-size: 1.125rem;
+				}
+	   .mitred    {color:#ffffff;
+	   			 background-color: #750014;
+				}
+	   .mitredgray	{color: #8b959e;
+	   				 background-color: #750014;
+				}
+	   .mitredgray a 
+				{color: #ffffff; 
+				 background-color: #750014;
+				}
+	   .mitredgray a:hover 
+				{color: #750014; 
+				 background-color: #8b959e;
+				}
+	   .mitredwhite
+				{color: #ffffff; 
+				 background-color: #750014;
+				}
+	   .mitredwhite a
+				{color: #ffffff; 
+				 background-color: #750014;
+				}
+	   .mitredwhite a:hover 
+				{color: #750014; 
+				 background-color: #ffffff;
+				}
+		ul.inline-list li 
+				{
+				  display: inline;
+				  margin-right: 0.5rem; /* optional spacing */
+				}
+		/* Shows only when navigating by keyboard */
+		.skip-link 
+				{
+           		position: absolute;
+          		top: -40px; /* Or a large negative number like -9999px */
+          		left: 0;
+           		background: black;
+           		color: white;
+          		padding: 0px;
+          		z-index: 100; /* Ensure it appears above other content */
+          		transition: top 0.2s; /* Smooth transition */
+				}
+		.skip-link:focus 
+				{
+				top: 0; /* Bring it to the top of the viewport */
+				}
+
+   </style>
+   <title>Thermophysical properties of seawater</title>
+</head>
+
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-372142195-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-372142195-1');
+</script>
+
+<header>
+<div class="mitred">
+<h1>Thermophysical properties of seawater </h1>
+</div>
+
+<div>
+<p><i>	Code version: 7 August 2024  		<a href="https://web.mit.edu/" title="MIT Home Page" style="background: #FFFFF5; float: right">
+         <img src="https://web.mit.edu/seawater/mit_logo_std_rgb_mit-red.svg" alt="MIT logo"
+         width=132 height=70 >
+         </a>
+<br>
+		Tables version: 9 December 2023</i></p>         
+</div>
+</header>
+
+<nav aria-label="Page sections">
+  <ul class="inline-list">
+    <li><a href="#Description">Description</a>			<span aria-hidden="true">|</span></li>
+    <li><a href="#Implementation">Implementation</a> 	<span aria-hidden="true">|</span></li>
+    <li><a href="#Downloads">Downloads</a>				<span aria-hidden="true">|</span></li>
+    <li><a href="#Installation">Installation</a>		<span aria-hidden="true">|</span></li>
+    <li><a href="#Properties">Property functions</a> 	<span aria-hidden="true">|</span></li>
+    <li><a href="#Surface_tension">Surface tension</a> 	<span aria-hidden="true">|</span></li>
+    <li><a href="#specific_heat_capacity">Note on c<sub>p</sub></a> <span aria-hidden="true">|</span></li>
+    <li>
+      <a href="https://accessibility.mit.edu">
+        MIT accessibility site
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<main id="main-content" tabindex="-1">
+<section>
+<h2 id="Description">Description</h2>
+
+<p>This page provides tables and a library of computational routines for the thermophysical properties of seawater. The properties given by these codes are those needed for design of thermal and membrane desalination processes. They are given as functions of temperature, pressure, and salinity.
+</p>
+
+<p>The temperature and salinity ranges are 0 - 120&nbsp;&deg;C and 0 - 120 g/kg respectively. Some functions are valid only near atmospheric pressures while others are valid for a pressure range of 0 - 12 MPa. For thermodynamic functions, the pressure dependence across 0 - 12 MPa has been incorporated. For select functions such as transport and colligative properties, the temperature and salinity also implicitly define the pressure as:</p>
+<img src="P0-image.png" alt="Pressure definition equation" style="width:400px;">
+<p>where <i>P</i><sub>0</sub> is taken as atmospheric pressure (0.101325 MPa) up to 100&nbsp;&deg;C and as the vapor pressure of seawater for higher temperatures.
+</p>
+</section>
+
+<section>
+<h2 id="Implementation">Implementation and Fair Usage</h2>
+
+<p>The seawater properties library routines are available in MATLAB, EES, and Excel VBA. They are a self-contained library and are extremely easy to use. They will run on all computers that support MATLAB, EES, or VBA. This software is provided "as is" without warranty of any kind. See the file sw_copy.m or sw_copy.txt for conditions of use and license.
+</p>
+
+<p>While the seawater properties library routines are freely distributed, it is requested that users of this library <i>please cite</i> the following two journal articles which comprehensively present how correlations in the library were developed, the original data sources, the validity ranges, and the uncertainty in each property function.
+</p>
+
+<ol> 
+     <li>K.G. Nayar, M.H. Sharqawy, L.D. Banchik, and J.H. Lienhard V, "Thermophysical properties of seawater: A review and new correlations that include pressure dependence," <i>Desalination</i>, Vol. 390, pp.1-24, 2016. doi:<a href="https://doi.org/10.1016/j.desal.2016.02.024" target="_blank" title="Open web site of journal paper" style="font-weight: bold;">10.1016/j.desal.2016.02.024</a> (<b><a href="https://hdl.handle.net/1721.1/106794" target="_blank" >open-access preprint</a></b>)</li>
+
+     <li>Mostafa H. Sharqawy, John H. Lienhard V, and Syed M. Zubair, "Thermophysical properties of seawater: A review of existing correlations and data," <i>Desalination and Water Treatment</i>,  Vol. 16, pp.354-380, April 2010. (<a href="https://web.mit.edu/lienhard/www/papers/journal/Thermophysical_properties_of_seawater-DWT-16-354-2010.pdf" target="_blank" ><b>PDF file</b></a> of journal paper, including corrections through November 2023.)</li>
+</ol>
+
+<p>Download <b><a href="seawater-thermophysical-refs.bib" target="_blank" 
+onclick="gtag('event', 'bib', {
+  'event_category': 'Downloads',
+  'event_label': '/seawater-thermophysical-refs.bib/',
+  'value': 1
+});">Bibtex formatted references</a></b> for these papers.</p>
+</section>
+
+<section>
+<h2 id="Downloads">Downloads</h2>
+
+<ul>
+     <li><b><a href="https://web.mit.edu/seawater/2017_MIT_Seawater_Property_Tables_r2b_2023c.pdf" target="_blank"  
+onclick="gtag('event', 'PDF', {
+  'event_category': 'Downloads',
+  'event_label': '/2017_MIT_Seawater_Property_Tables_r2a.pdf/',
+  'value': 1
+});">Tables of properties</a></b> in pdf format <small>(Version: 9 December 2023)</small></li>
+     <li><b><a href="https://web.mit.edu/seawater/SEAWATER_v3.1.5_07Aug24.zip"  download title="Zip archive for EES, MATLAB, and VBA"  
+onclick="gtag('event', 'PDF', {
+  'event_category': 'Downloads',
+  'event_label': '/2017_MIT_Seawater_Property_Tables_r2a.pdf/',
+  'value': 1
+});">MATLAB, EES, and VBA files</a></b> in a zip archive <small>(Version: 07 August 2024.  <a href="https://web.mit.edu/seawater/Version_History_07Aug24-pdf-3a.pdf" title="Opens version history of codes as pdf file (in PDF/A-3a format)">Version history</a>.)</small></li>
+</ul>
+</section>
+
+<section>
+<h2 id="Installation">Installation</h2>
+
+<p>For MATLAB:</p>
+<ul>
+     <li>Place all the MATLAB m files in a directory called "Seawater"</li>
+     <li>Add this folder to the MATLAB search path. See the MATLAB command "help path" for more details.</li>
+</ul>
+
+<p>For EES:</p>
+<ul>
+     <li>Place the files SEAWATER_EES.LIB and SEAWATER_EES.CHM in a directory called "Seawater"</li>
+     <li>Place this folder inside the Userlib folder of EES. See the EES library routines for usage of the properties functions.</li>
+</ul>
+
+<p>For Excel VBA:</p>
+<ul>
+     <li>Place the files SEAWATER_VBA.xla in the default Excel AddIns folder.</li>
+     <li>For Windows, default folder is typically "\Users\USER-NAME\AppData\Roaming\Microsoft\AddIns\"</li>
+</ul>
+</section>
+
+<section>
+<h2 id="Properties">Property Functions</h2>
+
+<table>
+<caption> Property functions provided by the seawater package</caption>
+<tbody>
+         
+<tr><th scope="col">Property (unit)</th><th scope="col"> Temperature, <i>t</i>&nbsp;(&deg;C)</th><th scope="col">Salinity, <i>S</i> (g/kg)</th><th scope="col"> Pressure, <i>P</i> (MPa) </th><th scope="col">Function name</th></tr>
+
+<tr><td>Boiling point elevation (K) </td><td> 0 - 200</td><td>0 - 120</td><td><i>P</i><sub>0</sub></td><td>SW_BPE(T, S)</td></tr>
+
+<tr><td>Chemical potential of salts in seawater (J/kg)</td><td>10 - 80</td><td>0.1 - 120</td><td>0 - 12</td><td>ChemPot_S(T, S, P)</td></tr>
+
+<tr><td>Chemical potential of water in seawater (J/kg) </td><td>
+10 - 80</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+ChemPot_W(T, S, P)</td></tr>
+
+<tr><td>Density (kg/m<sup>3</sup>)</td><td>
+0 - 180</td><td>
+0 - 150</td><td>
+0 - 12</td><td>
+SW_Density(T, S, P)</td></tr>
+
+<tr><td>Dynamic viscosity (kg/m-s)</td><td>
+
+0 - 180</td><td>
+0 - 150</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_Viscosity(T, S)</td></tr>
+
+<tr><td>Isobaric expansivity of seawater (1/K) </td><td>
+10 - 180</td><td>
+0 - 150</td><td>
+0 - 12</td><td>
+SW_IsobExp(T, S, P)</td></tr>
+
+<tr><td>Isothermal compressibility of seawater (1/MPa)</td><td>
+
+10 - 180</td><td>
+0 - 160</td><td>
+0 - 12</td><td>
+SW_IsothComp(T, S, P)</td></tr>
+
+<tr><td>Kinematic viscosity (m<sup>2</sup>/s)</td><td>
+
+0 - 180</td><td>
+0 - 150</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_Kviscosity(T, S)</td></tr>
+
+<tr><td>Latent heat of vaporization (J/kg)</td><td>
+
+0 - 200</td><td>
+0 - 240</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_LatentHeat(T, S)</td></tr>
+
+<tr><td>Osmotic coefficient</td><td>
+
+0 - 200</td><td>
+0 - 120</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_OsmCoeff(T, S)</td></tr>
+
+<tr><td>Osmotic pressure (MPa)</td><td>
+
+0 - 200</td><td>
+0 - 120</td><td>
+</td><td>
+ SW_OsmPress(T, S)</td></tr>
+
+<tr><td>Prandtl number</td><td>
+
+0 - 180</td><td>
+0 - 150</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_Prandtl(T, S)</td></tr>
+
+<tr><td>Specific enthalpy (J/kg)</td><td>
+
+10 - 120</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_Enthalpy(T, S, P)</td></tr>
+
+<tr><td>Specific entropy (J/kg-K)</td><td>
+
+10 - 120</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_Entropy(T, S, P)</td></tr>
+
+<tr><td>Specific flow exergy (J/kg)</td><td>
+
+10 - 80</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_FlowExergy(T, S, P, <i>T</i><sub>ds</sub>, <i>S</i><sub>ds</sub>, <i>P</i><sub>ds</sub>)<sup>*</sup></td></tr>
+
+<tr><td>Specific Gibbs energy (J/kg)</td><td>
+
+10 - 120</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_Gibbs(T, S, P)</td></tr>
+
+<tr><td>Specific heat capacity (J/kg-K) (see <a href="#specific_heat_capacity">note</a>)</td><td>
+
+0 - 180</td><td>
+0 - 180</td><td>
+0 - 12</td><td>
+SW_SpcHeat(T, S, P)</td></tr>
+
+<tr><td>Specific internal energy (J/kg)</td><td>
+
+10 - 120</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_IntEnergy(T, S, P)</td></tr>
+
+<tr><td>Specific volume (m<sup>3</sup>/kg)</td><td>
+
+0 - 180</td><td>
+0 - 150</td><td>
+0 - 12</td><td>
+SW_Volume(T, S, P)</td></tr>
+
+<tr><td>Surface tension (mN/m)</td><td>
+
+0 - 100</td><td>
+0 - 131</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_SurfaceTension(T, S)</td></tr>
+
+<tr><td>Thermal conductivity (W/m-K)</td><td>
+
+0 - 180</td><td>
+0 - 160</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_Conductivity(T, S)</td></tr>
+
+<tr><td>Thermal conductivity (pressure dep.) (W/m-K)</td><td>
+
+10 - 90</td><td>
+0 - 120</td><td>
+0 - 12</td><td>
+SW_ConductivityP(T, S, P)</td></tr>
+
+<tr><td>Thermal diffusivity (m<sup>2</sup>/s)</td><td>
+
+0 - 180</td><td>
+0 - 150</td><td>
+<i>P</i><sub>0</sub></td><td>
+SW_Diffusivity(T, S)</td></tr>
+
+<tr><td>Vapor pressure (Pa)</td><td>
+
+0 - 180</td><td>
+0 - 160</td><td>
+</td><td>
+SW_Psat(T, S)</td></tr>
+
+</tbody>
+</table>
+
+<p><sup>*</sup> <i>T</i><sub>ds</sub>, <i>S</i><sub>ds</sub>, and  <i>P</i><sub>ds</sub> are the dead state temperature, salinity, and pressure. The default values are <i>T</i><sub>ds</sub> = 25&nbsp;&deg;C, <i>S</i><sub>ds</sub> = 35 g/kg, and <i>P</i><sub>ds</sub> = 0.101325 MPa
+</p>
+</section>
+
+<section>
+<h2 id="Surface_tension">Seawater Surface Tension</h2>
+
+<p> The surface tension correlation used in this package is based on Nayar et al. (2014). They published reference data for the surface tension of seawater over the salinity range of 20 - 131&nbsp;g/kg and a temperature range of 1 - 92&nbsp;degC at atmospheric pressure. The uncertainty of the measurements varied from 0.18 to 0.37 mN/m with the average uncertainty being 0.22 mN/m. This data was correlated with an average absolute percentage deviation between measurements and the correlation of 0.19% and a maximum deviation of 0.60%.
+</p>
+
+<ul> 
+     <li>K.G. Nayar, D. Panchanathan, G.H. McKinley, and J.H. Lienhard V, "Surface tension of seawater," <i>J. Phys. Chem. Ref. Data</i>, <b>43</b>(4):43103, Nov. 2014.</li>
+     <li> doi:<b><a href="https://doi.org/10.1063/1.4899037" target="_blank" title="Open web paper for this paper">10.1063/1.4899037</a></b></li>
+     <li> preprint:<b><a href="https://hdl.handle.net/1721.1/96884" target="_blank" title="Open web page for preprint">https://hdl.handle.net/1721.1/96884</a></b></li>
+     <li> <b><a href="surface-tension-ref.bib" target="_blank" title="download latex .bib file for this paper"
+onclick="gtag('event', 'PDF', {
+  'event_category': 'Downloads',
+  'event_label': '/surface-tension-ref.bib/',
+  'value': 1
+});">Bibtex formatted reference.</a></b></li>
+</ul>
+</section>
+
+<section>
+<h2 id="specific_heat_capacity">Note on specific heat capacity correlation</h2>
+
+<p>We use the correlation of Jamieson et al. (<i>Desalination</i>, 1969) for the specific heat capacity of seawater at 1 atm.  The coefficients Jamieson et al. include a typo, which we corrected in Sharqawy et al. (2010) and in all of our codes. Nayar et al. (2016) show the original typo, although the corrected version was used in their calculations.</p>
+
+<p>In Jamieson et al., the coefficient b<sub>3</sub> should be -3.15 x 10<sup>-6</sup> (not positive as shown in their paper).  In Nayar et al., Table 8, the equation for B should be: B = -6.913 + 7.351 x 10<sup>-1</sup> S - 3.15 x 10<sup>-3</sup> S<sup>3</sup>.</p>
+</section>
+
+<footer class="mitredwhite" style="padding:0.01em 40px;" >
+<p><a href="https://web.mit.edu" class="large" title="MIT home page">Massachusetts Institute of Technology</a><br>
+77 Massachusetts Avenue<br>
+ Cambridge MA 02139-4037 USA <br><br>
+ <a href="https://accessibility.mit.edu" title="MIT accessibility web page">Accessibility</a>
+ </p>
+</footer>
+
+</main>
+</body>
+</html>
