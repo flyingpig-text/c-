@@ -1,44 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-C 题 问题 2：枚举 shape + GA 遗传算法 + SLSQP 局部寻优
-=================================================================
-目标：在 1m x 1m x 12m 的外形约束内设计带外翅片的圆柱 / 长方体壳体，
-      使可容纳服务器台数 N 最大化。
-
-统一口径（与交付清单一致）：
-    散热能力按问题 1 的热阻网络计算（不再只用海侧 h 高估）：
-        Q_max = h_total * A_eff * (T_max - T_inf)
-              = (T_max - T_inf) / R_total        （两式等价，统一为 Q_max）
-        R_total = 1/(h_air*A_in) + R_wall + 1/(h_sea*A_eff)
-    其中 A_eff = A_base + eta_f*N_f*A_f 为含翅片有效外面积，
-    h_air/h_sea 由 Churchill-Chu 关联式 + 壁温自洽迭代得到；
-    N_theory = Q_max / q0
-    N_space = V_inner / V_server
-    N = floor(min(N_theory, N_space))，且 N_theory < 1 时输出 0
-
-修正说明（2026-08-13 评审后）：
-    1) 原版本只用 h_sea*A_eff*(T_max-T_inf)，忽略舱内空气与壁导热，
-       使 N_theory 高估约两个数量级且恒大于 N_space，优化退化为体积最大化；
-       现改为与问题 1 相同口径的热阻网络，N 重新由散热上限主导。
-    2) 长方体改用等面积当量直径 2a/sqrt(pi) 作为 Churchill-Chu 特征长度，
-       不再把方柱边长直接当作圆柱直径。
-    3) 增加 Ra 适用域检查与参数来源核对；N_space 明确为体积法上界。
-
-本文件不使用 scipy.optimize / DEAP 等黑箱优化器：
-    GA       —— 手写二进制锦标赛选择 + 均匀交叉 + 变异 + 精英保留；
-    SLSQP    —— 手写 BFGS 拟牛顿 + 主动集 QP 子问题 + Armijo 线搜索。
-
-缺失数值说明（重要，避免把假设冒充成题面数据）：
-    * 题目与交付清单给出：D=1 m，L=12 m，外形上限 1x1x12 m，q0=500 W，
-      Tmax=80 ℃，Tinf=20 ℃，1U 服务器 482.6x44.45x525 mm。
-    * 清单中“翅片数量/翅高/翅厚上下界”“GA 超参数”只写了名称，未给数值；
-      本文件在核心算法模块《C题_问题2_核心算法.py》的“三、翅片设计变量上下界”
-      给出了工程默认值，并在注释中标注【假设值】；GA/SLSQP 参数见主脚本参数区。
-      正式交付前请按组委会给定数值替换。
-
-运行：python C题_问题2_枚举shape_GA_SLSQP.py
-数值结果与最优结构横截面温度云图输出到问题二文件夹 outputs/ 目录。
-"""
 
 from __future__ import annotations
 
