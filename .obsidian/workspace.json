@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "附件/补全版清单.md",
+                "file": "附件/水下服务器热设计参数与算法交付清单_数据补全.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "补全版清单"
+              "title": "水下服务器热设计参数与算法交付清单_数据补全"
             }
           }
         ],
@@ -202,8 +202,8 @@
   },
   "active": "a2bda8017c04e66f",
   "lastOpenFiles": [
-    "附件/水下服务器热设计参数与算法交付清单_数据补全.md",
     "附件/补全版清单.md",
+    "附件/水下服务器热设计参数与算法交付清单_数据补全.md",
     "C题数据/补充材料数据/导热系数/README_导热系数补充说明.md",
     "附件/__pycache__/补全版清单_四项数值计算.cpython-312.pyc",
     "附件/__pycache__",
