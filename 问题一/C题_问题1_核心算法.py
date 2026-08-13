@@ -238,7 +238,7 @@ def compute_final_capacity(n_theory: float, n_space: float) -> dict[str, int]:
     return {"n": n}
 
 
-def solve_q1(D_outer: float = 1.0, L_outer: float = 12.0, wall: float = 0.0,
+def solve_q1(D_outer: float = 1.0, L_outer: float = 12.0, wall: float = 0.01,
              k_wall: float | None = None,
              t_air_max: float = 80.0, t_sea: float = 20.0, q0: float = 500.0,
              w_server: float = 0.4826, h_server: float = 0.04445,
@@ -246,7 +246,7 @@ def solve_q1(D_outer: float = 1.0, L_outer: float = 12.0, wall: float = 0.0,
     """问题 1 主流程：依次调用步骤 1-5，返回全部中间量与最终容量。
 
     输入：D_outer/L_outer 外轮廓尺寸 m，wall 壁厚 m（交付清单未给壁厚，
-          问题 1 基准按薄壳 w=0 处理，壁厚影响单独做灵敏度分析），
+          按用户确认基准取 w=0.01 m，壁厚影响单独做灵敏度分析），
           k_wall 壁面导热系数 W/(m·K)（缺省时自动解析 304 不锈钢），
           t_air_max 允许最高温度 ℃，t_sea 海水温度 ℃，q0 单台产热 W，
           w_server/h_server/l_server 服务器尺寸 m

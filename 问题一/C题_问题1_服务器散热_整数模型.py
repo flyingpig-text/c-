@@ -23,8 +23,8 @@ C 题 问题 1：单个圆柱集装箱最多可放多少台 1U 服务器
    以及壁厚不确定性场景；同时保留 h_air-h_sea 灵敏度云图。
 6. 输出可运行代码 + Q1_结果.csv + Q1_灵敏度.csv + 云图1/云图2/图3。
 7. 使用相对路径，并自动寻找脚本当前目录。
-8. 基础参数来源仅采用交付清单；壁厚 w 交付清单未给出，问题 1 基准按薄壳 w=0，
-   壁厚影响单独作为灵敏度场景评估。
+8. 基础参数来源仅采用交付清单；壁厚 w 交付清单未给出，按用户确认
+   问题 1 基准采用 w=0.01 m（10 mm），壁厚影响单独作为灵敏度场景评估。
 
 运行：python C题_问题1_服务器散热_整数模型.py
 """
@@ -185,7 +185,7 @@ def load_cleaned_sst_summary() -> dict[str, tuple[float, float] | None]:
 # ---------------------------------------------------------------------------
 D_OUTER = 1.0            # 圆柱外轮廓直径 D，m（交付清单）
 L_OUTER = 12.0           # 圆柱外轮廓长度 L，m（交付清单）
-WALL = 0.0               # 壁厚 w，m（交付清单未给；问题1基准取薄壳，灵敏度单独分析）
+WALL = 0.01              # 壁厚 w，m（交付清单未给；按用户确认基准取 10 mm）
 T_AIR_MAX = 80.0         # 服务器最高允许温度，℃（交付清单）
 T_SEA = 20.0             # 海水恒温 T_inf，℃（交付清单）
 Q0 = 500.0               # 单台 1U 服务器产热，W（交付清单）
@@ -647,7 +647,7 @@ def print_param_sources() -> None:
         ("w_s(1U)", f"{W_SERVER}", "m", "交付清单：482.6 mm"),
         ("l_s(1U)", f"{L_SERVER}", "m", "交付清单：525 mm"),
         ("k_wall(304)", f"{k_wall}", "W/(m·K)", f"清洗后数据：{k_wall_src}"),
-        ("w(壁厚)", f"{WALL}", "m", "交付清单未给；问题1基准取薄壳 w=0，灵敏度单独分析"),
+        ("w(壁厚)", f"{WALL}", "m", "交付清单未给；按用户确认基准取 10 mm，灵敏度单独分析"),
     ]
     for name, value, unit, source in rows:
         print(f"    {name:<12} = {value:<10} {unit:<14} 来源：{source}")
@@ -691,7 +691,7 @@ def build_result_rows(result: dict) -> list[tuple[str, object, str, str, str]]:
     rows: list[tuple[str, object, str, str, str]] = [
         ("外轮廓直径 D", result["d_outer"], "m", "圆柱外径（基体尺寸）", "交付清单"),
         ("外轮廓长度 L", result["l_outer"], "m", "圆柱轴向长度", "交付清单"),
-        ("壁厚 w", result["wall"], "m", "薄壳假设（交付清单未给）", "模型假设"),
+        ("壁厚 w", result["wall"], "m", "用户确认壁厚基准 10 mm", "模型输入"),
         ("内径 D_inner", result["D_inner"], "m", "内部可用直径", "D-2w"),
         ("内长 L_inner", result["L_inner"], "m", "内部可用长度", "L-2w"),
         ("侧表面积 A=πDL", result["A_cyl"], "m^2", "圆柱侧表面散热面积", "步骤1公式"),
@@ -866,8 +866,8 @@ def validate_q1(result: dict) -> bool:
     print("    [说明] 简化假设检验：")
     print("      1) 稳态传热：问题 1 评估的是持续满载工况的散热能力上限，"
           "稳态热平衡假设合理。")
-    print("      2) 壳体温度均匀：基准按薄壳 w=0，内外壁温 T_wi=T_wo，"
-          "壳体温度均匀假设与模型一致。")
+    print("      2) 壳体温度均匀：w=0.01 m 壁厚较小，壁面温度近似均匀，"
+          "模型按壳壁两侧壁温自洽计算。")
     print("      3) 忽略辐射：按题目对流散热口径计算；若计入舱内辐射，"
           "实际散热能力会略高，因此本结果偏保守。")
     print("      4) 海水静止：题面未给流速，Q1 按自然对流；"
@@ -907,8 +907,8 @@ def _n_from_h_perturb(
     return n_theory, n
 
 
-def _check_sensitivity_directions(rows: list[tuple]) -> bool:
-    """校验灵敏度方向：q0/T_sea 增大应降低 N_theory，限温/h 增大应提高，壁厚增大应降低。"""
+def _check_sensitivity_directions(rows: list[tuple], base: dict) -> bool:
+    """校验灵敏度方向：q0/T_sea 增大应降低 N_theory，限温/h 增大应提高，壁厚按基准两侧判断。"""
     print("    灵敏度方向校验：")
     rules = {
         "服务器功率 q0": {"+": -1, "-": +1},
@@ -931,12 +931,22 @@ def _check_sensitivity_directions(rows: list[tuple]) -> bool:
               f"ΔN_theory={rel:+.3f}%（期望方向 {expect:+d}）")
 
     wall_rows = [r for r in rows if r[0] == "壁厚 w"]
-    for name, pert, _, _, _, _, rel, _ in wall_rows:
-        cond = rel < 0
+    base_w = float(base.get("wall", 0.01))
+    for name, pert, value, _, _, _, rel, _ in wall_rows:
+        w = float(value)
+        if abs(w - base_w) < 1e-9:
+            cond = abs(rel) < 0.01
+            note = "基准场景，变化率≈0"
+        elif w < base_w:
+            cond = rel > 0
+            note = "期望正向（壁厚减小）"
+        else:
+            cond = rel < 0
+            note = "期望负向（壁厚增大）"
         ok &= cond
         checked += 1
         print(f"      [{'PASS' if cond else 'FAIL'}] {name} {pert}："
-              f"ΔN_theory={rel:+.3f}%（期望负向）")
+              f"ΔN_theory={rel:+.3f}%（{note}）")
 
     print(f"    灵敏度方向校验：{'PASS' if ok else 'FAIL'}"
           f"（{checked} 组方向均合理）")
@@ -1034,7 +1044,7 @@ def sensitivity_analysis(base: dict) -> list[tuple]:
         print(f"    {name:<18} {pert:<8} {str(value):<10} {unit:<12} "
               f"{n_theory:8.3f} 台  {n:3d} 台  {rel:+8.3f}%")
 
-    _check_sensitivity_directions(rows)
+    _check_sensitivity_directions(rows, base)
     plot_sensitivity(rows)
     return rows
 
